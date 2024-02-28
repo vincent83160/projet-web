@@ -6,14 +6,29 @@
 
 @font-face {
   font-family: myFirstFont;
-  src: url("../assets/Raosand.ttf");
+  src: url("/public/assets/Raosand.ttf");
 }
 
 body {
   font-family: sans-serif;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: linear-gradient(180deg, #fad662 0, #e8d75b 8.33%, #d4d655 16.67%, #bed551 25%, #a6d34f 33.33%, #8bd04e 41.67%, #6acc50 50%, #3ec855 58.33%, #00c35c 66.67%, #00bf67 75%, #00bb73 83.33%, #00b881 91.67%, #00b591 100%);
+  background-image: linear-gradient(
+    180deg,
+    #fad662 0,
+    #e8d75b 8.33%,
+    #d4d655 16.67%,
+    #bed551 25%,
+    #a6d34f 33.33%,
+    #8bd04e 41.67%,
+    #6acc50 50%,
+    #3ec855 58.33%,
+    #00c35c 66.67%,
+    #00bf67 75%,
+    #00bb73 83.33%,
+    #00b881 91.67%,
+    #00b591 100%
+  );
 
   font-weight: bold;
 }
@@ -52,8 +67,6 @@ img.rounded-corners {
   width: 20%;
 }
 
-
-
 .container2 {
   padding-top: 50px;
   margin: 0 auto;
@@ -62,38 +75,38 @@ img.rounded-corners {
 }
 
 /* Input */
-input{
-  border:none;
-  outline:none;
-  display:inline-block;
-  height:34px;
-  vertical-align:middle;
-  position:relative;
-  bottom:14px;
-  right:9px;
-  border-radius:22px;
-  width:300px;
-  box-sizing:border-box;
-  padding:0 18px; 
+input {
+  border: none;
+  outline: none;
+  display: inline-block;
+  height: 34px;
+  vertical-align: middle;
+  position: relative;
+  bottom: 14px;
+  right: 9px;
+  border-radius: 22px;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 0 18px;
   text-align: center;
 }
 
 /* Button */
 .button {
   display: inline-block;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 10rem;
   color: #fff;
   text-transform: uppercase;
   font-size: 1rem;
-  letter-spacing: .15rem;
-  transition: all .3s;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 .button:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -104,14 +117,14 @@ input{
   z-index: -2;
 }
 .button:before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0%;
   height: 100%;
   background-color: #0086a1;
-  transition: all .3s;
+  transition: all 0.3s;
   border-radius: 10rem;
   z-index: -1;
 }
@@ -120,4 +133,11 @@ input{
 }
 .button:hover:before {
   width: 100%;
+}
+#button-container {
+  float: right;
+}
+
+.tree {
+  padding-top: 2%;
 }
