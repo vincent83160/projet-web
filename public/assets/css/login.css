@@ -1,0 +1,82 @@
+#wrapper-central {
+  position: relative;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#fond-login {
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/public/assets/img/fond-login.webp);
+    filter: blur(10px) opacity(0.8);
+    background-size: contain;
+    background-position: center;
+    top: 0px;
+    bottom: -10px;
+}
+
+#fond-login img {
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#div-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgb(253, 253, 253);
+  width: 400px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192);
+  margin-top: 85px;
+}
+
+#div-login .div-logo,
+.div-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div-login .div-logo {
+  width: fit-content;
+  height: 180px;
+  width: 180px;
+  padding: 20px;
+  border-radius: 100px;
+  background-color: #e4ebeb;
+  justify-content: center;
+}
+
+#div-login .div-logo img {
+  height: 150px;
+}
+
+#div-login form {
+  width: 100%;
+}
+
+.div-submit button {
+  background-color: #1bb7b7;
+  border: none;
+}
+
+.div-submit button:hover {
+  background-color: #118d8d;
+}

@@ -7,12 +7,14 @@
         Acceuil
     </title>
     <meta charset="utf-8" />
+    <?php 
+    $route = '/acceuil';
+include $_SERVER["DOCUMENT_ROOT"].'/vue/base.html';
+?>
 </head>
 
 <body>
-    <form action="logout.php" method="post">
-        <button type="submit">Se deconnecter</submit>
-    </form>
+ 
 </body>
 
 </html>
