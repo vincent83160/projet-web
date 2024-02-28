@@ -14,8 +14,7 @@
         <div class="two"><h1 >Plein la bobine !</h1></div>
         <div class="tree"  >
             <div id="button-container">
-                <a href="#" class="button">Connexion</a>
-                <a href="#" class="button">Inscription</a>
+                <a href="#" class="button">Déconnexion</a>
                 
             </div>
         </div>
@@ -30,7 +29,7 @@
         <form action="">
             <div class="fields">
                 <span>
-                    <input placeholder="Tape le nom d'un film" id="input-film" type="text" />
+                    <input placeholder="Tape le nom d'un film" type="text" />
                 </span>
         </form>
     </div>
