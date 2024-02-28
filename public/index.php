@@ -23,5 +23,5 @@ switch ($requestUri) {
         break;
 }
 }else{
-    require_once __DIR__.'/../vue/login.php';
+    require_once $_SERVER["DOCUMENT_ROOT"].'/../vue/login.php';
 }
