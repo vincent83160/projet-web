@@ -16,7 +16,12 @@
         </div>
         <div class="tree">
             <div id="button-container">
-                <a href="#" class="button">Connexion</a>
+                <?php  
+                if (isset($_SESSION['login'])) { ?>
+                    <a href="/logout" class="button">Déconnexion</a>
+                <?php }else{ ?>
+                <a href="/login" class="button">Connexion</a>
+                <?php } ?>
                 <a href="#" class="button">Inscription</a>
             </div>
         </div>
