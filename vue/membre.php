@@ -16,7 +16,7 @@
       <?php
       echo $_SESSION['user']->getEmail();
       ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/email">
       <input type=text name="email" id="email"></input>
       <input type=submit value="Modifier"></input>
    </form>
@@ -25,7 +25,7 @@
       <?php
       echo $_SESSION['user']->getPseudo();
       ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/pseudo">
       <input type=text name="pseudo" id='pseudo'></input>
       <input type=submit value="Modifier"></input>
    </form>
@@ -34,7 +34,7 @@
       <?php
       echo $_SESSION['user']->getPassword();
       ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/pwd">
       <input type=text name="pwd" id="pwd"></input>
       <input type=submit value="Modifier"></input>
    </form>
@@ -42,7 +42,7 @@
    <p>IsVerified :<?php
                   echo $_SESSION['user']->getIsVerified();
                   ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/isVerified">
       <input type=text name="isVerified" id="isVerified"></input>
       <input type=submit value="Modifier"></input>
    </form>
@@ -51,7 +51,7 @@
       <?php
       echo $_SESSION['user']->getRole();
       ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/role">
       <input type=text name="role" id="role"></input>
       <input type=submit value="Modifier"></input>
    </form>
