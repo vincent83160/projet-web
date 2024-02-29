@@ -1,27 +1,29 @@
 <?php
-$requestUri = $_SERVER['REQUEST_URI'];
-// Router les requêtes
+
 session_start();
 
-// Vérifier si l'utilisateur est connecté 
+$requestUri = $_SERVER['REQUEST_URI'];
+// Router les requêtes
 
+
+// Vérifier si l'utilisateur est connecté 
     $requestUri = $_SERVER['REQUEST_URI'];
     $segments = explode('/', $requestUri);
     // Récupérer le dernier élément du tableau
     $lastSegment = end($segments);
     // Vérifier si l'utilisateur est connecté 
-
+    $beforeLastSegment = $segments[count($segments) - 2]; 
     
     if (isset($_SESSION['login'])) {
         echo $lastSegment;
          // Routes pour les utilisateurs connectés
         switch ($lastSegment) {
             
-            case 'disconnect':
-                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/disconnect.php';
+            case 'logout':
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DisconnectController.php';
                 break;
             case 'userModif':
-                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/userModif.php';
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserModifController.php';
                 break;  
             case 'login':
                 require_once $_SERVER["DOCUMENT_ROOT"] .    '/vue/login.php';
@@ -36,4 +38,5 @@ session_start();
     } else {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/login.php';
     }
- 
+
+
