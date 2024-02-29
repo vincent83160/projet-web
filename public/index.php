@@ -1,5 +1,5 @@
 <?php
-
+require("../model/user.php"); 
 session_start();
 
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -25,6 +25,7 @@ if ($segments[1] == "") {
 if (isset($_SESSION['login'])) {
     // Routes pour les utilisateurs connectés 
     // $controller = '/controller/' . $controller;
+    var_dump($segments);
     switch ($nbSegments) {
         case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";

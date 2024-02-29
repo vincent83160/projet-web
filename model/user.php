@@ -1,5 +1,6 @@
 <?php
 class User{
+   private static $data = array();
     private int $id;
     private string $email; 
     private string $pseudo;
@@ -42,7 +43,9 @@ class User{
     function setRole($var){
         $this->role = $var;
     }
-
+    public function __set($name, $value) {
+        self::$data[$name] = $value;
+    }
     //CONSTRUCTEUR
     function __construct($id, $email, $pseudo, $password, $is_verified, $role){
         $this->id = $id;

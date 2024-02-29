@@ -1,7 +1,4 @@
-<?php
-require("../model/user.php");
-session_start();
-?>
+ 
 
 <p> Hola
    <?php

@@ -6,16 +6,15 @@ class UserController
 
     public function membre()
     {
-
-
+        
 
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
-    public function userModif()
+    public function userModif($input, $value)
     {
         require("../model/user.php");
-
+        $_SESSION['user']->__set($input, $value);
 
         switch ($_POST['input']) {
             case 'email':
@@ -39,7 +38,6 @@ class UserController
                 header('Location: ../model/membre.php?role  ');
                 break;
         }
-    
     }
     public function logout()
     {
