@@ -16,7 +16,7 @@
       <?php
       echo $_SESSION['user']->getEmail();
       ?>
-   <form method=post action="userModif">
+   <form method=post action="userModif/email">
       <input type=text name="email" id="email"></input>
       <input type=submit value="Modifier"></input>
    </form>

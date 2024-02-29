@@ -17,6 +17,7 @@ class UserController
         $_SESSION['user']->__set($input, $value);
 
     }
+    
     public function logout()
     {
         session_start();
