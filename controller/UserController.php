@@ -39,6 +39,7 @@ class UserController
         }
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
         $db = new ConnexionMySql();
+        $db->connexion();
         $erreur = "";
         if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
 
