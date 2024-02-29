@@ -46,16 +46,16 @@ if (isset($_SESSION['login'])) {
     }
 } else { 
     switch ($nbSegments) {
-        case 0:
+        case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
             break;
-        case 1:
+        case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php"; 
             $controller =  new $controller();
             $controller->$methode();
 
             break;
-        case 2:
+        case 3:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
             $controller =  new $controller();
             $controller->$methode();
