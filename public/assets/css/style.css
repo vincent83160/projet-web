@@ -3,7 +3,7 @@
   text-decoration: none;
   font-size: 20px;
 }
-
+/* Font */
 @font-face {
   font-family: myFirstFont;
   src: url("/public/assets/Raosand.ttf");
@@ -39,6 +39,20 @@ h1 {
   font-family: "myFirstFont";
   padding-top: 0%;
 }
+h2 {
+  text-align: center;
+  font-size: 100%;
+  font-weight: bolder;
+}
+h3 {
+  text-align: center;
+  font-size: 100%;
+}
+
+p {
+  text-align: center;
+  font-size: 100%;
+}
 
 .button-container {
   justify-self: end;
@@ -47,7 +61,7 @@ h1 {
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  grid-gap: 2%;
 }
 .one {
   grid-column: 1;
@@ -56,15 +70,21 @@ h1 {
 .two {
   grid-column: 2;
   grid-row: 0;
+  justify-self: center;
 }
 .three {
   grid-column: 3;
   grid-row: 0;
 }
-
+/* Images */
 img.rounded-corners {
   border-radius: 10%;
   width: 20%;
+}
+
+img.rounded-corners2 {
+  border-radius: 10%;
+  width: 50%;
 }
 
 .container2 {
@@ -140,4 +160,50 @@ input {
 
 .tree {
   padding-top: 2%;
+}
+
+/* grid container */
+.holy-grail-grid {
+  display:grid;
+  grid-template-areas:
+      'main-content'
+      'left-sidebar'
+      'right-sidebar'
+}
+
+/* Holy-grail */
+/* general column padding */
+.holy-grail-grid > * {
+  padding:1rem;
+}
+.holy-grail-grid > .main-content {
+  grid-area: main-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.holy-grail-grid > .left-sidebar {
+  grid-area:left-sidebar;
+}
+.holy-grail-grid > .right-sidebar {
+  grid-area:right-sidebar;
+}
+
+/* tablet breakpoint */
+@media (min-width:768px) {
+  .holy-grail-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+          'main-content main-content'
+          'left-sidebar right-sidebar'
+  }
+}
+
+/* desktop breakpoint */
+@media (min-width:1024px) {
+  .holy-grail-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas:
+          'left-sidebar main-content main-content right-sidebar'
+  }
 }

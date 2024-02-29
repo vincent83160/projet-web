@@ -6,8 +6,8 @@ $erreur = "";
 session_start();
 if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
 
-    require($_SERVER["DOCUMENT_ROOT"]."/vue/jeu.php");
-} else { 
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/DefaultController.php";
+} else {
     // var_dump(password_hash($_POST['password'], PASSWORD_DEFAULT));
     $result=$db->checkLogin($_POST['login'], $_POST['password']);
     if ($result) {
@@ -16,7 +16,6 @@ if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
         require($_SERVER["DOCUMENT_ROOT"]."/vue/jeu.php");
     } else {
         $erreur = "Mauvais login ou mot de passe";
-        header("Location: /login.php");
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
     }
- 
 }

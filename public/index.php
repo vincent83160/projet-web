@@ -3,25 +3,26 @@ $requestUri = $_SERVER['REQUEST_URI'];
 // Router les requêtes
 session_start();
 
-// Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['user_id'])) {
+// Vérifier si l'utilisateur est connecté 
 
-switch ($requestUri) {
-    case '/':
-        // Afficher la page d'accueil
-        require_once '../jeu.php';
-        break;
-    case '/login':
-        // Afficher la page "À propos"
-        require_once 'login.php';
-        break;
-        // Ajouter d'autres routes au besoin
-    default:
-        // Afficher une page d'erreur 404
-        header("HTTP/1.0 404 Not Found");
-        echo 'Page not found';
-        break;
-}
-}else{
-    require_once $_SERVER["DOCUMENT_ROOT"].'/vue/login.php';
-}
+    $requestUri = $_SERVER['REQUEST_URI'];
+    $segments = explode('/', $requestUri);
+    // Récupérer le dernier élément du tableau
+    $lastSegment = end($segments);
+    // Vérifier si l'utilisateur est connecté 
+
+    
+    if (isset($_SESSION['login'])) {
+        // Routes pour les utilisateurs connectés
+        switch ($lastSegment) {
+            case '':
+
+                break;
+            default:
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
+                break;
+        }
+    } else {
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/login.php';
+    }
+ 
