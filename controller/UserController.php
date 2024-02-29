@@ -17,9 +17,23 @@ class UserController
         $_SESSION['user']->__set($input, $value);
         // var_dump($_SESSION['user']);
         // var_dump($_POST);
-        // echo $input;
-        // echo "</br>";
-        // echo $value;
+
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
+        $db = new ConnexionMySql();
+        $db->connexion();
+        $pdo=$db->getPdo();
+        $id=$_SESSION['user']->getId();
+
+        $req = "UPDATE user SET ".$input." = :value"; //WHERE id = :id";
+        $stmt = $pdo->prepare($req);
+        //$stmt->bindParam(':input', $input, PDO::PARAM_STR);
+        $stmt->bindParam(':value', $value);
+        //$stmt->bindParam(':id',$id );     
+        $stmt->debugDumpParams();
+        $stmt->execute();
+
+        
+
         header('Location: /User/membre');
 
     }

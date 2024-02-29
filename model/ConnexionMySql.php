@@ -22,7 +22,9 @@ class ConnexionMySql {
         }
     }
 
-    
+    function getPdo(){
+        return $this->pdo;
+    }
     public function checkLogin($login, $password)
     { 
         $req = 'SELECT * FROM user WHERE pseudo = :login AND password = :password';
