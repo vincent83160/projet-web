@@ -3,13 +3,14 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 ?>
 <link rel="stylesheet" href="/public/assets/css/login.css">
+<link rel="icon" href="/public/assets/img/logo2.png" />
 
 <div id="fond-login">
 </div>
 
 <div id="div-login">
     <div class="div-logo">
-    <img src="/public/assets/img/favicon_movie.png" alt="Plein la bobine !">
+    <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
     </div>
     <div id="error"><?php
                     if (isset($erreur)) {
