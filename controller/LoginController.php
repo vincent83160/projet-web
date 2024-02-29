@@ -16,7 +16,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
 
         $_SESSION['login'] = $_POST['login'];
         $_SESSION['password'] = $_POST['password'];
-        header("Location: /default/jeu");
+        header("Location: /default/game");
     } else {
         $erreur = "Mauvais login ou mot de passe";
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
