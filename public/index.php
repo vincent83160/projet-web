@@ -26,15 +26,18 @@ if ($nbSegments >= 3) {
         $params[$segments[$i]] = $_POST[$segments[$i]];
     }
 }
+if($segments[0] == ""){
+    $controller = "DefaultController";
+    $methode = "accueil";
+}
 
 if (isset($_SESSION['login'])) {
-    // Routes pour les utilisateurs connectés 
-    var_dump($segments);
-    // $controller = '/controller/' . $controller; 
+    
+    
     switch ($nbSegments) {
  
 
-        case 2:
+        case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
         
         case 2:
@@ -49,11 +52,7 @@ if (isset($_SESSION['login'])) {
             $controller =  new $controller();
             $controller->$methode($params);
             break;
-        // case 3:
-        //     require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
-        //     $controller= new $controller();
-        //     $controller->$methode($segments[2],$_POST[$segments[2]]);
-        //     break;
+            
 
         default:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
@@ -75,7 +74,7 @@ if (isset($_SESSION['login'])) {
         case 3:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
             $controller =  new $controller();
-            $controller->$methode();
+            $controller->$methode($params);
             break;
 
         default:
