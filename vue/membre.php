@@ -34,16 +34,16 @@
       <?php
       echo $_SESSION['user']->getPassword();
       ?>
-   <form method=post action="userModif/pwd">
-      <input type=text name="pwd" id="pwd"></input>
+   <form method=post action="userModif/password">
+      <input type=text name="password" id="password"></input>
       <input type=submit value="Modifier"></input>
    </form>
    </p>
    <p>IsVerified :<?php
                   echo $_SESSION['user']->getIsVerified();
                   ?>
-   <form method=post action="userModif/isVerified">
-      <input type=text name="isVerified" id="isVerified"></input>
+   <form method=post action="userModif/is_verified">
+      <input type=text name="is_verified" id="is_verified"></input>
       <input type=submit value="Modifier"></input>
    </form>
    </p>
@@ -57,4 +57,4 @@
    </form>
    </p>
 </div>
-<p><a href="./User/logout"><button>deconnexion</button></a></p>
+<p><a href="/User/logout"><button>deconnexion</button></a></p>

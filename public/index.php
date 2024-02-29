@@ -23,18 +23,21 @@ $nbSegments = count($segments);
 
 if (isset($_SESSION['login'])) {
     // Routes pour les utilisateurs connectés 
+    var_dump($segments);
     // $controller = '/controller/' . $controller; 
-    switch ($nbSegments-1) {
+    switch ($nbSegments) {
 
         
-        case 1:
+        case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
             $controller =  new $controller();
             $controller->$methode();
 
             break;
-        case 2:
+        case 3:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
+            $controller= new $controller();
+            $controller->$methode($segments[2],$_POST[$segments[2]]);
             break;
 
         default:

@@ -28,23 +28,8 @@ class User{
         return $this->role;
     }
     //SETTER
-    function setEmail($email){
-        $this->email = $email;
-    }
-    function setPseudo($var){
-        $this->login=$var;
-    }
-    function setPassword($var){
-        $this->password=$var;
-    }
-    function setIsVerified($var){  
-        $this->is_verified = $var;
-    }
-    function setRole($var){
-        $this->role = $var;
-    }
     public function __set($name, $value) {
-        self::$data[$name] = $value;
+        $this->$name= $value;
     }
     //CONSTRUCTEUR
     function __construct($id, $email, $pseudo, $password, $is_verified, $role){
