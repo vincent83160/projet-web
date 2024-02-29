@@ -20,7 +20,7 @@
       <?php
          echo $_SESSION['user']->getEmail();
       ?> 
-      <form method=post action="../controler/userModif.php">
+      <form method=post action="userModif">
          <input type=text name="email" id="email"></input>
          <input type=submit value="Modifier"></input>
       </form>
@@ -29,7 +29,7 @@
       <?php
          echo $_SESSION['user']->getPseudo();
       ?> 
-      <form method=post action="/userModif.php">
+      <form method=post action="userModif">
          <input type=text name="pseudo" id='pseudo'></input>
          <input type=submit value="Modifier"></input>
       </form>
@@ -38,7 +38,7 @@
    <?php
          echo $_SESSION['user']->getPassword();
       ?> 
-      <form method=post action="/userModif.php">
+      <form method=post action="userModif">
          <input type=text name="pwd" id="pwd"></input>
          <input type=submit value="Modifier"></input>
       </form>
@@ -46,7 +46,7 @@
    <p>IsVerified :<?php
          echo $_SESSION['user']->getIsVerified();
       ?> 
-      <form method=post action="/userModif.php">
+      <form method=post action="userModif">
          <input type=text name="isVerified" id="isVerified"></input>
          <input type=submit value="Modifier"></input>
       </form>
@@ -55,10 +55,10 @@
    <?php
          echo $_SESSION['user']->getRole();
       ?> 
-      <form method=post action="/userModif.php">
+      <form method=post action="userModif">
          <input type=text name="role" id="role"></input>
          <input type=submit value="Modifier"></input>
       </form>
    </p>
 </div>
-<p><a href=disconect.php><button>deconnexion</button></a></p>
+<p><a href="/disconnect"><button>deconnexion</button></a></p>

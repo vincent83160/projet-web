@@ -14,12 +14,9 @@
         <div class="two"><h1 >Plein la bobine !</h1></div>
         <div class="tree"  >
             <div id="button-container">
-                <a href="../controller/disconect.php" class="button">Déconnexion</a>
-                
+                <a href="/disconnect" class="button">Déconnexion</a>        
             </div>
-      
-                <a href="../vue/membre.php" class="button">Compte</a>
-                
+                <a href="../vue/membre.php" class="button">Compte</a>   
             </div>
         </div>
        

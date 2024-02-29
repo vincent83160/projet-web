@@ -16,7 +16,18 @@
         </div>
         <div class="tree">
             <div id="button-container">
-                <a href="#" class="button">Connexion</a>
+                <?php
+                    if (isset($_SESSION["user"]) && $_SESSION["login"]){
+                        var_dump($_SESSION["user"]);
+                        var_dump($_SESSION["login"]);
+                        ?> 
+                            <a href="/disconnect" class="button">Deconnexion</a>
+                            <a href="/membre" class="button">Compte</a>
+                        <?php
+                    }
+                ?>
+
+                <a href="/login" class="button">Connexion</a>
                 <a href="#" class="button">Inscription</a>
             </div>
         </div>

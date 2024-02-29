@@ -13,10 +13,21 @@ session_start();
 
     
     if (isset($_SESSION['login'])) {
-        // Routes pour les utilisateurs connectés
+        echo $lastSegment;
+         // Routes pour les utilisateurs connectés
         switch ($lastSegment) {
-            case '':
-
+            
+            case 'disconnect':
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/disconnect.php';
+                break;
+            case 'userModif':
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/userModif.php';
+                break;  
+            case 'login':
+                require_once $_SERVER["DOCUMENT_ROOT"] .    '/vue/login.php';
+                break;
+            case 'accueil':
+                require_once $_SERVER["DOCUMENT_ROOT"] .    '/vue/accueil.php';
                 break;
             default:
                 require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';

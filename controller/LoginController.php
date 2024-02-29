@@ -13,6 +13,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
     if ($result) {
         $user= new User($result["id"],$result["email"],$result["pseudo"],$result["password"],$result["is_verified"],$result["role"]);
         $_SESSION['user'] = $user;
+        $_SESSION['login'] = $result['pseudo'];
         require($_SERVER["DOCUMENT_ROOT"]."/vue/jeu.php");
     } else {
         $erreur = "Mauvais login ou mot de passe";
