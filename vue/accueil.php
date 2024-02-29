@@ -14,21 +14,9 @@
         <div class="two">
             <h1>Plein la bobine !</h1>
         </div>
-        <div class="tree">
-            <div id="button-container">
-                <?php
-                    if (isset($_SESSION["user"]) && $_SESSION["login"]){
-                        ?> 
-                            <a href="/logout" class="button">Deconnexion</a>
-                            <a href="/membre" class="button">Compte</a>
-                        <?php
-                    }
-                ?>
-
-                <a href="/login" class="button">Connexion</a>
-                <a href="#" class="button">Inscription</a>
-            </div>
-        </div>
+<?php
+include 'navbar.php';
+?>
     </div>
 
     <!-- BODY -->
@@ -49,7 +37,7 @@
             <p>À toi de jouer !</p>
         </aside>
     </div>
-    
+
 </body>
 
 </html>

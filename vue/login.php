@@ -11,12 +11,13 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
     <div class="div-logo">
     <img src="/public/assets/img/favicon_movie.png" alt="Plein la bobine !">
     </div>
-    <div id="error"><?php
+    <div id="error"><?php   
                     if (isset($erreur)) {
+                     
                         echo $erreur;
                     }
                     ?></div>
-    <form method="post" id="formulaire" action="../controller/LoginController.php">
+    <form method="post" id="formulaire" action="/User/login">
         <div class="mb-3">
             <label class="form-label" for="username">Login:</label>
             <input class="form-control" type="text" id="username" name="login" value="" required />

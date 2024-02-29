@@ -12,13 +12,7 @@
     <div class="wrapper">
         <div class="one"><img src="/public/assets/img/favicon_movie.png" alt="Plein la bobine !"></div>
         <div class="two"><h1 >Plein la bobine !</h1></div>
-        <div class="tree"  >
-            <div id="button-container">
-                <a href="/disconnect" class="button">Déconnexion</a>        
-            </div>
-                <a href="../vue/membre.php" class="button">Compte</a>   
-            </div>
-        </div>
+   <?php include 'navbar.php'; ?>
        
     </div>
 
