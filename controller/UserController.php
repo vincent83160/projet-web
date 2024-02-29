@@ -13,14 +13,20 @@ class UserController
 
     public function userModif($input, $value)
     {
-        require("../model/user.php");
+        //require("../model/user.php");
         $_SESSION['user']->__set($input, $value);
+        // var_dump($_SESSION['user']);
+        // var_dump($_POST);
+        // echo $input;
+        // echo "</br>";
+        // echo $value;
+        header('Location: /User/membre');
 
     }
     
     public function logout()
     {
-        session_start();
+        //session_start();
         session_destroy();
         header("location: /Default/accueil");
     }
