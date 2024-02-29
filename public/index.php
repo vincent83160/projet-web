@@ -7,41 +7,41 @@ $requestUri = $_SERVER['REQUEST_URI'];
 
 
 // Vérifier si l'utilisateur est connecté 
-$requestUri = $_SERVER['REQUEST_URI'];
+$requestUri = trim($_SERVER['REQUEST_URI'],'/');
 $segments = explode('/', $requestUri);
 // Récupérer le dernier élément du tableau
-unset($segments[0]);
-$controller =$segments[1]."Controller"  ;
-if(isset($segments[2])){
-    $methode = $segments[2];
+
+
+$controller =$segments[0]."Controller"  ;
+if(isset($segments[1])){
+    $methode = $segments[1];
 }
   
 $nbSegments = count($segments);
 // Vérifier si l'utilisateur est connecté   
-if ($segments[1] == "") {
-    $nbSegments = 0;
-}
+
 
 if (isset($_SESSION['login'])) {
     // Routes pour les utilisateurs connectés 
-    // $controller = '/controller/' . $controller;
-    var_dump($segments);
-    switch ($nbSegments) {
+    // $controller = '/controller/' . $controller; 
+    switch ($nbSegments-1) {
+
+        
         case 1:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
-            break;
-        case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
             $controller =  new $controller();
             $controller->$methode();
 
             break;
-        case 3:
+        case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
             break;
 
         default:
+
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
+            $controller =  new DefaultController();
+            $controller->accueil();
             break;
     }
 } else { 
@@ -57,6 +57,8 @@ if (isset($_SESSION['login'])) {
             break;
         case 3:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
+            $controller =  new $controller();
+            $controller->$methode();
             break;
 
         default:
@@ -68,30 +70,3 @@ if (isset($_SESSION['login'])) {
     }
 }
 
-
-
-
-    // if (isset($_SESSION['login'])) {
-    //     echo $lastSegment;
-    //      // Routes pour les utilisateurs connectés
-    //     switch ($lastSegment) {
-            
-    //         case 'logout':
-    //             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DisconnectController.php';
-    //             break;
-    //         case 'userModif':
-    //             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserModif.php';
-    //             break;  
-    //         case 'login':
-    //             require_once $_SERVER["DOCUMENT_ROOT"] .    '/vue/login.php';
-    //             break;
-    //         case 'accueil':
-    //             require_once $_SERVER["DOCUMENT_ROOT"] .    '/vue/accueil.php';
-    //             break;
-    //         default:
-    //             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
-    //             break;
-    //     }
-    // } else {
-    //     require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/login.php';
-    // }

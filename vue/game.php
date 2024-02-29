@@ -13,6 +13,7 @@
         <div class="one"><img src="/public/assets/img/logo2.png" class="rounded-corners" alt="Plein la bobine !"></div>
         <div class="two"><h1 >Plein la bobine !</h1></div>
    <?php include 'navbar.php'; ?>
+   
        
     </div>
 
