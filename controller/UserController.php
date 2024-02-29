@@ -11,15 +11,14 @@ class UserController
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
-    public function userModif($input, $value)
+    public function userModif($params)
     {
-        //require("../model/user.php");
-        $_SESSION['user']->__set($input, $value);
-        // var_dump($_SESSION['user']);
-        // var_dump($_POST);
-        // echo $input;
-        // echo "</br>";
-        // echo $value;
+        //require("../model/user.php")
+        foreach ($params as $input => $value) {
+            $_SESSION['user']->__set($input, $value);
+        } 
+
+        
         header('Location: /User/membre');
 
     }

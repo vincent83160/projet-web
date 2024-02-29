@@ -32,8 +32,7 @@ if (isset($_SESSION['login'])) {
     var_dump($segments);
     // $controller = '/controller/' . $controller; 
     switch ($nbSegments) {
-
-    switch ($nbSegments) {
+ 
 
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
@@ -44,16 +43,17 @@ if (isset($_SESSION['login'])) {
             $controller->$methode();
 
             break;
-        case $nbSegments >=3:
+        case $nbSegments >= 3:
             
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
             $controller =  new $controller();
             $controller->$methode($params);
-        case 3:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
-            $controller= new $controller();
-            $controller->$methode($segments[2],$_POST[$segments[2]]);
             break;
+        // case 3:
+        //     require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller .".php";
+        //     $controller= new $controller();
+        //     $controller->$methode($segments[2],$_POST[$segments[2]]);
+        //     break;
 
         default:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
