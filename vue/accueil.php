@@ -18,10 +18,8 @@
             <div id="button-container">
                 <?php
                     if (isset($_SESSION["user"]) && $_SESSION["login"]){
-                        var_dump($_SESSION["user"]);
-                        var_dump($_SESSION["login"]);
                         ?> 
-                            <a href="/disconnect" class="button">Deconnexion</a>
+                            <a href="/logout" class="button">Deconnexion</a>
                             <a href="/membre" class="button">Compte</a>
                         <?php
                     }
