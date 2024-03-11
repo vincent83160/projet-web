@@ -12,7 +12,7 @@
     <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
     </div>
     <h1>Inscription</h1>
-    <form method="post" id="formulaire" action="/Default/accueil">
+    <form method="post" id="formulaire" action="/User/signIn">
         <div class="mb-3">
             <label class="form-label" for="username">Pseudo:</label>
             <input class="form-control" type="text" id="username" name="pseudo" required />

@@ -74,6 +74,15 @@ class UserController
 
     public function signIn(){
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
+        if(isset($_POST['mail'])){
+            $db =  user::createVide();
+            $db->create($_POST['mail'], $_POST['pseudo'], $_POST['password'], 0, 'USER');
+            header("location: /Vue/signInConfirm");
+            //var_dump($_POST);
+        }
+        else{
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
+        }
+        
     }
 }
