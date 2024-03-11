@@ -25,17 +25,7 @@ class ConnexionMySql {
     function getPdo(){
         return $this->pdo;
     }
-    public function checkLogin($login, $password)
-    { 
-        $req = 'SELECT * FROM user WHERE pseudo = :login AND password = :password';
-        $stmt = $this->pdo->prepare($req);
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':password', $password);
-        $result = $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
 
-        return $result;
-    }
 
 }
 

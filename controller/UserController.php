@@ -22,19 +22,11 @@ class UserController
             // var_dump($_SESSION['user']);
             // var_dump($_POST);
 
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
-            $db = new ConnexionMySql();
-            $db->connexion();
-            $pdo = $db->getPdo();
-            $id = $_SESSION['user']->getId();
+            $db =  user::createVide();
+            
+            $db->update($input, $value, $_SESSION['user']->getId()); 
 
-            $req = "UPDATE user SET " . $input . " = :value"; //WHERE id = :id";
-            $stmt = $pdo->prepare($req);
-            //$stmt->bindParam(':input', $input, PDO::PARAM_STR);
-            $stmt->bindParam(':value', $value);
-            //$stmt->bindParam(':id',$id );     
-            $stmt->debugDumpParams();
-            $stmt->execute();
+   
         }
 
 
@@ -55,9 +47,9 @@ class UserController
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
-        $db = new ConnexionMySql();
-        $db->connexion();
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+        $db =  user::createVide();
+        
         $erreur = "";
         if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
 
