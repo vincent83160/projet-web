@@ -9,7 +9,10 @@ class ConnexionMySql {
     private $charset = "utf8mb4";
     private $pdo;
 
-    public function __construct() {
+    public function __construct(){
+
+    }
+    public function connexion() {
         $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset={$this->charset}";
   
         try {
@@ -19,7 +22,9 @@ class ConnexionMySql {
         }
     }
 
-    
+    function getPdo(){
+        return $this->pdo;
+    }
     public function checkLogin($login, $password)
     { 
         $req = 'SELECT * FROM user WHERE pseudo = :login AND password = :password';

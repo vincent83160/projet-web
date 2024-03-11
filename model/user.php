@@ -1,5 +1,6 @@
 <?php
-class User{
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
+class User extends ConnexionMySql{
    private static $data = array();
     private int $id;
     private string $email; 
@@ -30,6 +31,7 @@ class User{
     //SETTER
     public function __set($name, $value) {
         $this->$name= $value;
+        
     }
     //CONSTRUCTEUR
     function __construct($id, $email, $pseudo, $password, $is_verified, $role){
