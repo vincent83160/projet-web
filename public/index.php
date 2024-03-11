@@ -29,7 +29,7 @@ if ($nbSegments >= 3) {
 if($segments[0] == ""){
     $controller = "DefaultController";
     $methode = "accueil";
-}
+} 
 
 if (isset($_SESSION['login'])) {
     
@@ -60,7 +60,7 @@ if (isset($_SESSION['login'])) {
             $controller->accueil();
             break;
     }
-} else {
+} else { 
     switch ($nbSegments) {
         case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
@@ -78,9 +78,9 @@ if (isset($_SESSION['login'])) {
             break;
 
         default:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
-            $controller =  new DefaultController();
-            $controller->accueil();
+            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
+            $controller =  new UserController();
+            $controller->logout();
             break;
     }
 }

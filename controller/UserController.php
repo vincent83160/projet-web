@@ -6,38 +6,42 @@ class UserController
 
     public function membre()
     {
-        
+
 
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
-    public function userModif($input, $value)
+    public function userModif($params)
     {
-        //require("../model/user.php");
-        $_SESSION['user']->__set($input, $value);
-        // var_dump($_SESSION['user']);
-        // var_dump($_POST);
+        //require("../model/user.php")
+        foreach ($params as $key => $value) {
+            $input = $key;
+            $value = $value;
 
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
-        $db = new ConnexionMySql();
-        $db->connexion();
-        $pdo=$db->getPdo();
-        $id=$_SESSION['user']->getId();
+            $_SESSION['user']->__set($input, $value);
 
-        $req = "UPDATE user SET ".$input." = :value"; //WHERE id = :id";
-        $stmt = $pdo->prepare($req);
-        //$stmt->bindParam(':input', $input, PDO::PARAM_STR);
-        $stmt->bindParam(':value', $value);
-        //$stmt->bindParam(':id',$id );     
-        $stmt->debugDumpParams();
-        $stmt->execute();
+            // var_dump($_SESSION['user']);
+            // var_dump($_POST);
 
-        
+            require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
+            $db = new ConnexionMySql();
+            $db->connexion();
+            $pdo = $db->getPdo();
+            $id = $_SESSION['user']->getId();
+
+            $req = "UPDATE user SET " . $input . " = :value"; //WHERE id = :id";
+            $stmt = $pdo->prepare($req);
+            //$stmt->bindParam(':input', $input, PDO::PARAM_STR);
+            $stmt->bindParam(':value', $value);
+            //$stmt->bindParam(':id',$id );     
+            $stmt->debugDumpParams();
+            $stmt->execute();
+        }
+
 
         header('Location: /User/membre');
-
     }
-    
+
     public function logout()
     {
         //session_start();
