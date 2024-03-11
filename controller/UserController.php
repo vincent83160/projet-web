@@ -16,7 +16,6 @@ class UserController
         //require("../model/user.php")
         foreach ($params as $key => $value) {
             $input = $key;
-            $value = $value;
 
             $_SESSION['user']->__set($input, $value);
 
@@ -52,6 +51,7 @@ class UserController
     public function login()
     {
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
+        
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -78,5 +78,10 @@ class UserController
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
             }
         }
+    }
+
+    public function signIn(){
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
     }
 }
