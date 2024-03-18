@@ -11,7 +11,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 <div>
    <a href="/Default/game" class="btn btn-primary top-left">Retour</a></a>
    <?php
-   if ($_SESSION['user']->getRole() == 'ADMIN') {
+   if ($_SESSION['role'] == 'ADMIN') {
       echo '<a href="/Default/game" class="btn btn-dark top-left2">Vue Admin</a>';
    }
    ?>
@@ -23,21 +23,21 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
       <div class="div-logo">
          <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
       </div>
-      <form method="post" id="formulaire" action="">
+      <form method="post" id="formulaire" action="/User/userModif/">
          <div class="mb-3">
             <p>Changer votre pseudo :
-               <?php
-               echo $_SESSION['user']->getPseudo();
-               ?>
+
             </p>
-            <input class="form-control" type="text" id="username" name="login" value="" required />
+            <input class="form-control" type="text" id="username" name="login" required value="<?php
+                                                                                                      echo $_SESSION['login'];
+                                                                                                      ?>" />
          </div>
          <div class="mb-3">
             <p>Changer votre email :
-               <?php
-               echo $_SESSION['user']->getEmail();
-               ?>
-               <input class="form-control" type="email" id="email" name="email" required />
+
+               <input class="form-control" type="email" id="email" name="email" value="          <?php
+                                                                                                   echo $_SESSION['email'];
+                                                                                                   ?>" required />
          </div>
          <div class="div-submit">
             <button class="btn btn-primary" id="btn-login" type="submit">Modifier les informations</button>
@@ -47,4 +47,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
          </div>
       </form>
    </div>
+
+
+   <script src="/public/assets/js/account.js"></script>
+   <script src="/public/assets/js/connexion.js"></script>
+   <script src="/public/assets/js/inscription.js"></script>
 </body>

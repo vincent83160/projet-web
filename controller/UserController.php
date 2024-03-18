@@ -11,6 +11,7 @@ class UserController
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
+    
     public function userModif($params)
     {
         //require("../model/user.php")

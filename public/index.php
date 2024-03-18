@@ -24,6 +24,9 @@ if ($nbSegments >= 3) {
         $params[$segments[$i]] = $_POST[$segments[$i]];
     }
 }
+// else if (){
+
+// }
 if($segments[0] == ""){
     $controller = "DefaultController";
     $methode = "accueil";

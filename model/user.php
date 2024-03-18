@@ -59,7 +59,19 @@ class User extends ConnexionMySql
         $this->role = $role;
     }
 
-    
+    public static function getConnexion()
+    { 
+        $db = new ConnexionMySql();
+        $db->connexion();
+        $pdo = $db->getPdo();
+        
+        return $pdo;  
+    }
+
+    public static function createVide()
+    {
+        return new self(0, "", "", "", false, "");
+    }
 
  
 public function update($input, $value,$idUser)
