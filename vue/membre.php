@@ -9,10 +9,10 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 </head>
 
 <div>
-   <a href="/User/logout" class="btn btn-primary top-left">Retour</a></a>
+   <a href="/Default/game" class="btn btn-primary top-left">Retour</a></a>
    <?php
    if ($_SESSION['user']->getRole() == 'ADMIN') {
-      echo '<a href="/User/logout" class="btn btn-dark top-left2">Vue Admin</a>';
+      echo '<a href="/Default/game" class="btn btn-dark top-left2">Vue Admin</a>';
    }
    ?>
 </div>
