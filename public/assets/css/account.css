@@ -23,28 +23,27 @@ body {
 }
 
 
-#div-login {
+#div-centrale {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background: rgb(253, 253, 253);
   width: 400px;
-  padding: 20px;
-  margin: 20px;
+  padding: 20px; 
   border-radius: 20px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192);
-  margin-top: 85px;
+  margin-top:1em;
 }
 
-#div-login .div-logo,
+#div-centrale .div-logo,
 .div-submit {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#div-login .div-logo {
+#div-centrale .div-logo {
   width: fit-content;
   height: 180px;
   width: 180px;
@@ -54,11 +53,11 @@ body {
   justify-content: center;
 }
 
-#div-login .div-logo img {
+#div-centrale .div-logo img {
   height: 150px;
 }
 
-#div-login form {
+#div-centrale form {
   width: 100%;
 }
 
@@ -83,4 +82,16 @@ body {
 
 #btn-login{
   margin-bottom:1em;
+}
+
+body {
+  display: block;
+}
+
+#container-div-centrale{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ width:100%;
 }

@@ -80,8 +80,7 @@ public function update($input, $value,$idUser)
         $req = "UPDATE user SET " . $input . " = :value WHERE id = :idUser";
         $stmt = $pdo->prepare($req); 
         $stmt->bindParam(':value', $value);
-        $stmt->bindParam(':idUser', $idUser); 
-        $stmt->debugDumpParams();
+        $stmt->bindParam(':idUser', $idUser);  
         $stmt->execute();
     }
 
@@ -128,7 +127,7 @@ public function create($email, $pseudo, $password, $is_verified, $role)
     public function checkLogin($login, $password)
     {
         $pdo = $this->getConnexion();
-        $req = 'SELECT * FROM user WHERE pseudo = :login AND password = :password';
+        $req = 'SELECT * FROM user WHERE login = :login AND password = :password';
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':login', $login);
         $stmt->bindParam(':password', $password);

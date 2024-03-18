@@ -1,34 +1,31 @@
 <?php
-
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
 class UserController
 {
 
 
     public function membre()
     {
-
-
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
-    
+
     public function userModif($params)
     {
         //require("../model/user.php")
         foreach ($params as $key => $value) {
             $input = $key;
             $value = $value;
+            if ($_SESSION["id"] == $params["id"]) {
+                $_SESSION[$input] = $value;
+                // $_SESSION['user']->__set($input, $value);
 
-            $_SESSION['user']->__set($input, $value);
+                // var_dump($_SESSION['user']);
+                // var_dump($_POST);
 
-            // var_dump($_SESSION['user']);
-            // var_dump($_POST);
-
-            $db =  user::createVide();
-            
-            $db->update($input, $value, $_SESSION['user']->getId()); 
-
-   
+                $db =  user::createVide();
+                $db->update($input, $value, $_SESSION['id']);
+            }
         }
 
 
@@ -49,7 +46,7 @@ class UserController
         }
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
         $db =  user::createVide();
-        
+
         $erreur = "";
         if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
 
@@ -60,14 +57,14 @@ class UserController
 
             $result = $db->checkLogin($_POST['login'], $_POST['password']);
             if ($result) {
-                $user = new User($result["id"], $result["email"], $result["pseudo"], $result["password"], $result["is_verified"], $result["role"]);
-              
+                $user = new User($result["id"], $result["email"], $result["login"], $result["password"], $result["is_verified"], $result["role"]);
+
                 $_SESSION['id'] = $result["id"];
                 $_SESSION['email'] = $result["email"];
-                $_SESSION['login'] = $result["pseudo"];
+                $_SESSION['login'] = $result["login"];
                 $_SESSION['role'] = $result["role"];
 
- 
+
 
                 require($_SERVER["DOCUMENT_ROOT"] . "/vue/game.php");
             } else {

@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <title>Plein la bobine !</title>
-    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <title>Plein la bobine !</title> 
     <link rel="icon" href="/public/assets/img/logo2.png" />
+    <?php include 'base.html'; ?>
 </head>
 
 <body>

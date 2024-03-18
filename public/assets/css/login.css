@@ -80,3 +80,8 @@ body {
 .div-submit button:hover {
   background-color: #118d8d;
 }
+
+
+.form-label {
+  margin-bottom: 0.75rem;
+}
