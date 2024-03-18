@@ -40,5 +40,6 @@
     </div>
 
 </body>
-
+<script src="/public/assets/js/ajaxJeu.js"></script>
+<script src="/public/assets/js/initJeu.js"></script>
 </html>
