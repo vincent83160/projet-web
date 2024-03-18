@@ -5,6 +5,7 @@
     <title>Plein la bobine !</title>
     <link rel="stylesheet" href="/public/assets/css/style.css">
     <link rel="icon" href="/public/assets/img/logo2.png" />
+    <?php include 'base.html'; ?>
 </head>
 
 <body>
@@ -26,11 +27,13 @@
         <form action="">
             <div class="fields">
                 <span>
-                    <input placeholder="Tapez le nom d'un film" type="text" />
+                    <input placeholder="Tapez le nom d'un film"  id="input-film"/>
+                    
                 </span>
         </form>
     </div>
     
 </body>
-
+<script src="/public/assets/js/ajaxJeu.js"></script>
+<script src="/public/assets/js/initJeu.js"></script>
 </html>

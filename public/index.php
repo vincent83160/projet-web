@@ -63,7 +63,9 @@ if (isset($_SESSION['login'])) {
 } else { 
     switch ($nbSegments) {
         case 1:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
+            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
+            $controller =  new UserController();
+            $controller->logout();
             break;
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
@@ -82,5 +84,6 @@ if (isset($_SESSION['login'])) {
             $controller =  new UserController();
             $controller->logout();
             break;
+            
     }
 }

@@ -5,7 +5,7 @@
         ?>
             <a href="/User/logout" class="button">Deconnexion</a>
             <a href="/User/membre" class="button">Compte</a>
-            <a href="/Film/films" class="button">Films</a>
+            <a href="/Game/start" class="button">Jeu</a>
         <?php
         } else {
         ?>
@@ -16,6 +16,6 @@
         }
         ?>
 
-            <a href="/Default/accueil" class="button">Accueil</a>
+         
     </div>
 </div>
