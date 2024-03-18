@@ -1,9 +1,9 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
-    class Film{
+    class Film extends ConnexionMySql{
         private int $id;
         private string $nom;
-        private date $date_sortie;
+        private string $date_sortie;
         private string $affiche;
         private int $duree;
         private string $classification;
@@ -74,6 +74,18 @@
             $stmt->bindParam(':id', $id); 
             $result = $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+            public function geFilmByTitle(string $titre)
+        {
+            $pdo = $this->getConnexion();
+            $req = "SELECT * FROM film WHERE nom like '%".$titre."%' LIMIT 10";
+           
+            $stmt = $pdo->prepare($req);
+            $result = $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         }
