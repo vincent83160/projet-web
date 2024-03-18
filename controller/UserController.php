@@ -48,14 +48,14 @@ class UserController
         $db =  user::createVide();
 
         $erreur = "";
-        if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
+        if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
 
             header("location: /Default/accueil");
         } else {
             $_POST['password'] = isset($_POST['password']) ? $_POST['password'] : "";
-            $_POST['login'] = isset($_POST['login']) ? $_POST['login'] : "";
+            $_POST['email'] = isset($_POST['email']) ? $_POST['email'] : "";
             
-            $result = $db->checkLogin($_POST['login'], $_POST['password']);
+            $result = $db->checkLogin($_POST['email'], $_POST['password']);
             if ($result) {
                 $user = new User($result["id"], $result["email"], $result["login"], $result["password"], $result["is_verified"], $result["role"]);
 

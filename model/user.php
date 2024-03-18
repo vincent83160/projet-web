@@ -124,12 +124,12 @@ public function create($email, $login, $password, $is_verified, $role)
         return $result;
     }
 
-    public function checkLogin($login, $password)
+    public function checkLogin($email, $password)
     {
         $pdo = $this->getConnexion();
-        $req = 'SELECT * FROM user WHERE login = :login';
+        $req = 'SELECT * FROM user WHERE email = :email';
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':email', $email);
         $result = $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

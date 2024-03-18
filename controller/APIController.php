@@ -60,7 +60,6 @@ class ApiController extends ConnexionMySql
             $detailsFilm = json_decode(file_get_contents($url));
 
             foreach ($detailsFilm->cast as $acteur) {
-                // var_dump($acteur);
                 $this->insertPersonne($acteur->id, $acteur->name, $acteur->profile_path);
 
                 if ($acteur->known_for_department == "Directing") {

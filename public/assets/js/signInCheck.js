@@ -57,7 +57,7 @@ src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
 
 $('#password').on(
     'keyup',function(){
-        if($(this).val().length<13){
+        if($(this).val().length<8){
             $('#warningLength').show();
             $('#warningLength').html('Mot de passe trop court');
         }
@@ -91,7 +91,7 @@ $('#formulaire').submit(function(event) {
     var champ3 = $('#mail').val()
 
     // Par exemple, vérifier si les champs ne sont pas vides
-    if (champ1.trim() === '' || champ2.trim() === ''|| champ2.length<13 || !/\d/.test(champ2) || !/[A-Z]/.test(champ2) || champ3.trim() === '   ') {
+    if (champ1.trim() === '' || champ2.trim() === ''|| champ2.length<8 || !/\d/.test(champ2) || !/[A-Z]/.test(champ2) || champ3.trim() === '   ') {
         // Afficher un message d'erreur
         alert('Veuillez remplir tous les champs');
         // Arrêter le traitement
