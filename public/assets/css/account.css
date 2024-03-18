@@ -1,0 +1,82 @@
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(
+    180deg,
+    #fad662 0,
+    #e8d75b 8.33%,
+    #d4d655 16.67%,
+    #bed551 25%,
+    #a6d34f 33.33%,
+    #8bd04e 41.67%,
+    #6acc50 50%,
+    #3ec855 58.33%,
+    #00c35c 66.67%,
+    #00bf67 75%,
+    #00bb73 83.33%,
+    #00b881 91.67%,
+    #00b591 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#div-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgb(253, 253, 253);
+  width: 400px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192);
+  margin-top: 85px;
+}
+
+#div-login .div-logo,
+.div-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#div-login .div-logo {
+  width: fit-content;
+  height: 180px;
+  width: 180px;
+  padding: 20px;
+  border-radius: 100px;
+  background-color: #e4ebeb;
+  justify-content: center;
+}
+
+#div-login .div-logo img {
+  height: 150px;
+}
+
+#div-login form {
+  width: 100%;
+}
+
+.div-submit button {
+  background-color: #1bb7b7;
+  border: none;
+}
+
+.div-submit button:hover {
+  background-color: #118d8d;
+}
+.top-left {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+.top-left2 {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+}

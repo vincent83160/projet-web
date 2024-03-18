@@ -1,60 +1,50 @@
- 
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
+?>
 
-<p> Hola
-   <?php
-   echo $_SESSION['user']->getPseudo();
-   ?>
-</p>
+<head>
+   <title>Mon compte</title>
+   <link rel="stylesheet" href="/public/assets/css/account.css">
+   <link rel="icon" href="/public/assets/img/logo2.png" />
+</head>
+
 <div>
-   <p>Id :
-      <?php
-      echo $_SESSION['user']->getId();
-      ?>
-
-   </p>
-   <p>Email :
-      <?php
-      echo $_SESSION['user']->getEmail();
-      ?>
-   <form method=post action="userModif/email">
-      <input type=text name="email" id="email"></input>
-      <input type=submit value="Modifier"></input>
-   </form>
-   </p>
-   <p>Pseudo :
-      <?php
-      echo $_SESSION['user']->getPseudo();
-      ?>
-   <form method=post action="userModif/pseudo">
-      <input type=text name="pseudo" id='pseudo'></input>
-      <input type=submit value="Modifier"></input>
-   </form>
-   </p>
-   <p>Password :
-      <?php
-      echo $_SESSION['user']->getPassword();
-      ?>
-   <form method=post action="userModif/password">
-      <input type=text name="password" id="password"></input>
-      <input type=submit value="Modifier"></input>
-   </form>
-   </p>
-   <p>IsVerified :<?php
-                  echo $_SESSION['user']->getIsVerified();
-                  ?>
-   <form method=post action="userModif/is_verified">
-      <input type=text name="is_verified" id="is_verified"></input>
-      <input type=submit value="Modifier"></input>
-   </form>
-   </p>
-   <p>Role :
-      <?php
-      echo $_SESSION['user']->getRole();
-      ?>
-   <form method=post action="userModif/role">
-      <input type=text name="role" id="role"></input>
-      <input type=submit value="Modifier"></input>
-   </form>
-   </p>
+   <a href="/User/logout" class="btn btn-primary top-left">Retour</a></a>
+   <?php
+   if ($_SESSION['user']->getRole() == 'ADMIN') {
+      echo '<a href="/User/logout" class="btn btn-dark top-left2">Vue Admin</a>';
+   }
+   ?>
 </div>
-<p><a href="/User/logout"><button>deconnexion</button></a></p>
+
+
+<body>
+   <div id="div-login">
+      <div class="div-logo">
+         <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
+      </div>
+      <form method="post" id="formulaire" action="">
+         <div class="mb-3">
+            <p>Changer votre pseudo :
+               <?php
+               echo $_SESSION['user']->getPseudo();
+               ?>
+            </p>
+            <input class="form-control" type="text" id="username" name="login" value="" required />
+         </div>
+         <div class="mb-3">
+            <p>Changer votre email :
+               <?php
+               echo $_SESSION['user']->getEmail();
+               ?>
+               <input class="form-control" type="email" id="email" name="email" required />
+         </div>
+         <div class="div-submit">
+            <button class="btn btn-primary" id="btn-login" type="submit">Modifier les informations</button>
+         </div>
+         <div class="div-submit">
+            <a href="/User/logout" class="btn btn-danger">Déconnexion</a>
+         </div>
+      </form>
+   </div>
+</body>
