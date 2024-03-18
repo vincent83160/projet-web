@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 18 mars 2024 à 09:09
+-- Généré le : lun. 18 mars 2024 à 13:09
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.2.0
 
@@ -16625,7 +16625,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `pseudo` varchar(255) NOT NULL,
+  `login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'USER',
@@ -16636,8 +16636,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `pseudo`, `password`, `is_verified`, `role`) VALUES
-(1, 'fvfdvdf', 'test', 'test', 1, 'USER');
+INSERT INTO `user` (`id`, `email`, `login`, `password`, `is_verified`, `role`) VALUES
+(1, 'test@gmail.com', 'test', 'test', 1, 'USER');
 
 --
 -- Contraintes pour les tables déchargées
