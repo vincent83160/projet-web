@@ -54,7 +54,7 @@ class UserController
         } else {
             $_POST['password'] = isset($_POST['password']) ? $_POST['password'] : "";
             $_POST['login'] = isset($_POST['login']) ? $_POST['login'] : "";
-
+            
             $result = $db->checkLogin($_POST['login'], $_POST['password']);
             if ($result) {
                 $user = new User($result["id"], $result["email"], $result["login"], $result["password"], $result["is_verified"], $result["role"]);
@@ -78,7 +78,8 @@ class UserController
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         if(isset($_POST['mail'])){
             $db =  user::createVide();
-            $db->create($_POST['mail'], $_POST['pseudo'], $_POST['password'], 0, 'USER');
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
             header("location: /Vue/signInConfirm");
             //var_dump($_POST);
         }

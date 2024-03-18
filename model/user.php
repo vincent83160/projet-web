@@ -6,7 +6,7 @@ class User extends ConnexionMySql
     private static $data = array();
     private int $id;
     private string $email;
-    private string $pseudo;
+    private string $login;
     private string $password;
     private bool $is_verified;
     private String $role;
@@ -23,9 +23,9 @@ class User extends ConnexionMySql
     {
         return $this->email;
     }
-    function getPseudo()
+    function getLogin()
     {
-        return $this->pseudo;
+        return $this->login;
     }
     function getPassword()
     {
@@ -45,11 +45,11 @@ class User extends ConnexionMySql
         $this->$name = $value;
     }
     //CONSTRUCTEUR
-    function __construct($id, $email, $pseudo, $password, $is_verified, $role)
+    function __construct($id, $email, $login, $password, $is_verified, $role)
     {
         $this->id = $id;
         $this->email = $email;
-        $this->pseudo = $pseudo;
+        $this->login = $login;
         $this->password = $password;
         $this->is_verified = $is_verified;
         $this->role = $role;
@@ -84,14 +84,14 @@ public function update($input, $value,$idUser)
         $stmt->execute();
     }
 
-public function create($email, $pseudo, $password, $is_verified, $role)
+public function create($email, $login, $password, $is_verified, $role)
     {
         
         $pdo = $this->getConnexion();
-        $req = "INSERT INTO user (email, pseudo, password, is_verified, role) VALUES (:email, :pseudo, :password, :is_verified, :role)";
+        $req = "INSERT INTO user (email, login, password, is_verified, role) VALUES (:email, :login, :password, :is_verified, :role)";
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':pseudo', $pseudo);
+        $stmt->bindParam(':login', $login);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':is_verified', $is_verified);
         $stmt->bindParam(':role', $role);
@@ -127,13 +127,19 @@ public function create($email, $pseudo, $password, $is_verified, $role)
     public function checkLogin($login, $password)
     {
         $pdo = $this->getConnexion();
-        $req = 'SELECT * FROM user WHERE login = :login AND password = :password';
+        $req = 'SELECT * FROM user WHERE login = :login';
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':password', $password);
         $result = $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result;
+        if(isset($result['password']) && password_verify($password, $result['password']))
+        {
+            return $result;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
