@@ -25,6 +25,7 @@ class ConnexionMySql {
     function getPdo(){
         return $this->pdo;
     }
+   
 
 
 }

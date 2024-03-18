@@ -1,7 +1,5 @@
-<?php
-require("../model/user.php");
-session_start();
-
+<?php 
+session_start();  
 $requestUri = $_SERVER['REQUEST_URI'];
 // Router les requêtes
 
@@ -29,8 +27,7 @@ if ($nbSegments >= 3) {
 if($segments[0] == ""){
     $controller = "DefaultController";
     $methode = "accueil";
-} 
-
+}  
 if (isset($_SESSION['login'])) {
     
     
@@ -61,9 +58,13 @@ if (isset($_SESSION['login'])) {
             break;
     }
 } else { 
+     
     switch ($nbSegments) {
+        
         case 1:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
+            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
+            $controller =  new UserController();
+            $controller->login();
             break;
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
@@ -80,7 +81,7 @@ if (isset($_SESSION['login'])) {
         default:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
             $controller =  new UserController();
-            $controller->logout();
+            $controller->login();
             break;
     }
 }

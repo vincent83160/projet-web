@@ -43,7 +43,6 @@ class UserController
 
     public function login()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -61,8 +60,13 @@ class UserController
             $result = $db->checkLogin($_POST['login'], $_POST['password']);
             if ($result) {
                 $user = new User($result["id"], $result["email"], $result["pseudo"], $result["password"], $result["is_verified"], $result["role"]);
-                $_SESSION['user'] = $user;
-                $_SESSION['login'] = $result['pseudo'];
+              
+                $_SESSION['id'] = $result["id"];
+                $_SESSION['email'] = $result["email"];
+                $_SESSION['login'] = $result["pseudo"];
+                $_SESSION['role'] = $result["role"];
+
+ 
 
                 require($_SERVER["DOCUMENT_ROOT"] . "/vue/game.php");
             } else {
