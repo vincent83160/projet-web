@@ -10,7 +10,9 @@ function ajaxGetFilmByTitre(query) {
       console.log(reponse)
       $("#list-suggestions").html("");
       html = "";
-
+if(reponse.length == 0){
+  $("#list-suggestions").hide();
+}
       $.each(reponse, function (index, film) {
         html += "<div class='suggestion row' id='" + film.id + "'>";
         html += "<div class='col-3'>";
