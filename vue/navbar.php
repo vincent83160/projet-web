@@ -1,7 +1,7 @@
 <div class="tree">
     <div id="button-container">
         <?php
-        if (isset($_SESSION["login"])) {
+        if (isset($_SESSION["pseudo"])) {
         ?>
             <a href="/User/logout" class="button">Deconnexion</a>
             <a href="/User/membre" class="button">Compte</a>

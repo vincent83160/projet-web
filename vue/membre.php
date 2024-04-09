@@ -18,22 +18,16 @@ include 'navbar.php';
             <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
          </div>
          <form method="post" id="formulaire" action="/User/userModif/">
-            <input type="hidden" name="id" required value="<?php
-                                                            echo $_SESSION['id'];
-                                                            ?>" />
+            <input type="hidden" name="id" required value="<?php echo $_SESSION['id'];?>" />
             <div class="mb-3">
                <p>Changer votre pseudo :
                </p>
-               <input class="form-control" type="text" id="username" name="login" required value="<?php
-                                                                                                   echo $_SESSION['login'];
-                                                                                                   ?>" />
+               <input class="form-control" type="text" id="username" name="login" required value="<?php echo $_SESSION['pseudo']; ?>" />
             </div>
             <div class="mb-3">
                <p>Changer votre email :</p>
 
-               <input class="form-control" type="email" id="email" name="email" value="          <?php
-                                                                                                   echo $_SESSION['email'];
-                                                                                                   ?>" required />
+               <input class="form-control" type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" required />
             </div>
             <div class="div-submit">
                <button class="btn btn-primary" id="btn-login" type="submit">Modifier les informations</button>

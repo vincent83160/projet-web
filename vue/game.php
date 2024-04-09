@@ -18,9 +18,9 @@
         <div class="two">
             <h1>Plein la bobine !</h1>
 
-            
+
         </div>
-<?php include 'navbar.php'; ?>
+        <?php include 'navbar.php'; ?>
 
     </div>
 
@@ -35,6 +35,11 @@
             <div class="fields">
                 <span>
                     <input id="input-film" placeholder="Tapez le nom d'un film" type="text" />
+
+                </span>
+                <span id="container-list-suggestions">
+                    <div id="list-suggestions"></div>
+
                 </span>
         </form>
     </div>
@@ -42,4 +47,5 @@
 </body>
 <script src="/public/assets/js/ajaxJeu.js"></script>
 <script src="/public/assets/js/initJeu.js"></script>
+
 </html>

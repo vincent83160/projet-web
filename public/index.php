@@ -9,7 +9,6 @@ $requestUri = filter_var(trim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL
 $segments = explode('/', $requestUri);
 // Récupérer le dernier élément du tableau
 
-
 $controller = $segments[0]  . "Controller";
 if (isset($segments[1])) {
     $methode = $segments[1];
@@ -20,7 +19,9 @@ $nbSegments = count($segments);
 if ($nbSegments >= 3) {
     $params = array();
     for ($i = 2; $i < $nbSegments; $i++) {
-        $params[$segments[$i]] = $_POST[$segments[$i]];
+        $param = explode("=", $segments[$i]);
+        $params[$param[0]] = $param[1];
+        
     }
 } else if (isset($_POST) && $_POST != null) {
     $params = $_POST;
@@ -32,7 +33,7 @@ if ($segments[0] == "") {
     $controller = "DefaultController";
     $methode = "accueil";
 }
-if (isset($_SESSION['login'])) {
+if (isset($_SESSION['pseudo'])) {
 
 
     switch ($nbSegments) {

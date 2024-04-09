@@ -2,9 +2,9 @@
     class Historique_film{
         private int $id;
         private int $id_film;
-        private date $date; 
+        private DateTime $date; 
 
-        function __construct(int $id, int $id_film, date $date){
+        function __construct(int $id, int $id_film, DateTime $date){
             $this->id = $id;
             $this->id_film = $id_film;
             $this->date = $date;
@@ -15,7 +15,7 @@
         public function getIdFilm(): int{
             return $this->id_film;
         }
-        public function getDate(): date{
+        public function getDate(): DateTime{
             return $this->date;
         }
     }

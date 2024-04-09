@@ -18,10 +18,6 @@ class UserController
             $value = $value;
             if ($_SESSION["id"] == $params["id"]) {
                 $_SESSION[$input] = $value;
-                // $_SESSION['user']->__set($input, $value);
-
-                // var_dump($_SESSION['user']);
-                // var_dump($_POST);
 
                 $db =  user::createVide();
                 $db->update($input, $value, $_SESSION['id']);
@@ -47,7 +43,7 @@ class UserController
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
         $db =  user::createVide();
 
-        $erreur = "";
+        $erreur = ""; 
         if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
 
             header("location: /Default/accueil");
@@ -57,18 +53,19 @@ class UserController
             
             $result = $db->checkLogin($_POST['email'], $_POST['password']);
             if ($result) {
-                $user = new User($result["id"], $result["email"], $result["login"], $result["password"], $result["is_verified"], $result["role"]);
+                $user = new User($result["id"], $result["email"], $result["pseudo"], $result["password"], $result["is_verified"], $result["role"]);
 
                 $_SESSION['id'] = $result["id"];
                 $_SESSION['email'] = $result["email"];
-                $_SESSION['login'] = $result["login"];
+                $_SESSION['pseudo'] = $result["pseudo"];
                 $_SESSION['role'] = $result["role"];
 
 
-
-                require($_SERVER["DOCUMENT_ROOT"] . "/vue/game.php");
-            } else {
+                header("Location: /game/start"); 
+            } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
+            }else{
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
             }
         }

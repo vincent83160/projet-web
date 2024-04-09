@@ -3,7 +3,7 @@
     class Film{
         private int $id;
         private string $nom;
-        private date $date_sortie;
+        private DateTime $date_sortie;
         private string $affiche;
         private int $duree;
         private string $classification;
@@ -26,7 +26,7 @@
             return $pdo;  
         }
 
-        function __construct(int $id, string $nom, string $date_sortie, string $affiche, int $duree, string $classification, string $synopsis){
+        function __construct(int $id, string $nom, DateTime $date_sortie, string $affiche, int $duree, string $classification, string $synopsis){
             $this->id = $id;
             $this->nom = $nom;
             $this->date_sortie = $date_sortie;
@@ -37,7 +37,7 @@
         }
         public static function createVide()
         {
-            return new self(0, "", "", "",0,"","");
+            return new self(0, "", new DateTime(), "",0,"","");
         }
 
         public function update($input, $value,$idFilm)
@@ -64,6 +64,17 @@
                 $stmt->bindParam('classification', $classification);
                 $stmt->bindParam('synopsis', $synopsis);
                 $stmt->execute();
+            }
+        public function getFilmByTitreLike(string $nom)
+            {
+                $nom = "%" . $nom . "%";
+                $pdo = $this->getConnexion();
+                $req = "SELECT * FROM film WHERE nom LIKE :nom LIMIT 10";
+                $stmt = $pdo->prepare($req);
+                $stmt->bindParam(':nom', $nom); 
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
             }
 
         public function deleteFilmByID(int $id)

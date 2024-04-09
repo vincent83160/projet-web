@@ -88,7 +88,7 @@ public function create($email, $login, $password, $is_verified, $role)
     {
         
         $pdo = $this->getConnexion();
-        $req = "INSERT INTO user (email, login, password, is_verified, role) VALUES (:email, :login, :password, :is_verified, :role)";
+        $req = "INSERT INTO user (email, pseudo, password, is_verified, role) VALUES (:email, :login, :password, :is_verified, :role)";
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':login', $login);
@@ -131,8 +131,7 @@ public function create($email, $login, $password, $is_verified, $role)
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email);
         $result = $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);  
         if(isset($result['password']) && password_verify($password, $result['password']))
         {
             return $result;
