@@ -1,7 +1,7 @@
 
 
 $(function () {
-
+nbEssais = 0;
     $("#input-film").focus();
     $("#input-film").on("input", function () {
         if ($(this).val().length >= 3) {

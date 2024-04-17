@@ -41,10 +41,24 @@
                     <div id="list-suggestions"></div>
 
                 </span>
+                <span>
+                    <div id="filmToFind">
+
+
+                    </div>
+                </span>
+                <span>
+                    <p id="nbEssais"></p>
+                    <div class="container" id="container-essais">
+
+
+                    </div>
+                </span>
         </form>
     </div>
 
 </body>
+
 <script src="/public/assets/js/ajaxJeu.js"></script>
 <script src="/public/assets/js/initJeu.js"></script>
 
