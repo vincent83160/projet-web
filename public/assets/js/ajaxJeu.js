@@ -68,23 +68,32 @@ function ajaxCheckIfFilmCorrect(id) {
         // htmlFilm += "<p>Acteurs " + reponse["acteursCommuns"].length + "/" + reponse["filmChecked"]["acteurs"].length + "</p>";
 
 
-        htmlFilm = "<div class='card' id='essai-" + nbEssais + "'>";
+        htmlFilm = "<div class='card essai' id='essai-" + nbEssais + "'>";
         htmlFilm += "<h4>" + reponse["filmChecked"]["nom"] + "</h4>";
-        htmlFilm += "<p>Acteurs</p>"; 
+        htmlFilm += "<p>Acteurs</p>";
         htmlFilm += "<div class='row scrollable-row'>";
-        $.each(reponse["acteursCommuns"], function (index, acteur) {
+        $.each(reponse["acteursCommunsDetails"], function (index, acteur) {
           htmlFilm += "<div class='acteur'>";
           if (acteur["image"] != null) {
-            htmlFilm += "<div><img src='https://image.tmdb.org/t/p/w185/" + acteur["image"] + "'></div>";
+            htmlFilm += "<img class='img-acteur' src='https://image.tmdb.org/t/p/w92/" + acteur["image"] + "'>";
+          } else {
+            htmlFilm += "<img class='anonyme' src='/public/assets/img/anonyme.png'>";
+          }
+          htmlFilm += "<p class='acteur-nom'>" + acteur.name + "</p>";
+          htmlFilm += "</div>";
+        });
+        $.each(reponse["acteursNonCommunsDetails"], function (index, acteur) {
+          htmlFilm += "<div class='acteur'>";
+          if (acteur["image"] != null) {
+            htmlFilm += "<img class='img-acteur noir-et-blanc' src='https://image.tmdb.org/t/p/w92/" + acteur["image"] + "'>";
           } else {
             htmlFilm += "<div><img class='anonyme' src='/public/assets/img/anonyme.png'></div>";
           }
-          htmlFilm += "<p>" + acteur.name + "</p>";
+          htmlFilm += "<p class='texte-barre acteur-nom'>" + acteur.name + "</p>";
           htmlFilm += "</div>";
         });
         htmlFilm += "</div>";
-        console.log(htmlFilm)
-        $("#container-essais").append(htmlFilm)
+        $("#container-essais").prepend(htmlFilm)
         $("#essai-" + nbEssais).css("background-image", "url('https://image.tmdb.org/t/p/w500" + reponse["filmChecked"]["affiche"] + "')");
         $("#essai-" + nbEssais).css("background-size", "cover");
         $("#essai-" + nbEssais).css("background-position", "center");

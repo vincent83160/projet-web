@@ -59,9 +59,29 @@
   height: fit-content;
 }
 .anonyme {
-  width: 11em;
-  height: 14em;
+  width: 6em;
+  height: 7.2em;
 }
 #container-essais {
   margin-bottom: 2em;
+}
+
+.noir-et-blanc {
+  filter: grayscale(100%); /* Convertit l'image en noir et blanc */
+}
+.texte-barre {
+  text-decoration: line-through; /* Ajoute un trait horizontal à travers le texte */
+}
+
+.acteur-nom {
+  color: white;
+  width: 6em;
+  overflow-wrap: break-word; /* Le texte reviendra à la ligne si nécessaire */
+}
+
+.img-acteur {
+  width: fit-content !important;
+}
+.essai {
+  margin-bottom: 1em;
 }

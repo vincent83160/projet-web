@@ -88,34 +88,63 @@ class Film
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
-        $film["acteurs"] = $this->getActeursByIdFilm($id);
-        $film["realisateurs"] = $this->getRealistaeursByIdFilm($id);
+        $film["acteurs"] = $this->getListIdActeursByIdFilm($id);
+        $film["realisateurs"] = $this->getListIdRealisateursByIdFilm($id);
         $film["genres"] = $this->getGenresByIdFilm($id);
         return $film;
     }
-    public function getActeursByIdFilm(string $id)
+
+    public function getListIdActeursByIdFilm(string $id)
     {
 
-        $req = "SELECT id,name,image,rang FROM personne inner join join_film_acteur on personne.id = join_film_acteur.id_acteur WHERE join_film_acteur.id_film =:id ORDER BY rang";
+        $req = "SELECT id from personne inner join join_film_acteur on personne.id = join_film_acteur.id_acteur WHERE join_film_acteur.id_film =:id ORDER BY rang";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         return $result;
     }
-    public function getRealistaeursByIdFilm(string $id)
+
+    public function getListIdRealisateursByIdFilm(string $id)
     {
 
-        $req = "SELECT id,name,image FROM personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_film =:id ";
+        $req = "SELECT id from personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_film =:id ";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
+
+    public function getActeurById(string $id)
+    {
+
+        $req = "SELECT id,name,image,rang FROM personne inner join join_film_acteur on personne.id = join_film_acteur.id_acteur WHERE join_film_acteur.id_acteur =:id ORDER BY rang";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
+    public function getRealisateurById(string $id)
+    {
+
+        $req = "SELECT id,name,image FROM personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_realisateur =:id ";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getGenresByIdFilm(string $id)
     {
 
@@ -137,8 +166,8 @@ class Film
         $stmt = $pdo->prepare($req);
         $stmt->execute();
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
-        $film["acteurs"] = $this->getActeursByIdFilm($film["id_film"]);
-        $film["realisateurs"] = $this->getRealistaeursByIdFilm($film["id_film"]);
+        $film["acteurs"] = $this->getListIdActeursByIdFilm($film["id_film"]);
+        $film["realisateurs"] = $this->getListIdRealisateursByIdFilm($film["id_film"]);
         $film["genres"] = $this->getGenresByIdFilm($film["id_film"]);
         return $film;
     }

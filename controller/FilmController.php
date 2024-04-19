@@ -1,4 +1,7 @@
 <?php
+
+require $_SERVER["DOCUMENT_ROOT"] . "/model/film.php";
+
 class FilmController
 {
     function films()
@@ -9,43 +12,58 @@ class FilmController
 
     function compare2Films($filmChecked, $filmToFind)
     {
-        // var_dump($filmChecked["acteurs"]); 
+
+        $db = Film::createVide();
         $acteursCommuns = [];
+        $acteursNonCommuns = [];
+        $acteursCommunsDetails = [];
+        $acteursNonCommunsDetails = [];
+
         $realisateursCommuns = [];
+        $realisateursNonCommuns = [];
+        $realisateursCommunsDetails = [];
+        $realisateursNonCommunsDetails = [];
+
+
         $genresCommuns = [];
-        foreach ($filmChecked["acteurs"] as $acteur) {
-            if (($key = array_search($acteur, $filmToFind["acteurs"])) !== false) {
-                unset($filmToFind["acteurs"][$key]);
-                unset($filmChecked["acteurs"][$key]);
-                $acteursCommuns[] = $acteur;
-            }
+        $genresNonCommuns = [];
+
+
+        $acteursCommuns = array_intersect($filmChecked["acteurs"], $filmToFind["acteurs"]);
+        $acteursNonCommuns = array_diff($filmChecked["acteurs"], $filmToFind["acteurs"]);
+
+
+        $realisateursCommuns = array_intersect($filmToFind["realisateurs"], $filmToFind["realisateurs"]);
+        $realisateursNonCommuns = array_diff($filmChecked["realisateurs"], $filmToFind["realisateurs"]);
+
+
+        foreach ($acteursCommuns as $acteur) {
+            $acteursCommunsDetails[] = $db->getActeurById($acteur);
         }
 
-        foreach ($filmChecked["realisateurs"] as $realisateur) {
-            if (($key = array_search($realisateur, $filmToFind["realisateurs"])) !== false) {
-                unset($filmToFind["realisateurs"][$key]);
-                unset($filmChecked["realisateurs"][$key]);
-                $realisateursCommuns[] = $realisateur;
-            }
+        foreach ($acteursNonCommuns as $acteur) {
+            $acteursNonCommunsDetails[] = $db->getActeurById($acteur);
+        }
+        foreach ($realisateursCommuns as $real) {
+            $realisateursCommunsDetails[] = $db->getActeurById($real);
         }
 
-        foreach ($filmChecked["genres"] as $genre) {
-            if (($key = array_search($genre, $filmToFind["genres"])) !== false) {
-                unset($filmToFind["genres"][$key]);
-                unset($filmChecked["genres"][$key]);
-                $genresCommuns[] = $genre;
-            }
+        foreach ($realisateursNonCommuns as $real) {
+            $realisateursNonCommunsDetails[] = $db->getRealisateurById($real);
         }
 
-        // var_dump(array_intersect($filmChecked["acteurs"], $filmToFind["acteurs"]));
-        // $realisateursCommuns = array_intersect($filmChecked["realisateurs"], $filmToFind["realisateurs"]);
-        // $genresCommuns = array_intersect($filmChecked["genres"], $filmToFind["genres"]);
+        // $genresCommuns = array_intersect($filmToFind["genres"], $filmChecked["genres"]);
+        // $genresNonCommuns = array_diff($filmToFind["genres"], $filmChecked["genres"]);
+
         $result = [
-            "acteursCommuns" => $acteursCommuns,
-            "realisateursCommuns" => $realisateursCommuns,
-            "genresCommuns" => $genresCommuns,
+            "acteursCommunsDetails" => $acteursCommunsDetails,
+            "acteursNonCommunsDetails" => $acteursNonCommunsDetails,
+            "realisateursCommunsDetails" => $realisateursCommunsDetails,
+            "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
+            "realisateursNonCommuns" => $realisateursNonCommuns,
             "filmChecked" => $filmChecked,
-            "filmToFind" => $filmToFind,
+            "filmToFind" => $filmToFind
+            
         ];
         return $result;
     }

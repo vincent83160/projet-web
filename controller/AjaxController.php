@@ -1,5 +1,4 @@
 <?php
-require $_SERVER["DOCUMENT_ROOT"] . "/model/film.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/FilmController.php";
 class AjaxController
 {
