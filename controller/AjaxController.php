@@ -22,7 +22,7 @@ class AjaxController
 
 
     
-        if ($idFilm== $filmToFind["id_film"]) {
+        if ($idFilm== $filmToFind["id"]) {
             $result["isCorrect"] = true;
         } else {
             $filmChecked = $db->getFilmById($idFilm);

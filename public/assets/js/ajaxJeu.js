@@ -8,6 +8,7 @@ function ajaxGetFilmByTitre(query) {
       // reponse = JSON.parse(reponse);
       console.log(reponse)
       $("#list-suggestions").html("");
+
       html = "";
       if (reponse.length == 0) {
         $("#list-suggestions").hide();
@@ -27,6 +28,7 @@ function ajaxGetFilmByTitre(query) {
 
 
       html += "</div>"
+      $("#list-suggestions").show();
       $("#list-suggestions").html(html);
 
       $(".suggestion").off();
@@ -58,6 +60,7 @@ function ajaxCheckIfFilmCorrect(id) {
 
 
         $("#list-suggestions").html("");
+        $("#list-suggestions").hide();
         if (nbEssais == 1) {
           html = nbEssais + " réponse";
         } else {
@@ -70,8 +73,65 @@ function ajaxCheckIfFilmCorrect(id) {
 
         htmlFilm = "<div class='card essai' id='essai-" + nbEssais + "'>";
         htmlFilm += "<h4>" + reponse["filmChecked"]["nom"] + "</h4>";
+        //infos film
+        htmlFilm += "<div class='row container-details'>";
+        $.each(reponse["genresCommuns"], function (index, genre) {
+          htmlFilm += "<div class='details'>" + genre + "</div>";
+        });
+        $.each(reponse["genresNonCommuns"], function (index, genre) {
+          htmlFilm += "<div class='details-barre'>" + genre + "</div>";
+        });
+        htmlFilm += "</div>";
+
+
+
+
+
+        htmlFilm += "<div class='row container-details'>";
+        htmlFilm += "<div class='row details'>";
+
+
+        //si les dates de sortie sont les mêmes
+        if (reponse["filmChecked"]["date_sortie"] == reponse["filmToFind"]["date_sortie"]) {
+          html += reponse["filmChecked"]["date_sortie"];
+
+          //si le film checké est sorti entre dateUp et dateLow
+
+        } else if (reponse["filmChecked"]["date_sortie"] < $("#dateUp").val() || reponse["filmChecked"]["date_sortie"] > $("#dateLow").val()) {
+
+          //si le film à trouver est sorti après le film checké
+          if (reponse["filmToFind"]["date_sortie"] < reponse["filmChecked"]["date_sortie"] && reponse["filmChecked"]["date_sortie"] < $("#dateUp").val()) {
+            $("#dateUp").val(reponse["filmChecked"]["date_sortie"]);
+          }
+
+          if (reponse["filmToFind"]["date_sortie"] > reponse["filmChecked"]["date_sortie"] && reponse["filmChecked"]["date_sortie"] > $("#dateLow").val()) {
+            $("#dateLow").val(reponse["filmChecked"]["date_sortie"]);
+          }
+
+
+
+          let dateLow = $("#dateLow").val();
+          let dateUp = $("#dateUp").val();
+          if (dateUp != 10000 && dateLow != 0) {
+            htmlFilm += "Entre " + dateLow + " et " + dateUp;
+          } else if ($("#dateUp").val() != 10000) {
+            htmlFilm += "Avant " + dateUp;
+          } else if ($("#dateLow").val() != 0) {
+            htmlFilm += "Après " + dateLow;
+          }
+
+        }
+        htmlFilm += "</div>"
+        htmlFilm += "</div>"
+
+
+
         htmlFilm += "<p>Acteurs</p>";
         htmlFilm += "<div class='row scrollable-row'>";
+
+
+
+        //acteurs
         $.each(reponse["acteursCommunsDetails"], function (index, acteur) {
           htmlFilm += "<div class='acteur'>";
           if (acteur["image"] != null) {
@@ -92,9 +152,10 @@ function ajaxCheckIfFilmCorrect(id) {
           htmlFilm += "<p class='texte-barre acteur-nom'>" + acteur.name + "</p>";
           htmlFilm += "</div>";
         });
+
         htmlFilm += "</div>";
         $("#container-essais").prepend(htmlFilm)
-        $("#essai-" + nbEssais).css("background-image", "url('https://image.tmdb.org/t/p/w500" + reponse["filmChecked"]["affiche"] + "')");
+        $("#essai-" + nbEssais).css("background-image", "linear-gradient(rgb(40, 31, 74) 2%, rgba(40, 31, 74, 0.7) 50%, rgb(40, 31, 74) 98%), url('https://image.tmdb.org/t/p/w500" + reponse["filmChecked"]["affiche"] + "')");
         $("#essai-" + nbEssais).css("background-size", "cover");
         $("#essai-" + nbEssais).css("background-position", "center");
       }

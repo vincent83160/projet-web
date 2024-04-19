@@ -18,7 +18,7 @@ class ApiController extends ConnexionMySql
     {
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
         // Terme de recherche
-        $query = 'jurassic';
+        $query = 'kingsman';
 //  
 
 

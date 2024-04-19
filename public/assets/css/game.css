@@ -74,7 +74,6 @@
 }
 
 .acteur-nom {
-  color: white;
   width: 6em;
   overflow-wrap: break-word; /* Le texte reviendra à la ligne si nécessaire */
 }
@@ -83,5 +82,36 @@
   width: fit-content !important;
 }
 .essai {
+  margin-bottom: 1em;
+}
+
+.essai {
+  color: white !important;
+}
+
+.details,
+.details-barre {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  width: fit-content !important;
+  height: fit-content;
+  padding-left: 0.25em !important;
+  padding-right: 0.25em !important;
+  font-size: 0.75em;
+}
+
+.details-barre {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.container-details > * {
+  margin-left: 2em;
+}
+.container-details {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1em;
 }

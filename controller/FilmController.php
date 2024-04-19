@@ -52,8 +52,8 @@ class FilmController
             $realisateursNonCommunsDetails[] = $db->getRealisateurById($real);
         }
 
-        // $genresCommuns = array_intersect($filmToFind["genres"], $filmChecked["genres"]);
-        // $genresNonCommuns = array_diff($filmToFind["genres"], $filmChecked["genres"]);
+        $genresCommuns = array_intersect($filmToFind["genres"], $filmChecked["genres"]);
+        $genresNonCommuns = array_diff($filmToFind["genres"], $filmChecked["genres"]);
 
         $result = [
             "acteursCommunsDetails" => $acteursCommunsDetails,
@@ -61,9 +61,11 @@ class FilmController
             "realisateursCommunsDetails" => $realisateursCommunsDetails,
             "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
             "realisateursNonCommuns" => $realisateursNonCommuns,
+            "genresCommuns" => $genresCommuns,
+            "genresNonCommuns" => $genresNonCommuns,
             "filmChecked" => $filmChecked,
             "filmToFind" => $filmToFind
-            
+
         ];
         return $result;
     }

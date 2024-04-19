@@ -9,7 +9,6 @@ nbEssais = 0;
             $("#list-suggestions").show();
         } else if ($(this).val().length == 0) {
 
-            $("#list-suggestions").remove();
             $("#list-suggestions").hide();
 
         } else {

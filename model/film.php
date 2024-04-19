@@ -82,7 +82,7 @@ class Film
     public function getFilmById(string $id)
     {
 
-        $req = "SELECT * FROM film WHERE film.id =:id ";
+        $req = "SELECT *, YEAR(date_sortie) as date_sortie FROM film WHERE film.id =:id ";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);
@@ -148,12 +148,12 @@ class Film
     public function getGenresByIdFilm(string $id)
     {
 
-        $req = "SELECT id,genre FROM genre inner join join_film_genre on genre.id = join_film_genre.id_genre WHERE join_film_genre.id_film =:id ";
+        $req = "SELECT genre FROM genre inner join join_film_genre on genre.id = join_film_genre.id_genre WHERE join_film_genre.id_film =:id ";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return $result;
     }
 
@@ -166,9 +166,7 @@ class Film
         $stmt = $pdo->prepare($req);
         $stmt->execute();
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
-        $film["acteurs"] = $this->getListIdActeursByIdFilm($film["id_film"]);
-        $film["realisateurs"] = $this->getListIdRealisateursByIdFilm($film["id_film"]);
-        $film["genres"] = $this->getGenresByIdFilm($film["id_film"]);
+        $film = $this->getFilmById($film["id_film"]);
         return $film;
     }
 
