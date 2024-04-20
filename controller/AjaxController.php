@@ -4,7 +4,8 @@ class AjaxController
 {
     function getFilmByTitre($params)
     {
-        $titre = $params["query"];
+        //urldecode permet de retrouver la string dans son état d'origine par exemple de ermplacer les %20 par des espaces
+        $titre = urldecode($params["query"]);
         $db = Film::createVide();
         $result = $db->getFilmByTitreLike($titre);
         echo json_encode($result);

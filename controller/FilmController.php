@@ -60,7 +60,6 @@ class FilmController
             "acteursNonCommunsDetails" => $acteursNonCommunsDetails,
             "realisateursCommunsDetails" => $realisateursCommunsDetails,
             "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
-            "realisateursNonCommuns" => $realisateursNonCommuns,
             "genresCommuns" => $genresCommuns,
             "genresNonCommuns" => $genresNonCommuns,
             "filmChecked" => $filmChecked,

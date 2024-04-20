@@ -42,7 +42,7 @@
 
                 </span>
                 <span>
-                    <div id="filmToFind">
+                    <div class="container" id="container-filmToFind">
 
 
                     </div>
