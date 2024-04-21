@@ -141,8 +141,9 @@ function ajaxCheckIfFilmCorrect(id) {
 
 
         //acteurs
+
         $.each(reponse["acteursCommunsDetails"], function (index, acteur) {
-          htmlFilm += "<div class='acteur'>";
+          htmlFilm += "<div class='acteur' idActeur='" + acteur["id"] + "' rang='" + acteur["rang"] + "'>";
           if (acteur["image"] != null) {
             htmlFilm += "<img class='img-acteur' src='https://image.tmdb.org/t/p/w92/" + acteur["image"] + "'>";
           } else {
@@ -197,18 +198,20 @@ function ajaxCheckIfFilmCorrect(id) {
         });
         htmlRecap += "</div>";
         htmlRecap += "<div class='row container-details'>";
-        htmlRecap += "<div class='details'>";
+        htmlRecap += "<div class='details' id='date-recap'>";
         htmlRecap += dateFilm;
         htmlRecap += "</div>";
 
         htmlRecap += "<div class='row row-nb-acteur-real'>";
-        htmlRecap += "<div id='row-nbActeurs' class='row'>Acteurs <div id='nbActeursFind'>" + reponse["acteursCommunsDetails"].length + "</div>/" + reponse["filmToFind"]["acteurs"].length + "</div>";
-        htmlRecap += "<div id='row-nbReals' class='row'>Réal(s) <div id='nbRealsFind'>" + reponse["realisateursCommunsDetails"].length + "</div>/" + reponse["filmToFind"]["realisateurs"].length + "</div>";
+        htmlRecap += "<div id='row-nbActeurs' class='row'>Acteurs <div id='nbActeursFind'>" + reponse["acteursCommunsDetails"].length + "</div>/<div id='nbActeursToFind'>" + reponse["filmToFind"]["acteurs"].length + "</div></div>";
+        htmlRecap += "<div id='row-nbReals' class='row'>Réal(s) <div id='nbRealsFind'>" + reponse["realisateursCommunsDetails"].length + "</div>/<div id='nbRealsToFind'>" + reponse["filmToFind"]["realisateurs"].length + "</div></div>";
         htmlRecap += "</div>";
 
-        htmlRecap += "<div class='row acteur-row scrollable-row'>";
+        htmlRecap += "<div id='find-acteur-row' class='row acteur-row scrollable-row'>";
+
         $.each(reponse["acteursCommunsDetails"], function (index, acteur) {
-          htmlRecap += "<div class='acteur'>";
+
+          htmlRecap += "<div class='acteur-find' idActeur='" + acteur.id + "' rang='" + acteur.rang + "'>";
           if (acteur["image"] != null) {
             htmlRecap += "<img class='img-acteur' src='https://image.tmdb.org/t/p/w92/" + acteur["image"] + "'>";
           } else {
@@ -219,7 +222,7 @@ function ajaxCheckIfFilmCorrect(id) {
         });
 
         $.each(reponse["acteursNonCommunsDetails"], function (index, acteur) {
-          htmlRecap += "<div class='acteur'>";
+          htmlRecap += "<div class='acteur' idActeur='" + acteur["id"] + "' rang='" + acteur["rang"] + "'>";
 
           htmlRecap += "<img class='anonyme' src='/public/assets/img/anonyme.png'>";
           htmlRecap += "<p class='acteur-nom'>&nbsp;</p>";
@@ -255,11 +258,39 @@ function ajaxCheckIfFilmCorrect(id) {
 
         $("#container-filmToFind").html(htmlRecap);
         $("#filmToFind").css("background-image", "linear-gradient(rgb(40, 31, 74) 2%, rgba(40, 31, 74, 0.7) 50%, rgb(40, 31, 74) 98%), url(/public/assets/img/fond-login.webp)");
+
+
+
       } else {
+        $("#dateFilm").html(dateFilm);
+        listActeursFind = [];
+        $(".acteur-find").each(function () {
+          listActeursFind[$(this).attr('rang')] = parseInt($(this).attr('idActeur'));
+        });
+
+        console.log(listActeursFind)
+        $.each(reponse["acteursCommunsDetails"], function (index, acteur) {
+          if (!listActeursFind.includes(acteur["rang"])) {
+            listActeursFind[acteur['rang']] = parseInt(acteur["id"]);
+          }
+        });
+
+        let nbActeursFind = listActeursFind.length;
+        $("#nbActeursFind").html(nbActeursFind);
+
+        htmlActeurs = "";
+        $.each(listActeursFind, function (rang, acteur) {
+          if (acteur != undefined) {
+            htmlActeurs += "<div class='acteur-find' idActeur='" + acteur + "' rang='" + rang + "'>" + $(".acteur[idActeur='" + acteur + "']").first().html() + "</div>";
+          }
+        });
 
 
-
-
+        let nbActeursNotFind = $("#nbActeursToFind").html() - nbActeursFind;
+        for (let i = 0; i < nbActeursNotFind; i++) {
+          htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+        }
+        $("#find-acteur-row").html(htmlActeurs);
       }
 
 

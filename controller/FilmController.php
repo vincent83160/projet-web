@@ -38,14 +38,14 @@ class FilmController
 
 
         foreach ($acteursCommuns as $acteur) {
-            $acteursCommunsDetails[] = $db->getActeurById($acteur);
+            $acteursCommunsDetails[] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
         }
 
         foreach ($acteursNonCommuns as $acteur) {
-            $acteursNonCommunsDetails[] = $db->getActeurById($acteur);
+            $acteursNonCommunsDetails[] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
         }
         foreach ($realisateursCommuns as $real) {
-            $realisateursCommunsDetails[] = $db->getActeurById($real);
+            $realisateursCommunsDetails[] = $db->getActeurByIdAndIdFilm($real,$filmToFind["id"]);
         }
 
         foreach ($realisateursNonCommuns as $real) {
