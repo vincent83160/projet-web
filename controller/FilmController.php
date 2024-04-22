@@ -18,11 +18,14 @@ class FilmController
         $acteursNonCommuns = [];
         $acteursCommunsDetails = [];
         $acteursNonCommunsDetails = [];
+        $acteurs = [];
+
 
         $realisateursCommuns = [];
         $realisateursNonCommuns = [];
         $realisateursCommunsDetails = [];
         $realisateursNonCommunsDetails = [];
+        $realisateurs = [];
 
 
         $genresCommuns = [];
@@ -45,23 +48,35 @@ class FilmController
             $acteursNonCommunsDetails[] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
         }
         foreach ($realisateursCommuns as $real) {
-            $realisateursCommunsDetails[] = $db->getActeurByIdAndIdFilm($real,$filmToFind["id"]);
+            $realisateursCommunsDetails[] = $db->getRealisateurByIdAndIdFilm($real, $filmToFind["id"]);
         }
 
         foreach ($realisateursNonCommuns as $real) {
-            $realisateursNonCommunsDetails[] = $db->getRealisateurById($real);
+            $realisateursNonCommunsDetails[] = $db->getRealisateurByIdAndIdFilm($real, $filmToFind["id"]);
         }
 
         $genresCommuns = array_intersect($filmToFind["genres"], $filmChecked["genres"]);
         $genresNonCommuns = array_diff($filmToFind["genres"], $filmChecked["genres"]);
 
+        foreach ($filmChecked["acteurs"] as $acteur) {
+            $acteurs[] = $db->getActeurByIdAndIdFilm($acteur, $filmChecked["id"]);
+        }
+        foreach ($filmChecked["realisateurs"] as $realisateur) {
+            $realisateurs[] = $db->getRealisateurByIdAndIdFilm($realisateur, $filmChecked["id"]);
+        }
+
+
         $result = [
             "acteursCommunsDetails" => $acteursCommunsDetails,
             "acteursNonCommunsDetails" => $acteursNonCommunsDetails,
+            "acteurs" => $acteurs,
             "realisateursCommunsDetails" => $realisateursCommunsDetails,
             "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
+            "realisateurs" => $realisateurs,
+
             "genresCommuns" => $genresCommuns,
             "genresNonCommuns" => $genresNonCommuns,
+
             "filmChecked" => $filmChecked,
             "filmToFind" => $filmToFind
 

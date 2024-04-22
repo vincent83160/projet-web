@@ -134,6 +134,10 @@
   margin-left: -10em !important;
 }
 
+.row-essai > .acteur-row {
+  margin-left: 0em !important;
+}
+
 .real-row {
   width: 13% !important;
   margin-left: 1em !important;

@@ -134,13 +134,14 @@ class Film
     }
 
 
-    public function getRealisateurById(string $id)
+    public function getRealisateurByIdAndIdFilm(string $idReal, string $idFilm)
     {
 
-        $req = "SELECT id,name,image FROM personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_realisateur =:id ";
+        $req = "SELECT id,name,image FROM personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_realisateur =:idReal AND join_film_realisateur.id_film = :idFilm";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':idReal', $idReal);
+        $stmt->bindParam(':idFilm', $idFilm);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;

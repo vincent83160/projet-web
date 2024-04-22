@@ -17,14 +17,19 @@ class AjaxController
         $filmController = new FilmController();
         $idFilm = $params["idFilm"];
         $db = Film::createVide();
-        
+
         $filmToFind = $db->getFilmToFind();
-        
 
 
-    
-        if ($idFilm== $filmToFind["id"]) {
-            $result["isCorrect"] = true;
+
+
+        if ($idFilm == $filmToFind["id"]) {
+            $result = $filmToFind;
+            $result["isCorrect"] = true; 
+            $result["acteurs"] = [];
+            foreach ($filmToFind["acteurs"] as $acteur) {
+                $result["acteurs"][] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
+            } 
         } else {
             $filmChecked = $db->getFilmById($idFilm);
             $result = $filmController->compare2Films($filmChecked, $filmToFind);
