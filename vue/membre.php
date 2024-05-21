@@ -30,6 +30,9 @@ include 'navbar.php';
                <input class="form-control" type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" required />
             </div>
             <div class="div-submit">
+               <a href="/User/mdp" class="btn btn-primary" id="btn-mdp">Modifier mot de passe</a>
+            </div>
+            <div class="div-submit">
                <button class="btn btn-primary" id="btn-login" type="submit">Modifier les informations</button>
             </div>
             <div class="div-submit">
@@ -39,7 +42,5 @@ include 'navbar.php';
       </div>
 
 
-      <script src="/public/assets/js/account.js"></script>
-      <script src="/public/assets/js/connexion.js"></script>
-      <script src="/public/assets/js/inscription.js"></script>
+      
 </body>
