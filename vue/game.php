@@ -26,7 +26,7 @@
 
     <!-- BODY -->
     <div class="container2">
-        <img src="/public/assets/img/img.jpg" class="rounded-corners" alt="Illustration">
+        <img src="/public/assets/img/img.jpg" class="rounded-corners3" alt="Illustration">
     </div>
     </div>
 
