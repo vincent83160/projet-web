@@ -31,7 +31,7 @@
     </div>
 
     <div class="container2">
-        <form action="">
+        <form id="form" action="">
             <div class="fields">
                 <span>
                     <input id="input-film" placeholder="Tapez le nom d'un film" type="text" />
