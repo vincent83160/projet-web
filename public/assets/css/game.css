@@ -1,3 +1,161 @@
 #input-film {
   text-align: center;
 }
+
+.suggestion:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgb(54, 57, 58);
+}
+
+#container-list-suggestions {
+  display: flex;
+  justify-content: center;
+}
+
+#list-suggestions {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+  overflow-y: auto;
+  z-index: 100;
+  background-image: linear-gradient(
+    180deg,
+    #fad662 0,
+    #e8d75b 8.33%,
+    #d4d655 16.67%,
+    #bed551 25%,
+    #a6d34f 33.33%,
+    #8bd04e 41.67%,
+    #6acc50 50%,
+    #3ec855 58.33%,
+    #00c35c 66.67%,
+    #00bf67 75%,
+    #00bb73 83.33%,
+    #00b881 91.67%,
+    #00b591 100%
+  );
+  border-radius: 15px;
+  max-height: 15em;
+  display: none;
+  max-width: 30em;
+}
+
+.suggestion {
+  cursor: pointer;
+  width: 100%;
+  margin: 0 !important;
+  padding: 2px 2px 2px 6px;
+}
+.acteur,
+.real,
+.acteur-find {
+  width: fit-content !important;
+  flex: 0 0 auto;
+  height: 11em;
+}
+.scrollable-row {
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  padding: 1em;
+  height: fit-content;
+}
+.anonyme {
+  width: 6em;
+  height: 7.2em;
+}
+#container-essais {
+  margin-bottom: 2em;
+}
+
+.noir-et-blanc {
+  filter: grayscale(100%); /* Convertit l'image en noir et blanc */
+}
+.texte-barre {
+  text-decoration: line-through; /* Ajoute un trait horizontal à travers le texte */
+}
+
+.acteur-nom,
+.realisateur-nom {
+  width: 6em;
+  overflow-wrap: break-word; /* Le texte reviendra à la ligne si nécessaire */
+}
+
+.img-acteur,
+.img-realisateur {
+  width: fit-content !important;
+}
+.essai {
+  margin-bottom: 1em;
+}
+
+.essai {
+  color: white !important;
+}
+
+.details,
+.details-barre {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 12px;
+  width: fit-content !important;
+  height: fit-content;
+  padding-left: 0.25em !important;
+  padding-right: 0.25em !important;
+  font-size: 0.75em;
+}
+
+.details-barre {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.container-details > * {
+  margin-left: 2em;
+}
+.container-details {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+#nbActeursFind,
+#nbActeursToFind,
+#nbRealsFind,
+#nbRealsToFind {
+  width: fit-content;
+  padding: 0.25em;
+}
+
+.acteur-row {
+  width: 85% !important;
+  margin-left: -10em !important;
+}
+
+.row-essai > .acteur-row {
+  margin-left: 0em !important;
+}
+
+.real-row {
+  width: 13% !important;
+  margin-left: 1em !important;
+  margin-right: -10em !important;
+}
+
+.row-nb-acteur-real > * {
+  width: fit-content !important;
+  align-items: center;
+}
+.row-nb-acteur-real {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+#row-nbReals {
+  margin-right: 2em;
+}
+#row-nbActeurs {
+  margin-left: 2em;
+}

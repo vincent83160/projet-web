@@ -40,11 +40,9 @@ body {
   flex-direction: column;
   background: rgb(253, 253, 253);
   width: 400px;
-  padding: 20px;
-  margin: 20px;
+  padding: 20px; 
   border-radius: 20px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192);
-  margin-top: 85px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192); 
 }
 
 #div-login .div-logo,
@@ -84,4 +82,16 @@ body {
 
 .form-label {
   margin-bottom: 0.75rem;
+}
+
+body {
+  display: block;
+}
+
+#container-div-centrale{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ width:100%;
 }

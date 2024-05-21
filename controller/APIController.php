@@ -18,14 +18,14 @@ class ApiController extends ConnexionMySql
     {
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
         // Terme de recherche
-        $query = 'fast';
+        $query = 'kingsman';
 //  
 
 
         // URL de l'API de TMDb
         $url = "https://api.themoviedb.org/3/search/movie?api_key=$apiKey&query=".urlencode($query)."&language=fr-FR";
         $response = json_decode(file_get_contents($url));
-
+    
  
 
         foreach ($response->results as $result) {
@@ -34,7 +34,7 @@ class ApiController extends ConnexionMySql
             $url = "https://api.themoviedb.org/3/movie/$result->id?language=fr-FR&api_key=$apiKey";
             $detailsFilm = json_decode(file_get_contents($url));
             $this->insertFilm($detailsFilm->id, $detailsFilm->title, $detailsFilm->poster_path, $detailsFilm->release_date, $detailsFilm->overview, $detailsFilm->runtime, $detailsFilm->adult);
-
+  
             foreach ($detailsFilm->production_companies as $production_companies) {
 
                 $this->insertProduction($production_companies->id, $production_companies->name, $production_companies->logo_path);
@@ -58,9 +58,9 @@ class ApiController extends ConnexionMySql
             }
             $url = "https://api.themoviedb.org/3/movie/$result->id/credits?language=fr-FR&api_key=$apiKey";
             $detailsFilm = json_decode(file_get_contents($url));
-
+ 
+ 
             foreach ($detailsFilm->cast as $acteur) {
-                // var_dump($acteur);
                 $this->insertPersonne($acteur->id, $acteur->name, $acteur->profile_path);
 
                 if ($acteur->known_for_department == "Directing") {
@@ -70,7 +70,7 @@ class ApiController extends ConnexionMySql
                     $this->insertJoinReal( $detailsFilm->id, $acteur->id);
                 } else {
                     $this->insertPersonne($acteur->id, $acteur->name, $acteur->profile_path); 
-                    $this->insertJoinActeur( $detailsFilm->id, $acteur->id);
+                    $this->insertJoinActeur( $detailsFilm->id, $acteur->id, $acteur->order);
 
                 }
             }
@@ -144,13 +144,14 @@ class ApiController extends ConnexionMySql
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->execute();
     }
-    public function insertJoinActeur($idFilm, $id)
+    public function insertJoinActeur($idFilm, $id_acteur, $rang)
     {
-        $req = 'INSERT IGNORE INTO join_film_acteur (id_film, id_acteur) VALUES(:idFilm, :id_acteur)';
+        $req = 'INSERT IGNORE INTO join_film_acteur (id_film, id_acteur,rang) VALUES(:idFilm, :id_acteur,:rang)';
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':idFilm', $idFilm, PDO::PARAM_STR);
-        $stmt->bindParam(':id_acteur', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':id_acteur', $id_acteur, PDO::PARAM_STR);
+        $stmt->bindParam(':rang', $rang, PDO::PARAM_STR);
         $stmt->execute();
     }
     public function insertJoinReal($idFilm, $id)
