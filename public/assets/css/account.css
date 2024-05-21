@@ -88,7 +88,7 @@ body {
   display: block;
 }
 
-#container-div-centrale{
+#container-div-centrale, #div-button{
   display: flex;
   justify-content: center;
   align-items: center;

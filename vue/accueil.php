@@ -26,7 +26,7 @@ include 'navbar.php';
         </main>
         <section class="left-sidebar">
             <h2>Les règles : </h2>
-            <h3>Bienvenue sur Pleinlabobine.fr : </h3>
+            <h3>Bienvenue sur Pleinlabobine : </h3>
             <h3>Tous les jours, tentez de trouver le film du jour.</h3>
             <p>Suivant vos essais, les informations en commun avec le film du jour apparaîtrons.</p>
         </section>
