@@ -1,13 +1,14 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/FilmController.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/controller/APIController.php";
 class AjaxController
 {
     function getFilmByTitre($params)
     {
         //urldecode permet de retrouver la string dans son état d'origine par exemple de ermplacer les %20 par des espaces
         $titre = urldecode($params["query"]);
-        $db = Film::createVide();
-        $result = $db->getFilmByTitreLike($titre);
+        $apiController = new APIController(); 
+        $result = $apiController->getFilmsForGame($titre);
         echo json_encode($result);
     }
 

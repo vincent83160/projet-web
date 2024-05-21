@@ -14,11 +14,19 @@ class ApiController extends ConnexionMySql
         return $pdo;
     }
  
-    function getFilmsApi()
+    function getFilmsForGame($query ='')
+    {
+        $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a'; 
+        // URL de l'API de TMDb
+        $url = "https://api.themoviedb.org/3/search/movie?api_key=$apiKey&query=".urlencode($query)."&language=fr-FR";
+        $response = json_decode(file_get_contents($url)); 
+    return $response->results;
+
+    }
+    function getFilmsApi($query ='')
     {
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
-        // Terme de recherche
-        $query = 'kingsman';
+        // Terme de recherche 
 //  
 
 

@@ -15,11 +15,11 @@ function ajaxGetFilmByTitre(query) {
       $.each(reponse, function (index, film) {
         html += "<div class='suggestion row' id='" + film.id + "'>";
         html += "<div class='col-3'>";
-        html += "<img src='https://image.tmdb.org/t/p/w92" + film.affiche + "' class='img-fluid'>";
+        html += "<img src='https://image.tmdb.org/t/p/w92" + film.poster_path + "' class='img-fluid'>";
         html += "</div>";
         html += "<div class='col-9'>";
-        html += "<h6>" + film.nom + "</h6>";
-        html += "<p>" + film.date_sortie.split("-")[0] + "</p>";
+        html += "<h6>" + film.original_title + "</h6>";
+        html += "<p>" + film.release_date.split("-")[0] + "</p>";
         html += "</div>";
         html += "</div>";
       }
