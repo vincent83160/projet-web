@@ -15,7 +15,6 @@ class UserController
         //require("../model/user.php")
         foreach ($params as $key => $value) {
             $input = $key;
-            $value = $value;
             if ($_SESSION["id"] == $params["id"]) {
                 $_SESSION[$input] = $value;
 
