@@ -76,7 +76,7 @@ class FilmController
         }
 
         $genresCommuns = array_intersect($filmChecked["genres"],$filmToFind["genres"]);
-        $genresNonCommuns = array_diff( $filmChecked["genres"],$filmToFind["genres"]);
+        $genresNonCommuns = array_diff($filmChecked["genres"],$filmToFind["genres"]);
 
         foreach ($filmToFind["acteurs"] as $acteur) {
             $acteurs[] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);

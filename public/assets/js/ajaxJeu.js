@@ -214,9 +214,10 @@ function ajaxCheckIfFilmCorrect(id) {
             htmlRecap += "<div class='details'>" + genre + "</div>";
           });
 
-          $.each(reponse["genresNonCommuns"], function (index, genre) {
+          n = reponse["filmToFind"]["genres"].length - reponse["genresCommuns"].length;
+          for (var i = 0; i < n; i++) {          
             htmlRecap += "<div class='genre-non-trouve'>...</div>";
-          });
+          }
           
           htmlRecap += "</div>";
           htmlRecap += "<div class='row container-details'>";
