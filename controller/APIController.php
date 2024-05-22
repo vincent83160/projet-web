@@ -23,6 +23,7 @@ class ApiController extends ConnexionMySql
     return $response->results;
 
     }
+
     function getFilmsApi($query ='')
     {
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
@@ -84,6 +85,66 @@ class ApiController extends ConnexionMySql
             }
         }
     }
+    function getFilmById($id)
+{
+    $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
+    
+    // URL de l'API de TMDb pour obtenir les détails du film par son ID
+    $url = "https://api.themoviedb.org/3/movie/$id?language=fr-FR&api_key=$apiKey";
+    $detailsFilm = json_decode(file_get_contents($url));
+    
+    if (!$detailsFilm) {
+        return;
+    }
+
+    // Insérer les détails du film
+    $this->insertFilm($detailsFilm->id, $detailsFilm->title, $detailsFilm->poster_path, $detailsFilm->release_date, $detailsFilm->overview, $detailsFilm->runtime, $detailsFilm->adult);
+
+    // Insérer les sociétés de production
+    foreach ($detailsFilm->production_companies as $production_companies) {
+        $this->insertProduction($production_companies->id, $production_companies->name, $production_companies->logo_path);
+        $this->insertJoinProductionFilm($detailsFilm->id, $production_companies->id);
+    }
+
+    // Insérer les genres
+    foreach ($detailsFilm->genres as $genre) {
+        $this->insertGenre($genre->id, $genre->name);
+        $this->insertJoinGenre($detailsFilm->id, $genre->id);
+    }
+
+    // Insérer les langues parlées
+    foreach ($detailsFilm->spoken_languages as $langue) {
+        $this->insertLangue($langue->iso_639_1, $langue->name);
+        $this->insertJoinLangue($detailsFilm->id, $langue->name);
+    }
+
+    // Insérer les pays de production
+    foreach ($detailsFilm->production_countries as $pays) {
+        $this->insertPays($pays->iso_3166_1, $pays->name);
+        $this->insertJoinPays($detailsFilm->id, $pays->iso_3166_1);
+    }
+
+    // URL de l'API de TMDb pour obtenir les crédits du film par son ID
+    $url = "https://api.themoviedb.org/3/movie/$id/credits?language=fr-FR&api_key=$apiKey";
+    $creditsFilm = json_decode(file_get_contents($url));
+    
+    if (!$creditsFilm) {
+        return;
+    }
+
+    // Insérer les acteurs et réalisateurs
+    foreach ($creditsFilm->cast as $acteur) {
+        $this->insertPersonne($acteur->id, $acteur->name, $acteur->profile_path);
+
+        if ($acteur->known_for_department == "Directing") {
+            $this->insertJoinReal($detailsFilm->id, $acteur->id);
+        } else {
+            $this->insertJoinActeur($detailsFilm->id, $acteur->id, $acteur->order);
+        }
+    }
+}
+ 
+
 
 
 
