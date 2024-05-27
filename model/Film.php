@@ -77,6 +77,9 @@ class Film
         $stmt->bindParam(':original_title', $original_title);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as &$row) {
+            $row["bdd"] = true;
+        }
         return $result;
     }
     public function getFilmById(string $id)
@@ -137,7 +140,7 @@ class Film
     public function getFilms()
     {
 
-        $req = "SELECT original_title,release_date,poster_path FROM film";
+        $req = "SELECT id,original_title,release_date,poster_path FROM film";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->execute();

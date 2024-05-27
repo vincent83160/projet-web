@@ -92,7 +92,6 @@ class ApiController extends ConnexionMySql
         // URL de l'API de TMDb pour obtenir les détails du film par son ID
         $url = "https://api.themoviedb.org/3/movie/$id?language=fr-FR&api_key=$apiKey";
         $detailsFilm = json_decode(file_get_contents($url));
-
         if (!$detailsFilm) {
             return;
         }

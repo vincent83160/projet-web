@@ -25,7 +25,7 @@
     </div>
 
     <!-- BODY -->
-    <div id="spinner"><img src="/public/assets/gif/spinner.gif"/></div>
+    <div id="spinner"><img src="/public/assets/gif/spinner.gif" /></div>
     <div class="container2">
         <img src="/public/assets/img/img.jpg" class="rounded-corners3" alt="Illustration">
     </div>
@@ -36,16 +36,12 @@
             <div class="fields">
                 <span>
                     <input id="input-film" placeholder="Tapez le nom d'un film" type="text" />
-
                 </span>
                 <span id="container-list-suggestions">
                     <div id="list-suggestions"></div>
-
                 </span>
                 <span>
                     <div class="container" id="container-filmToFind">
-
-
                     </div>
                 </span>
                 <span>
@@ -61,8 +57,8 @@
 </body>
 <input type="hidden" value="0" id="dateLow" />
 <input type="hidden" value="10000" id="dateUp" />
-<script src="/public/assets/js/ajaxJeu.js"></script>
-<script src="/public/assets/js/initJeu.js"></script>
-<script src="/public/assets/js/jeu.js"></script>
+<script src="/public/assets/js/jeu/ajaxJeu.js"></script>
+<script src="/public/assets/js/jeu/initJeu.js"></script>
+<script src="/public/assets/js/jeu/jeu.js"></script>
 
 </html>

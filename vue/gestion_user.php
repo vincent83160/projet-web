@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Plein la bobine !</title>
-    <link rel="icon" href="/public/assets/img/logo2.png" />
-
-    <link rel="stylesheet" href="/public/assets/css/style.css">
-    <?php
-    include 'base.html';
-    ?>
-</head>
+<?php
+include 'base_gestion.php';
+?>
 
 <body>
-    <!-- HEADER -->
-    <div class="wrapper">
-        <div class="one"><img src="/public/assets/img/logo2.png" class="rounded-corners" alt="Plein la bobine !"></div>
-        <div class="two">
-            <h1>Plein la bobine !</h1>
 
+    <div class="container2">
+        <input type="hidden" id="context" value="user" />
+        <!-- HEADER -->
+        <div class="wrapper">
+            <div class="one"><img src="/public/assets/img/logo2.png" class="rounded-corners" alt="Plein la bobine !"></div>
+            <div class="two">
+                <h1>Plein la bobine !</h1>
+            </div>
+            <?php include 'navbar.php'; ?>
 
         </div>
-        <?php include 'navbar.php'; ?>
 
-    </div>
-
-    <!-- BODY -->
-    <table class="table table-dark">
-        <thead>
-            <tr> 
-                <th scope="col">Email</th>
-                <th scope="col">Pseudo</th>
-                <th scope="col">Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user) { ?>
-                <tr> 
-                    <td><?php echo $user["email"]; ?></td>
-                    <td><?php echo $user["pseudo"];; ?></td>
-                    <td><?php echo $user["role"];; ?></td>
+        <!-- BODY -->
+        <table id="table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Rôle</th>
+                    <th scope="col">Supprimer</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user) { ?>
+                    <tr id="tr-<?php echo $user["id"]; ?>">
+                        <td><?php echo $user["email"]; ?></td>
+                        <td><?php echo $user["pseudo"]; ?></td>
+                        <td><?php echo $user["role"]; ?></td>
+                        <td><button class="btn btn-danger btn-delete" id="<?php echo $user["id"]; ?>">Supprimer</button></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

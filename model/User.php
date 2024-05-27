@@ -77,7 +77,7 @@ class User extends ConnexionMySql
     public function getUsers()
     {
         $pdo = $this->getConnexion();
-        $req = 'SELECT email,pseudo,role FROM user';
+        $req = 'SELECT id,email,pseudo,role FROM user';
         $stmt = $pdo->prepare($req);
         $result = $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

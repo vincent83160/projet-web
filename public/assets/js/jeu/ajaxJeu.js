@@ -1,5 +1,5 @@
 function ajaxGetFilmByTitre(query) {
-  url = "../../Ajax/getFilmByTitre/query=" + query;
+  url = "../../ajax/getFilmByTitre/query=" + query;
   $.ajax({
     url: url,
     type: "GET",
@@ -45,7 +45,7 @@ function ajaxGetFilmByTitre(query) {
 function ajaxCheckIfFilmCorrect(id) {
   $("#input-film").val("");
   nbEssais++;
-  url = "../../Ajax/checkIfFilmCorrect/idFilm=" + id;
+  url = "../../ajax/checkIfFilmCorrect/idFilm=" + id;
   toggleSpinner("show");
   $.ajax({
     url: url,

@@ -1,0 +1,11 @@
+#table {
+  width: 55% !important;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+.filmBdd {
+  opacity: 0.5;
+}

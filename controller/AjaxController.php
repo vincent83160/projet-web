@@ -1,8 +1,34 @@
 <?php
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/FilmController.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/controller/APIController.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/model/User.php";
 class AjaxController
 {
+    function deleteByContext($params)
+    {
+        //urldecode permet de retrouver la string dans son état d'origine par exemple de remplacer les %20 par des espaces
+        $context = urldecode($params["context"]);
+        $idElem = urldecode($params["idElem"]);
+
+        if ($context == "film") {
+            $db = Film::createVide();
+            $db->deleteFilmByID($idElem);
+        } elseif ($context == "user") {
+            $db = User::createVide();
+            $db->deleteUserByID($idElem);
+        }
+    }
+    function addFilm($params)
+    {
+        //urldecode permet de retrouver la string dans son état d'origine par exemple de remplacer les %20 par des espaces        
+        $idFilm = urldecode($params["idFilm"]);
+        $apiController = new APIController();
+        $apiController->getFilmById($idFilm);
+         
+    }
+
+
+
     function getFilmByTitre($params)
     {
         //urldecode permet de retrouver la string dans son état d'origine par exemple de remplacer les %20 par des espaces
@@ -11,11 +37,24 @@ class AjaxController
         $resultAPI = $apiController->getFilmsForGame($titre);
         $db = Film::createVide();
         $resultBDD = $db->getFilmByTitreLike($titre);
-        $result = array_merge($resultAPI, $resultBDD);
+        $result = $this->mergeMovies($resultBDD, $resultAPI);
         echo json_encode($result);
     }
 
-
+    //fonction qui permet de fusionner les films de la bdd et de l'api et de supprimmer les doublons
+    function mergeMovies($moviesBDD, $moviedAPI)
+    {
+        $idMap = [];
+        foreach ($moviesBDD as $movieBDD) {
+            $idMap[$movieBDD["id"]] =  true;
+        }
+        foreach ($moviedAPI as $movieAPI) {
+            if (!isset($idMap[$movieAPI->id])) {
+                array_unshift($moviesBDD,$movieAPI);
+            }
+        }
+        return $moviesBDD;
+    }
     function checkIfFilmCorrect($params)
     {
         $filmController = new FilmController();
@@ -23,7 +62,7 @@ class AjaxController
         $apiController = new APIController();
         //Insert le film en bdd si il n'existe pas
         $result = $apiController->getFilmById($idFilm);
- 
+
         $db = Film::createVide();
 
         $filmToFind = $db->getFilmToFind();
