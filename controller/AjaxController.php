@@ -5,7 +5,7 @@ class AjaxController
 {
     function getFilmByTitre($params)
     {
-        //urldecode permet de retrouver la string dans son état d'origine par exemple de ermplacer les %20 par des espaces
+        //urldecode permet de retrouver la string dans son état d'origine par exemple de remplacer les %20 par des espaces
         $titre = urldecode($params["query"]);
         $apiController = new APIController();
         $result = $apiController->getFilmsForGame($titre);

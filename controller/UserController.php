@@ -74,7 +74,7 @@ class UserController
     }
 
     public function signIn(){
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
         if(isset($_POST['mail'])){
             $db =  user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -83,12 +83,12 @@ class UserController
             //var_dump($_POST);
         }
         else{
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signIn.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
         }
         
     }
 
     public function mdp(){
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/motdepasse.php";
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/motdepasse.php";
     }
 }
