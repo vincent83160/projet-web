@@ -10,20 +10,20 @@
         <?php
         if (isset($_SESSION["pseudo"])) {
         ?>
-            <a href="/User/logout" class="button">Deconnexion</a>
-            <a href="/User/membre" class="button">Compte</a>
-            <a href="/Game/start" class="button">Jeu</a>
+            <a href="/user/logout" class="button">Deconnexion</a>
+            <a href="/user/membre" class="button">Compte</a>
+            <a href="/game/start" class="button">Jeu</a>
         <?php
         } else {
             ?>
 
-            <a href="/User/login" class="button">Connexion</a>
-            <a href="/User/signIn" class="button">Inscription</a>
+            <a href="/user/login" class="button">Connexion</a>
+            <a href="/user/signIn" class="button">Inscription</a>
         <?php
         }
         ?>
 
-        <a href="/Default/accueil" class="button">Accueil</a>
+        <a href="/default/accueil" class="button">Accueil</a>
     </div>
     
 </div>
