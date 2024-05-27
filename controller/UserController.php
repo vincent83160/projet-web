@@ -79,7 +79,7 @@ class UserController
             $db =  user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            header("location: /Vue/signInConfirm");
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
             //var_dump($_POST);
         }
         else{

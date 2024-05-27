@@ -26,9 +26,8 @@ class ApiController extends ConnexionMySql
 
     function getFilmsApi($query ='')
     {
+        $query = 'iron';
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
-        // Terme de recherche 
-//  
 
 
         // URL de l'API de TMDb
@@ -99,7 +98,7 @@ class ApiController extends ConnexionMySql
 
     // Insérer les détails du film
     $this->insertFilm($detailsFilm->id, $detailsFilm->title, $detailsFilm->poster_path, $detailsFilm->release_date, $detailsFilm->overview, $detailsFilm->runtime, $detailsFilm->adult);
-
+ 
     // Insérer les sociétés de production
     foreach ($detailsFilm->production_companies as $production_companies) {
         $this->insertProduction($production_companies->id, $production_companies->name, $production_companies->logo_path);
@@ -130,17 +129,17 @@ class ApiController extends ConnexionMySql
     
     if (!$creditsFilm) {
         return;
-    }
-
+    } 
     // Insérer les acteurs et réalisateurs
     foreach ($creditsFilm->cast as $acteur) {
         $this->insertPersonne($acteur->id, $acteur->name, $acteur->profile_path);
-
-        if ($acteur->known_for_department == "Directing") {
-            $this->insertJoinReal($detailsFilm->id, $acteur->id);
-        } else {
             $this->insertJoinActeur($detailsFilm->id, $acteur->id, $acteur->order);
-        }
+    }
+    foreach ($creditsFilm->crew as $real) {
+        if($real->job == "Director"){
+            $this->insertPersonne($real->id, $real->name, $real->profile_path);
+            $this->insertJoinReal($detailsFilm->id, $real->id);
+        } 
     }
 }
  
@@ -181,7 +180,7 @@ class ApiController extends ConnexionMySql
 
     public function insertFilm($id, $title, $poster_path, $release_date, $overview, $runtime, $adult)
     {
-        $req = 'INSERT IGNORE INTO film (id, nom, affiche, date_sortie, synopsis, duree, adult) VALUES(:id, :title, :poster_path, :release_date, :overview, :runtime, :adult)';
+        $req = 'INSERT IGNORE INTO film (id, original_title, poster_path, release_date, synopsis, duree, adult) VALUES(:id, :title, :poster_path, :release_date, :overview, :runtime, :adult)';
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);

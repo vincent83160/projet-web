@@ -55,6 +55,16 @@
   flex: 0 0 auto;
   height: 11em;
 }
+
+
+.acteur-not-find{
+opacity: 0.5;
+}
+.acteur-not-find > .acteur-nom{
+opacity: 0.5;
+text-decoration: line-through;
+}
+
 .scrollable-row {
   flex-wrap: nowrap !important;
   overflow-x: auto;
@@ -162,4 +172,12 @@
 }
 #row-nbActeurs {
   margin-left: 2em;
+}
+
+#spinner {
+	display: none;
+	position: fixed;
+	z-index: 99;
+	margin-left: 45%;
+	width: 15em;
 }

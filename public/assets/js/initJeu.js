@@ -16,6 +16,8 @@ nbEssais = 0;
             $("#list-suggestions").hide();
         }
     });
+
+    
     $('#form input').on('keydown', function(event) {
         if (event.key === "Enter") {
             event.preventDefault();

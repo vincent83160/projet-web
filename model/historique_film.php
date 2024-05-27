@@ -47,23 +47,15 @@ class Historique_film
     $stmt->execute();
     $result = $stmt->fetch();
     
-    if ($result) {
-        return $result;
-    } else {
+    if (!$result) { 
         // Sélectionner un film aléatoire et insérer avec la date d'aujourd'hui
         $req = "INSERT INTO historique_film (id_film, date)
                 VALUES ((SELECT id FROM film ORDER BY RAND() LIMIT 1), CURDATE())";
         $stmt = $pdo->prepare($req);
         $stmt->execute();
         
-        // Récupérer le nouvel enregistrement inséré
-        $req = "SELECT * FROM historique_film WHERE date = CURDATE()";
-        $stmt = $pdo->prepare($req);
-        $stmt->execute();
-        $result = $stmt->fetch();
     }
     
-    return $result;
 }
 
 }
