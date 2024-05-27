@@ -65,7 +65,7 @@ if (isset($_SESSION['pseudo'])) {
 } else {
 
     switch ($nbSegments) {
-
+        default:
         case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
             $controller =  new UserController();
@@ -83,11 +83,7 @@ if (isset($_SESSION['pseudo'])) {
             $controller->$methode($params);
             break;
 
-        default:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
-            $controller =  new UserController();
-            $controller->Login();
-            break;
+        
             
     }
 }
