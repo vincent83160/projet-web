@@ -100,7 +100,7 @@ function ajaxCheckIfFilmCorrect(id) {
           htmlFilm += "<div class='acteur' idActeur='" + acteur.id + "' rang='" + acteur["rang"] + "'>";
 
           if (acteur["image"] != null) {
-            htmlFilm += "<img class='img-acteur' src='https://image.tmdb.org/t/p/w92/" + acteurr["image"] + "'>";
+            htmlFilm += "<img class='img-acteur' src='https://image.tmdb.org/t/p/w92/" + acteur["image"] + "'>";
           } else {
             htmlFilm += "<img class='anonyme' src='/public/assets/img/anonyme.png'>";
           }

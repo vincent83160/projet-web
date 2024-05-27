@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 17 avr. 2024 à 20:32
--- Version du serveur : 8.2.0
--- Version de PHP : 8.2.13
+-- Généré le : mar. 21 mai 2024 à 06:50
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `historique_film` (
 --
 
 INSERT INTO `historique_film` (`id`, `id_film`, `date`) VALUES
-(2, 1771, '2024-04-17');
+(2, 1771, '2024-05-21');
 
 -- --------------------------------------------------------
 
@@ -8143,14 +8143,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_verified` tinyint(1) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `pseudo`, `password`, `is_verified`, `role`) VALUES
-(4, 'gary.vincent3107@gmail.com', 'test', '$2y$10$G8QNikhEhAhYour2pVQ8wOMXHqaw1UxAhDGCtPTpyh95hBPTOk6xS', 0, 'USER');
+(5, 'gary.vincent3107@gmail.com', 'Vincent83130', '$2y$10$TJsTo0IxV5io50/e7Yxl6OBhwhBZ.x7hXx8dy1mXJIIDbs3hzNVG.', 0, 'USER');
 
 --
 -- Contraintes pour les tables déchargées

@@ -15,16 +15,18 @@ class UserController
         //require("../model/user.php")
         foreach ($params as $key => $value) {
             $input = $key;
-            $value = $value;
             if ($_SESSION["id"] == $params["id"]) {
                 $_SESSION[$input] = $value;
 
                 $db =  user::createVide();
+                if($input=="password"){
+                    $value = password_hash($value, PASSWORD_DEFAULT);
+                }
                 $db->update($input, $value, $_SESSION['id']);
+                
             }
         }
-
-
+       
         header('Location: /User/membre');
     }
 
@@ -81,8 +83,12 @@ class UserController
             //var_dump($_POST);
         }
         else{
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signIn.php";
         }
         
+    }
+
+    public function mdp(){
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/motdepasse.php";
     }
 }
