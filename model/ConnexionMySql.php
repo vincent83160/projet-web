@@ -2,10 +2,10 @@
 
 
 class ConnexionMySql {
-    private $host = "localhost";
-    private $username = "web";
-    private $password = "web";
-    private $dbname = "bdd-web";
+    private $host = "mysql-pleinlabobine.alwaysdata.net;port=3306";
+    private $username = "360526";
+    private $password = "Cnam2024+*";
+    private $dbname = "pleinlabobine_bdd-web";
     private $charset = "utf8mb4";
     private $pdo;
 

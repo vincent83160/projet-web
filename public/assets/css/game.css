@@ -95,7 +95,8 @@
 }
 
 .details,
-.details-barre {
+.details-barre,
+.genre-non-trouve {
   background-color: white;
   color: black;
   border: none;
@@ -109,6 +110,9 @@
 
 .details-barre {
   text-decoration: line-through;
+  opacity: 0.65;
+}
+.genre-non-trouve {
   opacity: 0.65;
 }
 

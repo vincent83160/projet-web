@@ -88,9 +88,11 @@ class Film
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
+    
         $film["acteurs"] = $this->getListIdActeursByIdFilm($id);
         $film["realisateurs"] = $this->getListIdRealisateursByIdFilm($id);
         $film["genres"] = $this->getGenresByIdFilm($id);
+       
         return $film;
     }
 
@@ -164,7 +166,7 @@ class Film
     public function getFilmToFind()
     {
         $pdo = $this->getConnexion();
-        $req = "SELECT * FROM historique_film ORDER BY date LIMIT 1";
+        $req = "SELECT * FROM historique_film ORDER BY date DESC LIMIT 1";
         $stmt = $pdo->prepare($req);
         $stmt->execute();
         $film = $stmt->fetch(PDO::FETCH_ASSOC);
