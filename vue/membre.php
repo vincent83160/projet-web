@@ -30,16 +30,16 @@ include 'navbar.php';
                <input class="form-control" type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" required />
             </div>
             <div class="div-submit">
-               <a href="/User/mdp" class="btn btn-primary" id="btn-mdp">Modifier mot de passe</a>
+               <a href="/user/mdp" class="btn btn-primary" id="btn-mdp">Modifier mot de passe</a>
             </div>
             <div class="div-submit">
                <button class="btn btn-primary" id="btn-login" type="submit">Modifier les informations</button>
             </div>
             <div class="div-submit">
-               <a href="/User/logout" class="btn btn-danger">Déconnexion</a>
+               <a href="/user/logout" class="btn btn-danger">Déconnexion</a>
             </div>
             <div class="div-submit">
-               <a href="/User/gestionFilm" class="btn btn-primary">Gestion des films</a>
+               <a href="/admin/gestionFilm" class="btn btn-primary">Gestion des films</a>
             </div>
          </form>
       </div>

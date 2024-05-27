@@ -31,31 +31,18 @@
                 <th scope="col">Affiche</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Année</th>
+                <th scope="col">Supprimer</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($films as $film) { ?>
                 <tr>
-                    <td><img src="/public/assets/img/<?= $film['affiche'] ?>" alt="<?= $film['nom'] ?>" class="rounded-corners"></td>
-                    <td><?= $film['nom'] ?></td>
-                    <td><?= $film['annee'] ?></td>
+                    <td><img src="https://image.tmdb.org/t/p/w185<?= $film['poster_path'] ?>" alt="<?= $film['original_title'] ?>" class="rounded-corners"></td>
+                    <td><?= $film['original_title'] ?></td>
+                    <td><?= $film['release_date'] ?></td>
+                    <td></td>
                 </tr>
             <?php } ?>
-            <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
         </tbody>
     </table>
 </body>

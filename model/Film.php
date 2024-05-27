@@ -134,7 +134,18 @@ class Film
 
         return $result;
     }
+    public function getFilms()
+    {
 
+        $req = "SELECT original_title,release_date,poster_path FROM film";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+    
 
     public function getRealisateurByIdAndIdFilm(string $idReal, string $idFilm)
     {

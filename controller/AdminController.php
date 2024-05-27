@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/Film.php';
 
 class AdminController extends ConnexionMySql
 {
@@ -21,10 +22,15 @@ class AdminController extends ConnexionMySql
     }
 
 
-    public function gestion_user(){
+    public function gestionUser(){
         $db = User::createVide();
         $users = $db->getUsers();
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_user.php";
+    }
+    public function gestionFilm(){
+        $db = Film::createVide();
+        $films = $db->getFilms();
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_film.php";
     }
 
 
