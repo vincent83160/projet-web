@@ -30,11 +30,6 @@ class UserController
         header('Location: /user/membre');
     }
 
-    public function gestionFilm()
-    {
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_film.php";
-    }
-
     public function logout()
     {
         //session_start();

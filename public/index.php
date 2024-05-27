@@ -8,7 +8,7 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = filter_var(trim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL);
 $segments = explode('/', $requestUri);
 // Récupérer le dernier élément du tableau
-
+$segments[0] = ucfirst($segments[0]);
 $controller = $segments[0]  . "Controller";
 if (isset($segments[1])) {
     $methode = $segments[1];

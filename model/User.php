@@ -12,7 +12,7 @@ class User extends ConnexionMySql
     private String $role;
 
 
- 
+
 
     //GETTER
     function getId()
@@ -60,12 +60,12 @@ class User extends ConnexionMySql
     }
 
     public static function getConnexion()
-    { 
+    {
         $db = new ConnexionMySql();
         $db->connexion();
         $pdo = $db->getPdo();
-        
-        return $pdo;  
+
+        return $pdo;
     }
 
     public static function createVide()
@@ -73,25 +73,36 @@ class User extends ConnexionMySql
         return new self(0, "", "", "", false, "");
     }
 
- 
-public function update($input, $value,$idUser)
+
+    public function getUsers()
+    {
+        $pdo = $this->getConnexion();
+        $req = 'SELECT email,pseudo,role FROM user';
+        $stmt = $pdo->prepare($req);
+        $result = $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
+    public function update($input, $value, $idUser)
     {
         $pdo = $this->getConnexion();
         $req = "UPDATE user SET " . $input . " = :value WHERE id = :idUser";
-        $stmt = $pdo->prepare($req); 
+        $stmt = $pdo->prepare($req);
         $stmt->bindParam(':value', $value);
-        $stmt->bindParam(':idUser', $idUser);  
+        $stmt->bindParam(':idUser', $idUser);
         $stmt->execute();
     }
 
-public function create($email, $login, $password, $is_verified, $role)
+    public function create($email, $pseudo, $password, $is_verified, $role)
     {
-        
         $pdo = $this->getConnexion();
-        $req = "INSERT INTO user (email, pseudo, password, is_verified, role) VALUES (:email, :login, :password, :is_verified, :role)";
+        $req = "INSERT INTO user (email, pseudo, password, is_verified, role) VALUES (:email, :pseudo, :password, :is_verified, :role)";
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':login', $login);
+        $stmt->bindParam(':pseudo', $pseudo);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':is_verified', $is_verified);
         $stmt->bindParam(':role', $role);
@@ -105,7 +116,7 @@ public function create($email, $login, $password, $is_verified, $role)
         $pdo = $this->getConnexion();
         $req = 'DELETE FROM user WHERE id = :id';
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':id', $id); 
+        $stmt->bindParam(':id', $id);
         $result = $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -117,7 +128,7 @@ public function create($email, $login, $password, $is_verified, $role)
         $pdo = $this->getConnexion();
         $req = 'SELECT * FROM user WHERE id = :id';
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':id', $id); 
+        $stmt->bindParam(':id', $id);
         $result = $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -131,13 +142,10 @@ public function create($email, $login, $password, $is_verified, $role)
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':email', $email);
         $result = $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);  
-        if(isset($result['password']) && password_verify($password, $result['password']))
-        {
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (isset($result['password']) && password_verify($password, $result['password'])) {
             return $result;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

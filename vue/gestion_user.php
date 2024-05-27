@@ -27,20 +27,18 @@
     <!-- BODY -->
     <table class="table table-dark">
         <thead>
-            <tr>
-                <th scope="col">Affiche</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Année</th>
-                <th scope="col">Supprimer</th>
+            <tr> 
+                <th scope="col">Email</th>
+                <th scope="col">Pseudo</th>
+                <th scope="col">Rôle</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($films as $film) { ?>
-                <tr>
-                    <td><img src="https://image.tmdb.org/t/p/w185<?= $film['poster_path'] ?>" alt="<?= $film['original_title'] ?>" class="rounded-corners"></td>
-                    <td><?= $film['original_title'] ?></td>
-                    <td><?= $film['release_date'] ?></td>
-                    <td></td>
+            <?php foreach ($users as $user) { ?>
+                <tr> 
+                    <td><?php echo $user["email"]; ?></td>
+                    <td><?php echo $user["pseudo"];; ?></td>
+                    <td><?php echo $user["role"];; ?></td>
                 </tr>
             <?php } ?>
         </tbody>
