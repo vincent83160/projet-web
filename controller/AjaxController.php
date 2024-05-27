@@ -8,7 +8,10 @@ class AjaxController
         //urldecode permet de retrouver la string dans son état d'origine par exemple de remplacer les %20 par des espaces
         $titre = urldecode($params["query"]);
         $apiController = new APIController();
-        $result = $apiController->getFilmsForGame($titre);
+        $resultAPI = $apiController->getFilmsForGame($titre);
+        $db = Film::createVide();
+        $resultBDD = $db->getFilmByTitreLike($titre);
+        $result = array_merge($resultAPI, $resultBDD);
         echo json_encode($result);
     }
 
@@ -18,8 +21,9 @@ class AjaxController
         $filmController = new FilmController();
         $idFilm = $params["idFilm"];
         $apiController = new APIController();
+        //Insert le film en bdd si il n'existe pas
         $result = $apiController->getFilmById($idFilm);
-
+ 
         $db = Film::createVide();
 
         $filmToFind = $db->getFilmToFind();

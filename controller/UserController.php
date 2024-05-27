@@ -6,7 +6,7 @@ class UserController
 
     public function membre()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Membre.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
     }
 
 
@@ -66,9 +66,9 @@ class UserController
                 header("Location: /Game/start"); 
             } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
-                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Login.php";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
             }else{
-                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Login.php";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
             }
         }
     }
@@ -79,16 +79,16 @@ class UserController
             $db =  user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/SignInConfirm.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
             //var_dump($_POST);
         }
         else{
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/SignIn.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
         }
         
     }
 
     public function mdp(){
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/MotDePasse.php";
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/motDePasse.php";
     }
 }

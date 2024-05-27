@@ -6,21 +6,21 @@
     </p>
 
     <p>
-      <label for="nom">Title:</label>
-      <input type="text" id="nom" name="nom" required>
-      <button type="button" onclick="clearInput('nom')">Modifier</button>
+      <label for="original_title">Title:</label>
+      <input type="text" id="original_title" name="original_title" required>
+      <button type="button" onclick="clearInput('original_title')">Modifier</button>
     </p>
 
     <p>
-      <label for="date_sortie">Release Date:</label>
-      <input type="date" id="date_sortie" name="date_sortie" required>
-      <button type="button" onclick="clearInput('date_sortie')">Modifier</button>
+      <label for="poster_path">Release Date:</label>
+      <input type="date" id="poster_path" name="poster_path" required>
+      <button type="button" onclick="clearInput('poster_path')">Modifier</button>
     </p>
 
     <p>
-      <label for="affiche">Poster URL:</label>
-      <input type="url" id="affiche" name="affiche" required>
-      <button type="button" onclick="clearInput('affiche')">Modifier</button>
+      <label for="poster_path">Poster URL:</label>
+      <input type="url" id="poster_path" name="poster_path" required>
+      <button type="button" onclick="clearInput('poster_path')">Modifier</button>
     </p>
 
     <p>

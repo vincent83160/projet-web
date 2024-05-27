@@ -3,9 +3,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
 class Film
 {
     private int $id;
-    private string $nom;
-    private DateTime $date_sortie;
-    private string $affiche;
+    private string $original_title;
+    private DateTime $release_date;
+    private string $poster_path;
     private int $duree;
     private string $classification;
     private string $synopsis;
@@ -28,12 +28,12 @@ class Film
         return $pdo;
     }
 
-    function __construct(int $id, string $nom, DateTime $date_sortie, string $affiche, int $duree, string $classification, string $synopsis)
+    function __construct(int $id, string $original_title, DateTime $release_date, string $poster_path, int $duree, string $classification, string $synopsis)
     {
         $this->id = $id;
-        $this->nom = $nom;
-        $this->date_sortie = $date_sortie;
-        $this->affiche = $affiche;
+        $this->original_title = $original_title;
+        $this->release_date = $release_date;
+        $this->poster_path = $poster_path;
         $this->duree = $duree;
         $this->classification = $classification;
         $this->synopsis = $synopsis;
@@ -54,27 +54,27 @@ class Film
         $stmt->execute();
     }
 
-    public function create(string $nom, string $date_sortie, string $affiche, int $duree, string $classification, string $synopsis)
+    public function create(string $original_title, string $release_date, string $poster_path, int $duree, string $classification, string $synopsis)
     {
 
         $pdo = $this->getConnexion();
-        $req = "INSERT INTO film (nom, date_sortie, affiche, duree, classification, synopsis) VALUES (:nom,:date,:affiche,:duree, :classification, :synopsis)";
+        $req = "INSERT INTO film (original_title, release_date, poster_path, duree, classification, synopsis) VALUES (:original_title,:date,:poster_path,:duree, :classification, :synopsis)";
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':date', $date_sortie);
-        $stmt->bindParam(':affiche', $affiche);
+        $stmt->bindParam(':original_title', $original_title);
+        $stmt->bindParam(':date', $release_date);
+        $stmt->bindParam(':poster_path', $poster_path);
         $stmt->bindParam('duree', $duree);
         $stmt->bindParam('classification', $classification);
         $stmt->bindParam('synopsis', $synopsis);
         $stmt->execute();
     }
-    public function getFilmByTitreLike(string $nom)
+    public function getFilmByTitreLike(string $original_title)
     {
-        $nom = "%" . $nom . "%";
+        $original_title = "%" . $original_title . "%";
         $pdo = $this->getConnexion();
-        $req = "SELECT * FROM film WHERE nom LIKE :nom LIMIT 10";
+        $req = "SELECT * FROM film WHERE original_title LIKE :original_title LIMIT 10";
         $stmt = $pdo->prepare($req);
-        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':original_title', $original_title);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -82,7 +82,7 @@ class Film
     public function getFilmById(string $id)
     {
 
-        $req = "SELECT *, YEAR(date_sortie) as date_sortie FROM film WHERE film.id =:id ";
+        $req = "SELECT *, YEAR(release_date) as release_date FROM film WHERE film.id =:id ";
         $pdo = $this->getConnexion();
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);

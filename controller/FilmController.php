@@ -7,7 +7,7 @@ class FilmController
 {
     function films()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Film.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/film.php";
     }
 
 
@@ -48,7 +48,7 @@ class FilmController
         $acteursNonCommuns = array_diff($filmChecked["acteurs"], $filmToFind["acteurs"]);
 
 
-        $realisateursCommuns = array_intersect($filmToFind["realisateurs"], $filmToFind["realisateurs"]);
+        $realisateursCommuns = array_intersect($filmChecked["realisateurs"],$filmToFind["realisateurs"]);
         $realisateursNonCommuns = array_diff($filmChecked["realisateurs"], $filmToFind["realisateurs"]);
 
 
