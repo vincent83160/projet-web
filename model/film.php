@@ -186,4 +186,132 @@ class Film
 
         return $result;
     }
+
+
+
+
+    public function insertProduction($id, $name, $logo_path)
+    {
+        $req = 'INSERT IGNORE INTO production (id, nom, logo) VALUES(:id, :name, :logo_path)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':logo_path', $logo_path, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function insertGenre($id, $genre)
+    {
+        $req = 'INSERT IGNORE INTO genre (id, genre) VALUES(:id, :genre)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':genre', $genre, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertPersonne($id, $name, $profile_path)
+    {
+        $req = 'INSERT IGNORE INTO personne (id, name, image) VALUES(:id, :name, :profile_path)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':profile_path', $profile_path, PDO::PARAM_STR);
+        $stmt->execute(); 
+    }
+
+    public function insertFilm($id, $original_title, $poster_path, $release_date, $overview, $runtime, $adult)
+    {
+        $req = 'INSERT IGNORE INTO film (id, original_title, poster_path, release_date, synopsis, duree, adult) VALUES(:id, :original_title, :poster_path, :release_date, :overview, :runtime, :adult)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':original_title', $original_title, PDO::PARAM_STR);
+        $stmt->bindParam(':poster_path', $poster_path, PDO::PARAM_STR);
+        $stmt->bindParam(':release_date', $release_date, PDO::PARAM_STR);
+        $stmt->bindParam(':overview', $overview, PDO::PARAM_STR);
+        $stmt->bindParam(':runtime', $runtime, PDO::PARAM_STR);
+        $stmt->bindParam(':adult', $adult, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function insertPays($iso_3166_1, $name)
+    {
+        $req = 'INSERT IGNORE INTO pays (iso, nom) VALUES(:iso_3166_1, :name)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':iso_3166_1', $iso_3166_1, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function insertLangue($iso_639_1, $name)
+    {
+        $req = 'INSERT IGNORE INTO langue (langue, iso) VALUES(:name, :iso)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':iso', $iso_639_1, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertJoinActeur($idFilm, $id_acteur, $rang)
+    {
+        $req = 'INSERT IGNORE INTO join_film_acteur (id_film, id_acteur,rang) VALUES(:idFilm, :id_acteur,:rang)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':idFilm', $idFilm, PDO::PARAM_STR);
+        $stmt->bindParam(':id_acteur', $id_acteur, PDO::PARAM_STR);
+        $stmt->bindParam(':rang', $rang, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertJoinReal($idFilm, $id)
+    {
+        $req = 'INSERT IGNORE INTO join_film_realisateur (id_film, id_realisateur) VALUES(:idFilm, :id_realisateur)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':idFilm', $idFilm, PDO::PARAM_STR);
+        $stmt->bindParam(':id_realisateur', $id, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertJoinGenre($idFilm, $id)
+    {
+        $req = 'INSERT IGNORE INTO join_film_genre (id_film, id_genre) VALUES(:id_film, :id_genre)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id_film', $idFilm, PDO::PARAM_STR);
+        $stmt->bindParam(':id_genre', $id, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function insertJoinPays($idFilm, $id)
+    {
+        $req = 'INSERT IGNORE INTO join_film_pays (id_film, id_pays) VALUES(:id_film, :id_pays)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id_film', $idFilm, PDO::PARAM_STR);
+        $stmt->bindParam(':id_pays', $id, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertJoinLangue($idFilm, $id)
+    {
+        $req = 'INSERT IGNORE INTO join_film_langue (id_film, id_langue) VALUES(:id_film, :id_langue)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id_film', $idFilm, PDO::PARAM_STR);
+        $stmt->bindParam(':id_langue', $id, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    public function insertJoinProductionFilm($id, $id_production)
+    {
+        $req = 'INSERT IGNORE INTO join_film_production (id_film, id_production) VALUES(:id, :id_production)';
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':id_production', $id_production, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+
+
 }
