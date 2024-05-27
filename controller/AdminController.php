@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
 
 class AdminController extends ConnexionMySql
 {
@@ -18,6 +19,14 @@ class AdminController extends ConnexionMySql
         
         return $pdo;  
     }
+
+
+    public function gestion_user(){
+        $db = User::createVide();
+        $users = $db->getUsers();
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_user.php";
+    }
+
 
     public static function createVide()
     {
