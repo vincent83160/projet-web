@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
 class UserController
 {
 
@@ -12,7 +12,7 @@ class UserController
 
     public function userModif($params)
     {
-        //require("../model/user.php")
+        //require("../model/User.php")
         foreach ($params as $key => $value) {
             $input = $key;
             if ($_SESSION["id"] == $params["id"]) {
@@ -42,7 +42,7 @@ class UserController
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         $db =  user::createVide();
 
         $erreur = ""; 
@@ -63,7 +63,7 @@ class UserController
                 $_SESSION['role'] = $result["role"];
 
 
-                header("Location: /game/start"); 
+                header("Location: /Game/start"); 
             } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
@@ -83,12 +83,12 @@ class UserController
             //var_dump($_POST);
         }
         else{
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signIn.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
         }
         
     }
 
     public function mdp(){
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/motdepasse.php";
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/motDePasse.php";
     }
 }

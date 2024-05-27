@@ -1,7 +1,5 @@
 <?php
 
-
-
 class DefaultController
 {
     public function accueil()
