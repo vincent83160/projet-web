@@ -207,12 +207,14 @@ input {
   }
   #button-container {
     position:absolute;
+    right: 0;
   }
   .navbar{
     width: fit-content ;
     margin:auto;
     margin-right: 10%;
   }   
+  
 }
 
 /* desktop breakpoint */
@@ -222,10 +224,7 @@ input {
       grid-template-areas:
           'left-sidebar main-content main-content right-sidebar'
   }
-  #button-container {
-    position:absolute;
-    right: 0;
-  }
+  
   .one img{
     width: 100px;
   }
@@ -236,11 +235,6 @@ input {
   .holy-grail-grid {
     display: block;
   }
-    #input-film{
-      width: 50vw;
-      height: 30px;
-      font-size: xx-large;
-    }
 
     .one{
       display: none;
@@ -258,3 +252,7 @@ input {
 } 
 
 
+#button-ToGame{
+  margin: auto;
+  width: fit-content;
+}

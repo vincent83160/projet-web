@@ -37,6 +37,17 @@ include 'navbar.php';
             <p>À vous de jouer !</p>
         </aside>
     </div>
+    <div id="button-ToGame">
+        <?php
+        if (isset($_SESSION["pseudo"])) {
+        ?>
+            
+            <a href="/Game/start" class="button">Jouer</a>
+       
+        <?php
+        }
+        ?>
+    </div>
 
 </body>
 
