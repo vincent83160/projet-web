@@ -11,15 +11,17 @@ function ajaxGetFilmByTitre(query) {
       html = "";
 
       $.each(reponse, function (index, film) {
-        html += "<div class='suggestion row' id='" + film.id + "'>";
-        html += "<div class='col-3'>";
-        html += "<img src='https://image.tmdb.org/t/p/w92" + film.poster_path + "' class='img-fluid'>";
-        html += "</div>";
-        html += "<div class='col-9'>";
-        html += "<h6>" + film.original_title + "</h6>";
-        html += "<p>" + film.release_date.split("-")[0] + "</p>";
-        html += "</div>";
-        html += "</div>";
+        if (film.release_date != null) {
+          html += "<div class='suggestion row' id='" + film.id + "'>";
+          html += "<div class='col-3'>";
+          html += "<img src='https://image.tmdb.org/t/p/w92" + film.poster_path + "' class='img-fluid'>";
+          html += "</div>";
+          html += "<div class='col-9'>";
+          html += "<h6>" + film.original_title + "</h6>";
+          html += "<p>" + film.release_date.split("-")[0] + "</p>";
+          html += "</div>";
+          html += "</div>";
+        }
       });
 
       html += "</div>";
@@ -51,8 +53,10 @@ function ajaxCheckIfFilmCorrect(id) {
     url: url,
     type: "GET",
     dataType: "json",
-    success: function (reponse) {
+    success: function (reponse) { 
       console.log(reponse);
+
+      htmlFilm = "";
       if (reponse["isCorrect"] == true) {
         $("#list-suggestions").html("");
         $("#list-suggestions").hide();
@@ -63,7 +67,7 @@ function ajaxCheckIfFilmCorrect(id) {
         }
         $("#nbEssais").html(html);
 
-        // htmlFilm += "<p>Acteurs " + reponse["acteursCommuns"].length + "/" + reponse["filmChecked"]["acteurs"].length + "</p>";
+        htmlFilm += "<p>Acteurs " + reponse["acteursCommunsDetails"].length + "/" + reponse["filmChecked"]["acteurs"].length + "</p>";
         htmlFilm = "<div class='card essai' id='essai-" + nbEssais + "'>";
         htmlFilm += "<h4>" + reponse["original_title"] + "</h4>";
         //infos film
@@ -115,7 +119,7 @@ function ajaxCheckIfFilmCorrect(id) {
         }
         $("#nbEssais").html(html);
 
-        // htmlFilm += "<p>Acteurs " + reponse["acteursCommuns"].length + "/" + reponse["filmChecked"]["acteurs"].length + "</p>";
+        htmlFilm += "<p>Acteurs " + reponse["acteursCommunsDetails"].length + "/" + reponse["filmChecked"]["acteurs"].length + "</p>";
 
         htmlFilm = "<div class='card essai' id='essai-" + nbEssais + "'>";
         htmlFilm += "<h4>" + reponse["filmChecked"]["original_title"] + "</h4>";

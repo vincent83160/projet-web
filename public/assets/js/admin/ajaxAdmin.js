@@ -92,7 +92,8 @@ function ajaxAddFilm(id) {
     error: function (reponse, statut, erreur) {
       console.log(reponse);
       console.log(erreur);
+      toggleSpinner("hide");
     },
-  })
-  toggleSpinner("hide");
+  });
+
 }
