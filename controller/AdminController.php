@@ -9,7 +9,7 @@ class AdminController extends ConnexionMySql
     {
 
 
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/admin.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Admin.php";
     }
 
     public static function getConnexion()

@@ -1,5 +1,5 @@
 <?php
-    require_once("user.php");
+    require_once("User.php");
 
     switch($_POST["input"]){
         case "email":   

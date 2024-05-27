@@ -1,18 +1,18 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
 class UserController
 {
 
 
     public function membre()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Membre.php";
     }
 
 
     public function userModif($params)
     {
-        //require("../model/user.php")
+        //require("../model/User.php")
         foreach ($params as $key => $value) {
             $input = $key;
             if ($_SESSION["id"] == $params["id"]) {
@@ -42,7 +42,7 @@ class UserController
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         $db =  user::createVide();
 
         $erreur = ""; 
@@ -63,32 +63,32 @@ class UserController
                 $_SESSION['role'] = $result["role"];
 
 
-                header("Location: /game/start"); 
+                header("Location: /Game/start"); 
             } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
-                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Login.php";
             }else{
-                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Login.php";
             }
         }
     }
 
     public function signIn(){
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/user.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         if(isset($_POST['mail'])){
             $db =  user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            header("location: /Vue/signInConfirm");
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/SignInConfirm.php";
             //var_dump($_POST);
         }
         else{
-            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/SignIn.php";
         }
         
     }
 
     public function mdp(){
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/motdepasse.php";
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/MotDePasse.php";
     }
 }

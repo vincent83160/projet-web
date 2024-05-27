@@ -15,7 +15,7 @@
             <h1>Plein la bobine !</h1>
         </div>
 <?php
-include 'navbar.php';
+include 'Navbar.php';
 ?>
     </div>
 

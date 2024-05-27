@@ -1,19 +1,19 @@
 <?php
 
-require $_SERVER["DOCUMENT_ROOT"] . "/model/film.php";
-require $_SERVER["DOCUMENT_ROOT"] . "/model/historique_film.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/model/Film.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/model/Historique_film.php";
 
 class FilmController
 {
     function films()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/film.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/Film.php";
     }
 
 
     function checkIfFilmToFindToday()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/model/film.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/model/Film.php";
         $db = Historique_film::createVide();
         $db->checkIfFilmToFindToday();
     }

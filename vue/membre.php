@@ -8,7 +8,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
    <link rel="icon" href="/public/assets/img/logo2.png" />
 </head>
 <?php
-include 'navbar.php';
+include 'Navbar.php';
 ?>
 
 <body>
