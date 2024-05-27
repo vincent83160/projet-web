@@ -31,7 +31,7 @@ if ($nbSegments >= 3) {
 
 if ($segments[0] == "") {
     $controller = "DefaultController";
-    $methode = "Accueil";
+    $methode = "accueil";
 }
 if (isset($_SESSION['pseudo'])) {
 
@@ -59,7 +59,7 @@ if (isset($_SESSION['pseudo'])) {
         default:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/DefaultController.php';
             $controller =  new DefaultController();
-            $controller->Accueil();
+            $controller->accueil();
             break;
     }
 } else {
@@ -69,7 +69,7 @@ if (isset($_SESSION['pseudo'])) {
         case 1:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
             $controller =  new UserController();
-            $controller->Login();
+            $controller->login();
             break;
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
@@ -86,7 +86,7 @@ if (isset($_SESSION['pseudo'])) {
         default:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
             $controller =  new UserController();
-            $controller->Login();
+            $controller->login();
             break;
             
     }

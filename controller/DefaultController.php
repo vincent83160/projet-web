@@ -4,10 +4,10 @@ class DefaultController
 {
     public function accueil()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/Accueil.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/accueil.php';
     }
     public function game()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/Game.php';
+        require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/game.php';
     }
 }

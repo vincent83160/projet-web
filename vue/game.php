@@ -20,7 +20,7 @@
 
 
         </div>
-        <?php include 'Navbar.php'; ?>
+        <?php include 'navbar.php'; ?>
 
     </div>
 
@@ -60,7 +60,7 @@
 </body>
 <input type="hidden" value="0" id="dateLow" />
 <input type="hidden" value="10000" id="dateUp" />
-<script src="/public/assets/js/AjaxJeu.js"></script>
-<script src="/public/assets/js/InitJeu.js"></script>
+<script src="/public/assets/js/ajaxJeu.js"></script>
+<script src="/public/assets/js/initJeu.js"></script>
 
 </html>

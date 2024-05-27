@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/public/assets/css/login.css">
     <link rel="icon" href="/public/assets/img/logo2.png" />
 </head>
-<?php include 'Navbar.php'; ?>
+<?php include 'navbar.php'; ?>
 <div id="fond-login">
 </div>
 <div id="container-div-centrale">

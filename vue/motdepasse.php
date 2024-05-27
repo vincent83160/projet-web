@@ -40,4 +40,4 @@ include 'navbar.php';
     </div>
 </body>
 
-<script src="/public/assets/js/ModifPwdCheck.js"></script>
+<script src="/public/assets/js/modifPwdCheck.js"></script>
