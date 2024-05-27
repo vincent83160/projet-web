@@ -28,27 +28,30 @@
     <table class="table table-dark">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Affiche</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Année</th>
             </tr>
         </thead>
         <tbody>
+            <?php foreach ($films as $film) { ?>
+                <tr>
+                    <td><img src="/public/assets/img/<?= $film['affiche'] ?>" alt="<?= $film['nom'] ?>" class="rounded-corners"></td>
+                    <td><?= $film['nom'] ?></td>
+                    <td><?= $film['annee'] ?></td>
+                </tr>
+            <?php } ?>
             <tr>
-                <th scope="row">1</th>
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
             </tr>
             <tr>
-                <th scope="row">2</th>
                 <td>Jacob</td>
                 <td>Thornton</td>
                 <td>@fat</td>
             </tr>
             <tr>
-                <th scope="row">3</th>
                 <td>Larry</td>
                 <td>the Bird</td>
                 <td>@twitter</td>
