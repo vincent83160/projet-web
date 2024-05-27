@@ -38,6 +38,9 @@ include 'navbar.php';
             <div class="div-submit">
                <a href="/User/logout" class="btn btn-danger">Déconnexion</a>
             </div>
+            <div class="div-submit">
+               <a href="/User/gestionFilm" class="btn btn-primary">Gestion des films</a>
+            </div>
          </form>
       </div>
 

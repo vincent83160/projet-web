@@ -208,6 +208,11 @@ input {
   #button-container {
     position:absolute;
   }
+  .navbar{
+    width: fit-content ;
+    margin:auto;
+    margin-right: 10%;
+  }   
 }
 
 /* desktop breakpoint */
@@ -219,6 +224,7 @@ input {
   }
   #button-container {
     position:absolute;
+    right: 0;
   }
   .one img{
     width: 100px;
@@ -228,10 +234,7 @@ input {
 /*mobile breakpoint */
 @media screen and (max-width:768px){
   .holy-grail-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        'main-content'
-        'left-sidebar' 'right-sidebar'
+    display: block;
   }
     #input-film{
       width: 50vw;
@@ -240,13 +243,18 @@ input {
     }
 
     .one{
-      width: auto ;
+      display: none;
+    }
+    .wrapper{
+      display: block;
+    }
+    img.rounded-corners3{
+      width: 60vw;
+    }
+    .navbar{
+      width: fit-content ;
       margin:auto;
     }
-    
 } 
 
-.tree{
-  width: fit-content ;
-  margin:auto;
-}
+

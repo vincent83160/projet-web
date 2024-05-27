@@ -27,14 +27,19 @@ class UserController
             }
         }
        
-        header('Location: /User/membre');
+        header('Location: /user/membre');
+    }
+
+    public function gestionFilm()
+    {
+        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_film.php";
     }
 
     public function logout()
     {
         //session_start();
         session_destroy();
-        header("location: /Default/accueil");
+        header("location: /default/accueil");
     }
 
     public function login()
@@ -48,7 +53,7 @@ class UserController
         $erreur = ""; 
         if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
 
-            header("location: /Default/accueil");
+            header("location: /default/accueil");
         } else {
             $_POST['password'] = isset($_POST['password']) ? $_POST['password'] : "";
             $_POST['email'] = isset($_POST['email']) ? $_POST['email'] : "";
@@ -63,7 +68,7 @@ class UserController
                 $_SESSION['role'] = $result["role"];
 
 
-                header("Location: /Game/start"); 
+                header("Location: /game/start"); 
             } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
