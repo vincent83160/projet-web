@@ -85,8 +85,7 @@ public function update($input, $value,$idUser)
     }
 
 public function create($email, $pseudo, $password, $is_verified, $role)
-    {
-        var_dump($email, $pseudo, $password, $is_verified, $role);
+    { 
         $pdo = $this->getConnexion();
         $req = "INSERT INTO user (email, pseudo, password, is_verified, role) VALUES (:email, :pseudo, :password, :is_verified, :role)";
         $stmt = $pdo->prepare($req);
@@ -94,8 +93,8 @@ public function create($email, $pseudo, $password, $is_verified, $role)
         $stmt->bindParam(':pseudo', $pseudo);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':is_verified', $is_verified);
-        $stmt->bindParam(':role', $role);
-        var_dump($stmt->execute());
+        $stmt->bindParam(':role', $role); 
+        $stmt->execute();
     }
 
 

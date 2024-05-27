@@ -27,19 +27,14 @@ class UserController
             }
         }
        
-        header('Location: /user/membre');
-    }
-
-    public function gestionFilm()
-    {
-        require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/gestion_film.php";
+        header('Location: /User/membre');
     }
 
     public function logout()
     {
         //session_start();
         session_destroy();
-        header("location: /default/accueil");
+        header("location: /Default/accueil");
     }
 
     public function login()
@@ -53,7 +48,7 @@ class UserController
         $erreur = ""; 
         if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
 
-            header("location: /default/accueil");
+            header("location: /Default/accueil");
         } else {
             $_POST['password'] = isset($_POST['password']) ? $_POST['password'] : "";
             $_POST['email'] = isset($_POST['email']) ? $_POST['email'] : "";
@@ -68,7 +63,7 @@ class UserController
                 $_SESSION['role'] = $result["role"];
 
 
-                header("Location: /game/start"); 
+                header("Location: /Game/start"); 
             } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
                 $erreur = "Mauvais login ou mot de passe";
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
@@ -81,12 +76,11 @@ class UserController
     public function signIn(){
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         if(isset($_POST['mail'])){
-            var_dump($_POST);
             $db =  user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            // require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
-            
+            require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
+            //var_dump($_POST);
         }
         else{
             require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
