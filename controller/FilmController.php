@@ -28,15 +28,12 @@ class FilmController
         $acteursCommunsDetails = [];
         $acteursNonCommunsDetails = [];
         $realisateursFilmChecked = [];
-
-        $acteursFilmChecked = [];
+ 
         $acteurs = [];
 
 
-        $realisateursCommuns = [];
-        $realisateursNonCommuns = [];
-        $realisateursCommunsDetails = [];
-        $realisateursNonCommunsDetails = [];
+        $realisateursCommuns = []; 
+        $realisateursCommunsDetails = []; 
         $realisateurs = [];
 
 
@@ -49,12 +46,10 @@ class FilmController
 
 
         $realisateursCommuns = array_intersect($filmChecked["realisateurs"],$filmToFind["realisateurs"]);
-        $realisateursNonCommuns = array_diff($filmChecked["realisateurs"], $filmToFind["realisateurs"]);
+        $realisateursNonCommunsLength = count(array_diff($filmChecked["realisateurs"], $filmToFind["realisateurs"]));
 
 
-        foreach ($filmChecked["acteurs"] as $acteur) {
-            $acteursFilmChecked[] = $db->getActeurByIdAndIdFilm($acteur, $filmChecked["id"]);
-        }
+ 
         foreach ($acteursCommuns as $acteur) {
             $acteursCommunsDetails[] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
         }
@@ -71,10 +66,7 @@ class FilmController
             $realisateursCommunsDetails[] = $db->getRealisateurByIdAndIdFilm($real, $filmToFind["id"]);
         }
 
-        foreach ($realisateursNonCommuns as $real) {
-            $realisateursNonCommunsDetails[] = $db->getRealisateurByIdAndIdFilm($real, $filmToFind["id"]);
-        }
-
+   
         $genresCommuns = array_intersect($filmChecked["genres"],$filmToFind["genres"]);
         $genresNonCommuns = array_diff($filmChecked["genres"],$filmToFind["genres"]);
 
@@ -90,12 +82,11 @@ class FilmController
         $result = [
             "acteursCommunsDetails" => $acteursCommunsDetails,
             "acteursNonCommunsDetails" => $acteursNonCommunsDetails,
-            "acteurs" => $acteurs,
-            "acteursFilmChecked" => $acteursFilmChecked,
+            "acteurs" => $acteurs, 
             "realisateursFilmChecked" => $realisateursFilmChecked,
-            "realisateursCommunsDetails" => $realisateursCommunsDetails,
-            "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
+            "realisateursNonCommunsLength" => $realisateursNonCommunsLength, 
             "realisateurs" => $realisateurs,
+            "realisateursCommunsDetails" => $realisateursCommunsDetails,
 
             // "genresFilmToFind" => $filmToFind["genres"],
             // "genresFilmChecked" => $filmChecked["genres"],

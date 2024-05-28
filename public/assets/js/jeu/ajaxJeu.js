@@ -53,7 +53,7 @@ function ajaxCheckIfFilmCorrect(id) {
     url: url,
     type: "GET",
     dataType: "json",
-    success: function (reponse) { 
+    success: function (reponse) {
       console.log(reponse);
 
       htmlFilm = "";
@@ -268,7 +268,7 @@ function ajaxCheckIfFilmCorrect(id) {
           for (var i = 0; i < n; i++) {
             htmlRecap += "<div class='acteur'>";
 
-            htmlRecap += "<img class='anonyme' src='/public/assets/img/anonyme.png'>";
+            htmlRecap += "<img class='anonyme' src='/public/assets/img/anonymous.png'>";
             htmlRecap += "<p class='acteur-nom'>&nbsp;</p>";
 
             htmlRecap += "</div>";
@@ -286,15 +286,14 @@ function ajaxCheckIfFilmCorrect(id) {
             htmlRecap += "<p class='realisateur-nom'>" + real.name + "</p>";
             htmlRecap += "</div>";
           });
-
-          $.each(reponse["realisateursNonCommunsDetails"], function (index, real) {
+          for (let i = 0; i < reponse["realisateursNonCommunsLength"]; i++) {
             htmlRecap += "<div class='real'>";
 
-            htmlRecap += "<img class='anonyme' src='/public/assets/img/anonyme.png'>";
+            htmlRecap += "<img class='anonyme' src='/public/assets/img/anonymous.png'>";
             htmlRecap += "<p class='realisateur-nom'>&nbsp;</p>";
 
             htmlRecap += "</div>";
-          });
+          }
           htmlRecap += "</div>";
 
           $("#container-filmToFind").html(htmlRecap);
@@ -337,7 +336,7 @@ function ajaxCheckIfFilmCorrect(id) {
 
           let nbActeursNotFind = $("#nbActeursToFind").html() - nbActeursFind;
           for (let i = 0; i < nbActeursNotFind; i++) {
-            htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+            htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonymous.png'><p class='acteur-nom'>&nbsp;</p></div>";
           }
 
           $("#find-acteur-row").html(htmlActeurs);
@@ -358,7 +357,6 @@ function ajaxCheckIfFilmCorrect(id) {
               nbRealsFind++;
             }
           });
-
 
           $("#nbRealsFind").html(nbRealsFind);
           console.log(listRealFind);
