@@ -7,5 +7,4 @@ function toggleSpinner(action) {
 		$("body").css("opacity", "1");
 		$("input, select, .btn").attr("disabled", false);
 	}
-    console.log("toggleSpinner: " + action);
 }

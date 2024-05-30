@@ -32,7 +32,7 @@ include 'base_gestion.php';
                 <tr>
                     <th scope="col">Affiche</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Année</th>
+                    <th scope="col">Date de sortie</th>
                     <th scope="col">Supprimer</th>
                 </tr>
             </thead>

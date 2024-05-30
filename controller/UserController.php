@@ -80,7 +80,6 @@ class UserController
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
             require_once  $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
-            //var_dump($_POST);
         }
         else{
             require_once  $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";

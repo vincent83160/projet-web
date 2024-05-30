@@ -95,6 +95,8 @@ class Film
         $film["acteurs"] = $this->getListIdActeursByIdFilm($id);
         $film["realisateurs"] = $this->getListIdRealisateursByIdFilm($id);
         $film["genres"] = $this->getGenresByIdFilm($id);
+        $film["pays"] = $this->getPaysByIdFilm($id);
+        $film["productions"] = $this->getProductionByIdFilm($id); 
        
         return $film;
     }
@@ -114,6 +116,7 @@ class Film
 
     public function getListIdRealisateursByIdFilm(string $id)
     {
+
 
         $req = "SELECT id from personne inner join join_film_realisateur on personne.id = join_film_realisateur.id_realisateur WHERE join_film_realisateur.id_film =:id ";
         $pdo = $this->getConnexion();
@@ -160,6 +163,7 @@ class Film
         $stmt->bindParam(':idFilm', $idFilm);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
         return $result;
     }
 
@@ -171,7 +175,32 @@ class Film
         $stmt = $pdo->prepare($req);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN); 
+        return $result;
+    }
+
+    public function getPaysByIdFilm(string $id)
+    {
+
+        $req = "SELECT nom FROM pays inner join join_film_pays on pays.iso = join_film_pays.id_pays WHERE join_film_pays.id_film =:id ";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN); 
+        return $result;
+    }
+ 
+
+    public function getProductionByIdFilm(string $id)
+    {
+
+        $req = "SELECT production.id FROM production inner join join_film_production on production.id = join_film_production.id_production WHERE join_film_production.id_film =:id ";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN); 
         return $result;
     }
 
@@ -183,8 +212,8 @@ class Film
         $req = "SELECT * FROM historique_film ORDER BY date DESC LIMIT 1";
         $stmt = $pdo->prepare($req);
         $stmt->execute();
-        $film = $stmt->fetch(PDO::FETCH_ASSOC);
-        $film = $this->getFilmById($film["id_film"]);
+        $film = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $film = $this->getFilmById($film["id_film"]); 
         return $film;
     }
 
@@ -325,7 +354,15 @@ class Film
         $stmt->bindParam(':id_production', $id_production, PDO::PARAM_STR);
         $stmt->execute();
     }
-
-
-
+    public function getProductionById($id)
+    {
+        $req = "SELECT * FROM production WHERE id =:id ";
+        $pdo = $this->getConnexion();
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+  
 }

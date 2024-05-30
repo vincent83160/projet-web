@@ -3,8 +3,7 @@
 }
 
 .suggestion:hover
-/* .filmBdd:hover  */
-{
+/* .filmBdd:hover  */ {
   cursor: pointer;
   color: white;
   background-color: rgb(54, 57, 58);
@@ -44,13 +43,14 @@
   max-width: 30em;
 }
 
-.suggestion,.filmBdd {
+.suggestion,
+.filmBdd {
   cursor: pointer;
   width: 100%;
   margin: 0 !important;
   padding: 2px 2px 2px 6px;
 }
-.filmBdd{
+.filmBdd {
   cursor: default;
 }
 .acteur,
@@ -61,17 +61,19 @@
   height: 11em;
 }
 
-
-.acteur-not-find{
-opacity: 0.5;
+.acteur-not-find,
+.real-not-find {
+  opacity: 0.5;
 }
-.acteur-not-find img{
-  border:double;
+.acteur-not-find img,
+.real-not-find img {
+  border: double;
   border-color: red !important;
 }
-.acteur-not-find > .acteur-nom{
-opacity: 0.5;
-text-decoration: line-through;
+.acteur-not-find > .acteur-nom,
+.real-not-find > .realisateur-nom {
+  opacity: 0.5;
+  text-decoration: line-through;
 }
 
 .scrollable-row {
@@ -104,6 +106,7 @@ text-decoration: line-through;
 .img-acteur,
 .img-realisateur {
   width: fit-content !important;
+  max-width: 7em;
 }
 .essai {
   margin-bottom: 1em;
@@ -131,7 +134,7 @@ text-decoration: line-through;
   text-decoration: line-through;
   opacity: 0.65;
   border: double;
-  border-color:red;
+  border-color: red;
 }
 .genre-non-trouve {
   opacity: 0.65;
@@ -156,11 +159,14 @@ text-decoration: line-through;
 
 .acteur-row {
   width: 85% !important;
-  margin-left: -10em !important;
 }
 
 .row-essai > .acteur-row {
   margin-left: 0em !important;
+}
+
+.container-personne-row {
+  margin-left: 1em !important;
 }
 
 .real-row {
@@ -186,9 +192,9 @@ text-decoration: line-through;
 }
 
 #spinner {
-	display: none;
-	position: fixed;
-	z-index: 99;
-	margin-left: 45%;
-	width: 15em;
+  display: none;
+  position: fixed;
+  z-index: 99;
+  margin-left: 45%;
+  width: 15em;
 }
