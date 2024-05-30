@@ -105,9 +105,10 @@ class FilmController
         $result = [
             "acteursCommunsDetails" => $acteursCommunsDetails,
             "acteursNonCommunsDetails" => $acteursNonCommunsDetails,
-            "acteurs" => $acteurs,
-            "acteursFilmChecked" => $acteursFilmChecked,
+            "acteurs" => $acteurs, 
             "realisateursFilmChecked" => $realisateursFilmChecked,
+            "realisateursNonCommunsLength" => $realisateursNonCommunsLength, 
+            "realisateurs" => $realisateurs,
             "realisateursCommunsDetails" => $realisateursCommunsDetails,
             "realisateursNonCommunsDetails" => $realisateursNonCommunsDetails,
             "realisateurs" => $realisateurs,
