@@ -11,7 +11,7 @@ class ConnexionMySql {
     private $host = "localhost";
     private $username = "web";
     private $password = "web";
-    private $dbname = "bdd_web";
+    private $dbname = "bdd-web";
     private $charset = "utf8mb4";
     private $pdo;
 
