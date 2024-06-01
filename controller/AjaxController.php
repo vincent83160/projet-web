@@ -63,26 +63,51 @@ class AjaxController
         $apiController->getFilmById($idFilm);
         $db = Film::createVide();
 
-        $result = $db->getFilmById($idFilm);
+        $filmChecked = $db->getFilmById($idFilm);
 
         $filmToFind = $db->getFilmToFind();
+        $result = [];
 
-
-        if ($idFilm == $filmToFind["id"]) {
-            $result = $filmToFind;
+        if ($idFilm == $filmToFind["id"]) {;
+            $result["filmToFind"] = $filmToFind;
+            $result["filmChecked"] = $filmChecked;
+            $result["filmToFind"]["acteurs"] = [];
+            $result["filmChecked"]["acteurs"] = [];
+            $result["filmToFind"]["realisateurs"] = [];
+            $result["filmChecked"]["realisateurs"] = [];
             $result["isCorrect"] = true;
-            $result["acteurs"] = [];
-            $result["realisateurs"] = [];
+            $result["genresCommuns"] = $filmChecked["genres"];
+            $result["genresNonCommuns"] = [];
+            $result["paysCommuns"] = $filmChecked["pays"];
+            $result["paysNonCommuns"] = [];
+            $result["productionsCommuns"] = $filmChecked["productions"];
+            $result["productionsNonCommuns"] = [];
+            $result["acteursCommuns"] = $filmChecked["acteurs"];
+            $result["acteursNonCommuns"] = [];
+            $result["realisateursCommuns"] = $filmChecked["realisateurs"];
+            $result["realisateursNonCommuns"] = [];
 
             foreach ($filmToFind["acteurs"] as $acteur) {
-                $result["acteurs"][] = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
+                $acteur = $db->getActeurByIdAndIdFilm($acteur, $filmToFind["id"]);
+                $result["filmToFind"]["acteurs"][] = $acteur;
+                $result["acteursCommunsDetails"][] = $acteur;
             }
             foreach ($filmToFind["realisateurs"] as $realisateur) {
-                $result["realisateurs"][] = $db->getRealisateurByIdAndIdFilm($realisateur, $filmToFind["id"]);
+                $realisateur = $db->getRealisateurByIdAndIdFilm($realisateur, $filmToFind["id"]);
+                $result["filmToFind"]["realisateurs"][] = $realisateur;
+                $result["realisateursCommunsDetails"][] = $realisateur;
             }
+
+            foreach ($filmToFind["productions"] as $production) {
+                $productions[] = $db->getProductionById($production);
+
+            }
+            $result["productionsCommuns"] = $productions;
+            $result["filmToFind"]["productionsDetails"] = $productions;
+            $result["filmChecked"] = $result["filmToFind"]; 
         } else {
 
-            $result = $filmController->compare2Films($result, $filmToFind);
+            $result = $filmController->compare2Films($filmChecked, $filmToFind);
         }
 
         echo json_encode($result);

@@ -86,7 +86,9 @@ function updateNbEssais() {
 
 // Gère le cas où le film est correct
 function handleCorrectFilm(response) {
-  const filmHTML = generateFilmHTML(response);
+  console.log("Productions reçues dans handleCorrectFilm:", response.filmChecked.productions);
+ 
+  const filmHTML = generateFilmHTML(response.filmChecked);
   $("#container-filmToFind").html(filmHTML);
   applyFilmBackground(response.poster_path, nbEssais);
   showCongratulationMessage(response.original_title);
@@ -108,7 +110,7 @@ function generateFilmHTML(response) {
       <h4>${response.original_title}</h4>
       <div class='row container-details'>${generateGenresHTML(response.genres)}</div>
       <div class='row container-details'>${generatePaysHTML(response.pays)}</div>
-      <div class='row container-details'>${generateProductionsHTML(response.productions)}</div>
+      <div class='row container-details'>${generateProductionsHTML(response.productionsDetails)}</div>
       <div class='row container-details'>
         <div class='row details'>${response.release_date}</div>
       </div>
@@ -128,19 +130,20 @@ function generateFilmHTML(response) {
 
 // Génère le HTML pour les genres
 function generateGenresHTML(genres) {
-  return genres.map(genre => `<div class='details'>${genre}</div>`).join("");
+  return genres.map(genre => `<div class='details' title="Genre">${genre}</div>`).join("");
 }
 
 // Génère le HTML pour les pays
 function generatePaysHTML(pays) {
-  return pays.map(pays => `<div class='details'>${pays}</div>`).join("");
+  return pays.map(pays => `<div class='details' title="Pays">${pays}</div>`).join("");
 }
 
 // Génère le HTML pour les productions
 function generateProductionsHTML(productions) {
+  console.log("Productions dans generateProductionsHTML:", productions);
   return productions.map(production => {
-    const img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
-    return `<div class='details'>${img}${production.nom}</div>`;
+    let img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
+    return `<div class='details' title="Production">${img}${production.nom}</div>`;
   }).join("");
 }
 
@@ -225,14 +228,13 @@ function generateIncorrectPaysHTML(response) {
 // Génère le HTML pour les productions incorrects
 function generateIncorrectProductionsHTML(response) {
   const productionsCommuns = response.productionsCommuns.map(production => {
-    return `<div class='details'>${production.nom}</div>`;
+    let img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
+    return `<div class='details'>${img}${production.nom}</div>`;
   }).join("");
-
   const nbProductionsNonCommuns = response.filmToFind.productions.length - response.productionsCommuns.length;
   const productionsNonCommuns = Array.from({ length: nbProductionsNonCommuns }).map(() => {
-    return `<div class='details-barre'>...</div>`;
+    return `<div class='details-barre' title="Production">...</div>`;
   }).join("");
-
   return productionsCommuns + productionsNonCommuns;
 }
 
@@ -273,15 +275,15 @@ function generateIncorrectActeursHTML(response) {
 }
 
 // Génère le HTML pour les réals incorrects
-function generateIncorrectRealisateursHTML(response) { 
-  const realisateursCommuns = response.realisateursCommunsDetails && response.realisateursCommunsDetails.length > 0 ? 
+function generateIncorrectRealisateursHTML(response) {
+  const realisateursCommuns = response.realisateursCommunsDetails && response.realisateursCommunsDetails.length > 0 ?
     response.realisateursCommunsDetails.map(real => `
       <div class='real' idReal='${real.id}'>
         <img class='img-realisateur' src='https://image.tmdb.org/t/p/w92/${real.image}'>
         <p class='real-nom'>${real.name}</p>
       </div>`).join("") : '';
 
-  const realisateursNonCommuns = response.realisateursNonCommunsDetails && response.realisateursNonCommunsDetails.length > 0 ? 
+  const realisateursNonCommuns = response.realisateursNonCommunsDetails && response.realisateursNonCommunsDetails.length > 0 ?
     response.realisateursNonCommunsDetails.map(real => `
       <div class='real real-not-find' idReal='${real.id}' >
         <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonymous.png'}'>
@@ -328,7 +330,9 @@ function updatePaysRecap(response) {
 
 // Met à jour le récapitulatif des productions
 function updateProductionsRecap(response) {
+  console.log("updateProductionsRecap")
   const productionsHTML = generateIncorrectProductionsHTML(response);
+  console.log(productionsHTML)
   $("#productions-recap").html(productionsHTML);
 }
 
