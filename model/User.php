@@ -1,50 +1,62 @@
 <?php
+// Inclusion du fichier de connexion à MySQL
 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
+
+// Déclaration de la classe User qui étend ConnexionMySql
 class User extends ConnexionMySql
 {
-
+    // Déclaration des propriétés privées
     private static $data = array();
     private int $id;
     private string $email;
     private string $login;
     private string $password;
     private bool $is_verified;
-    private String $role;
+    private string $role;
 
-
-
-
-    //GETTER
+    // Getter pour l'ID
     function getId()
     {
         return $this->id;
     }
+
+    // Getter pour l'email
     function getEmail()
     {
         return $this->email;
     }
+
+    // Getter pour le login
     function getLogin()
     {
         return $this->login;
     }
+
+    // Getter pour le mot de passe
     function getPassword()
     {
         return $this->password;
     }
+
+    // Getter pour vérifier si l'utilisateur est vérifié
     function getIsVerified()
     {
         return $this->is_verified;
     }
+
+    // Getter pour le rôle
     function getRole()
     {
         return $this->role;
     }
-    //SETTER
+
+    // Méthode magique pour définir une propriété
     public function __set($name, $value)
     {
         $this->$name = $value;
     }
-    //CONSTRUCTEUR
+
+    // Constructeur de la classe
     function __construct($id, $email, $login, $password, $is_verified, $role)
     {
         $this->id = $id;
@@ -53,12 +65,9 @@ class User extends ConnexionMySql
         $this->password = $password;
         $this->is_verified = $is_verified;
         $this->role = $role;
-        $this->email = $email;
-        $this->password = $password;
-        $this->is_verified = $is_verified;
-        $this->role = $role;
     }
 
+    // Méthode statique pour obtenir une connexion à la base de données
     public static function getConnexion()
     {
         $db = new ConnexionMySql();
@@ -68,16 +77,17 @@ class User extends ConnexionMySql
         return $pdo;
     }
 
+    // Méthode statique pour créer une instance vide de User
     public static function createVide()
     {
         return new self(0, "", "", "", false, "");
     }
 
-
+    // Méthode pour obtenir tous les utilisateurs
     public function getUsers()
     {
         $pdo = $this->getConnexion();
-        $req = 'SELECT id,email,pseudo,role FROM user';
+        $req = 'SELECT id, email, pseudo, role FROM user';
         $stmt = $pdo->prepare($req);
         $result = $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +95,7 @@ class User extends ConnexionMySql
         return $result;
     }
 
-
+    // Méthode pour mettre à jour un utilisateur
     public function update($input, $value, $idUser)
     {
         $pdo = $this->getConnexion();
@@ -96,6 +106,7 @@ class User extends ConnexionMySql
         $stmt->execute();
     }
 
+    // Méthode pour créer un nouvel utilisateur
     public function create($email, $pseudo, $password, $is_verified, $role)
     {
         $pdo = $this->getConnexion();
@@ -109,8 +120,7 @@ class User extends ConnexionMySql
         $stmt->execute();
     }
 
-
-
+    // Méthode pour supprimer un utilisateur par son ID
     public function deleteUserByID($id)
     {
         $pdo = $this->getConnexion();
@@ -123,6 +133,7 @@ class User extends ConnexionMySql
         return $result;
     }
 
+    // Méthode pour obtenir un utilisateur par son ID
     public function getUserByID($id)
     {
         $pdo = $this->getConnexion();
@@ -135,6 +146,7 @@ class User extends ConnexionMySql
         return $result;
     }
 
+    // Méthode pour vérifier les informations de connexion
     public function checkLogin($email, $password)
     {
         $pdo = $this->getConnexion();
@@ -150,3 +162,4 @@ class User extends ConnexionMySql
         }
     }
 }
+?>

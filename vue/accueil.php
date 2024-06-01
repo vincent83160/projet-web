@@ -42,7 +42,7 @@ include 'navbar.php';
         if (isset($_SESSION["pseudo"])) {
         ?>
             
-            <a href="/Game/start" class="button">Jouer</a>
+            <a href="/game/game" class="button">Jouer</a>
        
         <?php
         }

@@ -5,12 +5,13 @@ require $_SERVER["DOCUMENT_ROOT"] . "/model/Historique_film.php";
 
 class FilmController
 {
+    // Méthode pour afficher la page des films
     function films()
     {
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/film.php";
     }
 
-
+// Méthode qui permet de vérifier si un film est à trouvé aujourd'hui
     function checkIfFilmToFindToday()
     {
         require_once $_SERVER["DOCUMENT_ROOT"] . "/model/Film.php";
@@ -18,7 +19,7 @@ class FilmController
         $db->checkIfFilmToFindToday();
     }
 
-
+//Méthode pour comparer le film à trouver et le film choisi par l'utilisateur, permet également de renvoyer les infos détaillés de chacun des deux pour l'afficher dans la vue
     function compare2Films($filmChecked, $filmToFind) {
         $db = Film::createVide();
         $acteursCommuns = [];

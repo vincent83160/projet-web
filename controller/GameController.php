@@ -1,8 +1,8 @@
 <?php
 
 class GameController {
-
-    function start() {
+//fonction pour afficher la page de jeu
+    function game() {
         require_once $_SERVER["DOCUMENT_ROOT"] . "/controller/FilmController.php";
         $filmController = new FilmController(); 
         $filmController->checkIfFilmToFindToday();

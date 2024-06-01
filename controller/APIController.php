@@ -1,19 +1,10 @@
 <?php
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/model/ConnexionMySql.php';
 
-class ApiController extends ConnexionMySql
+class ApiController
 {
 
-    public static function getConnexion()
-    {
-        $db = new ConnexionMySql();
-        $db->connexion();
-        $pdo = $db->getPdo();
-
-        return $pdo;
-    }
-
+    // Méthode pour obtenir des films pour le jeu en fonction d'une chaine de caractères
     function getFilmsForGame($query = '')
     {
         $apiKey = '0dab7f323e77fc24fe9a13a247dcd82a';
@@ -23,6 +14,7 @@ class ApiController extends ConnexionMySql
         return $response->results;
     }
 
+    //Fonctio nqui permettait de récupérer les films de l'API et de les insérer dans la base de données lors de la phase de test
     function getFilmsApi($query = '')
     {
         $query = 'iron';

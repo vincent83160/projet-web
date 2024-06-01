@@ -8,7 +8,7 @@
         <?php if (isset($_SESSION["pseudo"])) { ?>
             <a href="/user/logout" class="button">Deconnexion</a>
             <a href="/user/membre" class="button">Compte</a>
-            <a href="/game/start" class="button">Jeu</a>
+            <a href="/game/game" class="button">Jeu</a>
             <?php if ($_SESSION["role"] == "ADMIN") { ?>
                 <a href="/admin/gestionFilm" class="button">Films</a>
                 <a href="/admin/gestionUser" class="button">Utilisateurs</a>

@@ -2,6 +2,7 @@
 
 class DefaultController
 {
+    // Méthode pour afficher la page d'accueil
     public function accueil()
     {
        
