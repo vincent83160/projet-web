@@ -178,7 +178,7 @@ function applyFilmBackground(posterPath, nbEssais) {
 // Affiche un message de félicitations
 function showCongratulationMessage(originalTitle) {
   $("#input-film").remove();
-  $("#form").html(`<h4>Félicitations vous avez trouvé le film du jour</h4>${$("#form").html()}`);
+  $("#form").html(`<h4>Félicitations vous avez trouvé le film du jour!!</h4>${$("#form").html()}`);
   $("#titre-recap").html(originalTitle);
 }
 
