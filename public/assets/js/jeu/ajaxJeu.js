@@ -374,8 +374,13 @@ function updateRealisateursRecap(response) {
 
 // Crée la div de récapitulatif pour la première fois
 function createRecapDiv(response, dateFilm) {
+  if(response.isCorrect){
+    titre = response.filmToFind.original_title;
+  }else{
+    titre = "Film à trouver";
+  }
   let htmlRecap = `<div class='card essai' id='filmToFind'>
-    <h4 id='titre-recap'>Film à trouver</h4>
+    <h4 id='titre-recap'>${titre}</h4>
     <div id='genres-recap' class='row container-details'>${generateIncorrectGenresHTML(response)}</div>
     <div id='pays-recap' class='row container-details'>${generateIncorrectPaysHTML(response)}</div>
     <div id='productions-recap' class='row container-details'>${generateIncorrectProductionsHTML(response)}</div>

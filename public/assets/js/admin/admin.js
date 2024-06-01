@@ -1,3 +1,4 @@
+//permet d'afficher et de cacher le spinner selon l'action apssé par le paramètre
 function toggleSpinner(action) {
 	if (action == "show") {
 		$("#spinner").show();
