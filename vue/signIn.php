@@ -27,14 +27,15 @@
                  <label class="form-label" for="password">Mot de passe:</label>
                  <input class="form-control" type="password" id="password" name="password" required />
              </div>
-             <div id="warning" style=" color: red;">
-                 <div id="warningLength" style="display: none; "></div>
-                 <div id="warningNumber" style="display: none; "></div>
-                 <div id="warningUpperCase" style="display: none; "></div>
+             <div id="warning">
+                 <div id="warningLength" class="warning"></div>
+                 <div id="warningNumber" class="warning"></div>
+                 <div id="warningUpperCase" class="warning"></div>
              </div>
              <div class="mb-3">
                  <label class="form-label" for="username">Mail:</label>
                  <input class="form-control" type="text" id="mail" name="mail" required />
+                 <div id="warningEmail" class="warning"></div>
              </div>
              <div class="div-submit">
                  <button class="btn btn-primary" id="btn-login" type="submit">S'inscrire</button>

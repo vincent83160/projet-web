@@ -1,97 +1,56 @@
-/*mdp = document.getElementById('password');
 
-mdp.addEventListener('input',function (){
-    console.log(mdp.value);
-    console.log(mdp.value.length);
-    if(this.value.length<13){
-        showWarning()
-        warningLength("Mot de passe trop court")
-    }
-    if(/d/.test(this.value)){
-        showWarning()
-        warningNumber("Mot de passe doit contenir un chiffre")
-    }
-    else {
-    // If the input is empty, hide the warning
-        hideWarning();
-    }
-
-})
-
-function showWarning(){
-    warningElement = document.getElementById("warning");
-    if (warningElement) {   
-        warningElement.style.display = 'block';
-      }
-}
-
-function warningLength(message){
-    showWarning()
-    const warningElement = document.getElementById('warningLength');
-    if (warningElement) {   
-      warningElement.textContent = message ;
-      warningElement.style.display = 'block';
-    }
-}
-
-function warningNumber(message){
-    showWarning()
-    const warningElement = document.getElementById('warningNumber');
-    if (warningElement) {   
-      warningElement.textContent = message ;
-      warningElement.style.display = 'block';
-    }
-}
-
-function hideWarning() {
-    const warningElement = document.getElementById('warning');
-    if (warningElement) {
-      warningElement.textContent = '';
-      warningElement.style.display = 'none';
-    }
-  }
-*/
 
 src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-
+$("#btn-login").hide();
 
 $('#password').on(
-    'keyup',function(){
-        if($(this).val().length<8){
-            $('#warningLength').show();
+    'keyup', function () {
+        if ($(this).val().length < 8) {
             $('#warningLength').html('Mot de passe trop court');
         }
-        else{
-            $('#warningLength').hide();
-        }    
-        if(/\d/.test($(this).val())){
-            $('#warningNumber').hide();
+        else {
+            $('#warningLength').html("");
         }
-        else{
-            $('#warningNumber').show();
+        if (/\d/.test($(this).val())) {
+            $('#warningNumber').html("");
+        }
+        else {
             $('#warningNumber').html('Mot de passe doit contenir un chiffre');
-        }   
-        if(/[A-Z]/.test($(this).val())){
-            $('#warningUpperCase').hide();
         }
-        else{
-            $('#warningUpperCase').show();
+        if (/[A-Z]/.test($(this).val())) {
+            $('#warningUpperCase').html("");
+        }
+        else {
             $('#warningUpperCase').html('Mot de passe doit contenir une majuscule');
-        } 
+        }
+        checkEmptyWarnings()
+
     }
 );
 
-$('#formulaire').submit(function(event) {
+var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+$("#mail").on("input", function () {
+    if (!emailPattern.test($(this).val())) {
+        $('#warningEmail').html('Adresse e-mail invalide.');
+    } else {
+        $('#warningEmail').html("");
+    }
+    checkEmptyWarnings();
+
+
+})
+
+$('#formulaire').submit(function (event) {
     // Empêcher l'envoi par défaut du formulaire
     event.preventDefault();
-    
+
     // Vérifier les conditions avant d'autoriser l'envoi du formulaire
     var champ1 = $('#username').val();
     var champ2 = $('#password').val();
     var champ3 = $('#mail').val()
 
     // Par exemple, vérifier si les champs ne sont pas vides
-    if (champ1.trim() === '' || champ2.trim() === ''|| champ2.length<8 || !/\d/.test(champ2) || !/[A-Z]/.test(champ2) || champ3.trim() === '   ') {
+    if (champ1.trim() === '' || champ2.trim() === '' || champ2.length < 8 || !/\d/.test(champ2) || !/[A-Z]/.test(champ2) || champ3.trim() === '   ') {
         // Afficher un message d'erreur
         alert('Veuillez remplir tous les champs');
         // Arrêter le traitement
@@ -102,4 +61,30 @@ $('#formulaire').submit(function(event) {
     // et envoyer le formulaire avec ajax si nécessaire
     $(this).unbind('submit').submit();
 });
-    
+
+$("#username").on("input", function () {
+    checkEmptyWarnings();
+});
+
+function checkEmptyWarnings() {
+    var allEmpty = true;
+    $('.warning').each(function () {
+        if ($.trim($(this).html()) !== '') {
+            console.log($(this).attr('id'))
+            allEmpty = false;
+            return false; // Sort de la boucle each
+        }
+    });
+
+    console.log(allEmpty)
+    if ($("#username").val() == "") {
+        allEmpty = false;
+    }
+    console.log(allEmpty)
+    if (allEmpty) {
+        $("#btn-login").show();
+    } else {
+        $("#btn-login").hide();
+    }
+}
+
