@@ -118,6 +118,7 @@ class User extends ConnexionMySql
         $stmt->bindParam(':is_verified', $is_verified);
         $stmt->bindParam(':role', $role);
         $stmt->execute();
+        return $pdo->lastInsertId();
     }
 
     // Méthode pour supprimer un utilisateur par son ID

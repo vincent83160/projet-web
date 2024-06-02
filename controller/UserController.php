@@ -23,7 +23,7 @@ class UserController
 
                 $db = user::createVide();
                 // Hacher le mot de passe avant de le mettre à jour
-                if($input == "password"){
+                if ($input == "password") {
                     $value = password_hash($value, PASSWORD_DEFAULT);
                 }
                 $db->update($input, $value, $_SESSION['id']);
@@ -50,7 +50,7 @@ class UserController
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         $db = user::createVide();
 
-        $erreur = ""; 
+        $erreur = "";
         // Vérifier si l'utilisateur est déjà connecté
         if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
             header("location: /default/accueil");
@@ -69,8 +69,8 @@ class UserController
                 $_SESSION['pseudo'] = $result["pseudo"];
                 $_SESSION['role'] = $result["role"];
 
-                header("Location: /game/game"); 
-            } elseif ($_POST['email'] != "" && $_POST['password'] != ""){
+                header("Location: /game/game");
+            } elseif ($_POST['email'] != "" && $_POST['password'] != "") {
                 $erreur = "Mauvais login ou mot de passe";
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/login.php";
             } else {
@@ -86,8 +86,8 @@ class UserController
         if (isset($_POST['mail'])) {
             $db = user::createVide();
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'],$db->getLastId());
+            $lastId =  $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
+            $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'], $lastId);
 
             echo $emailContent;
             require_once $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
@@ -106,24 +106,23 @@ class UserController
     {
         $id = urldecode($params["id"]);
         $db = user::createVide();
-        $db->update("is_verified","1",$id);
+        $db->update("is_verified", "1", $id);
 
         require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/confirmCompte.php";
     }
 
-        // Méthode pour simuler l'envoi d'un e-mail de confirmation
-        private function simulateConfirmationEmail($email, $pseudo,$id)
-        {
-            // Contenu de l'e-mail
-            $subject = 'Confirmation d\'inscription';
-            $body = "Bonjour $pseudo,<br><br>Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : <a href='http://web/user/confirmCompte/id=$id'>Confirmer mon e-mail</a><br><br>Cordialement,<br>L'équipe de votre site";
-            
-            // Simulation de l'e-mail
-            $emailContent = "<strong>To:</strong> $email<br>";
-            $emailContent .= "<strong>Subject:</strong> $subject<br>";
-            $emailContent .= "<strong>Body:</strong><br>$body";
-            
-            return $emailContent;
-        }
+    // Méthode pour simuler l'envoi d'un e-mail de confirmation
+    private function simulateConfirmationEmail($email, $pseudo, $id)
+    {
+        // Contenu de l'e-mail
+        $subject = 'Confirmation d\'inscription';
+        $body = "Bonjour $pseudo,<br><br>Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : <a href='http://web/user/confirmCompte/id=$id'>Confirmer mon e-mail</a><br><br>Cordialement,<br>L'équipe de votre site";
+
+        // Simulation de l'e-mail
+        $emailContent = "<strong>To:</strong> $email<br>";
+        $emailContent .= "<strong>Subject:</strong> $subject<br>";
+        $emailContent .= "<strong>Body:</strong><br>$body";
+
+        return $emailContent;
+    }
 }
-?>
