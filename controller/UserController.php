@@ -94,7 +94,11 @@ class UserController
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $lastId =  $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
                 $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'], $lastId);
-
+ 
+                $_SESSION['id'] = $lastId;
+                $_SESSION['email'] = $_POST['mail'];
+                $_SESSION['pseudo'] = $_POST['pseudo'];
+                $_SESSION['role'] = 'USER';
                 echo $emailContent;
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signInConfirm.php";
             }
