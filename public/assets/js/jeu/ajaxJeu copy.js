@@ -49,11 +49,13 @@ function ajaxCheckIfFilmCorrect(id) {
   nbEssais++;
   const url = `../../ajax/checkIfFilmCorrect/idFilm=${id}`;
   toggleSpinner("show");
+  console.log("ajaxCheckIfFilmCorrect")
   $.ajax({
     url: url,
     type: "GET",
     dataType: "json",
     success: function (response) {
+      console.log(response);
       handleResponse(response);
       toggleSpinner("hide");
     },
@@ -84,6 +86,8 @@ function updateNbEssais() {
 
 // Gère le cas où le film est correct
 function handleCorrectFilm(response) {
+  console.log("Productions reçues dans handleCorrectFilm:", response.filmChecked.productions);
+
   const filmHTML = generateFilmHTML(response.filmChecked);
   $("#container-filmToFind").html(filmHTML);
   applyFilmBackground(response.poster_path, nbEssais);
@@ -97,7 +101,7 @@ function handleIncorrectFilm(response) {
   $("#container-essais").prepend(filmHTML);
   applyFilmBackground(response.filmChecked.poster_path, nbEssais);
 
-  updateRecap(response);
+    updateRecap(response);
 
 }
 
@@ -138,6 +142,7 @@ function generatePaysHTML(pays) {
 
 // Génère le HTML pour les productions
 function generateProductionsHTML(productions) {
+  console.log("Productions dans generateProductionsHTML:", productions);
   return productions.map(production => {
     let img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
     return `<div class='details' title="Production">${img}${production.nom}</div>`;
@@ -184,11 +189,11 @@ function generateIncorrectFilmHTML(response) {
   let html = `
     <div class='card essai' id='essai-${nbEssais}'>
       <h4>${response.filmChecked.original_title}</h4>
-      <div class='row container-details'>${generateEssaiGenresHTML(response)}</div>
-      <div class='row container-details'>${generateEssaiPaysHTML(response)}</div>
-      <div class='row container-details'>${generateEssaiProductionsHTML(response)}</div>
+      <div class='row container-details'>${generateIncorrectGenresHTML(response)}</div>
+      <div class='row container-details'>${generateIncorrectPaysHTML(response)}</div>
+      <div class='row container-details'>${generateCheckedProductionsHTML(response.productionsFilmChecked)}</div>
       <div class='row container-details'>
-        <div class='row details'>${response.filmChecked.release_date}</div>
+        <div class='row details'>${getDateDetails(response)}</div>
       </div>
       <div class='row row-essai'>
         <p>Acteurs</p>
@@ -208,72 +213,60 @@ function generateCheckedProductionsHTML(productions) {
   }).join("");
 }
 
-// Génère le HTML pour les pays dans les essais
-function generateEssaiPaysHTML(response) {
-  const paysCommuns = response.filmChecked.pays.map(pays => `<div class='details'>${pays}</div>`).join("");
-  return paysCommuns;
-}
-
-// Génère le HTML pour les genres dans les essais
-function generateEssaiGenresHTML(response) {
-  const genresCommuns = response.filmChecked.genres.map(genre => `<div class='details'>${genre}</div>`).join("");
+// Génère le HTML pour les genres incorrects sans inclure les genres barrés dans le récapitulatif initial
+function generateIncorrectGenresHTML(response) {
+  const genresCommuns = response.genresCommuns.map(genre => {
+    if ($("#genres-recap .details").filter((_, el) => $(el).text() === genre).length === 0) {
+      return `<div class='details'>${genre}</div>`;
+    }
+    return '';
+  }).join("");
   return genresCommuns;
 }
-// Génère le HTML pour les productions dans les essais
-function generateEssaiProductionsHTML(response) {
-  const productionsCommuns = response.productionsFilmChecked.map(production => {
+
+
+// Génère le HTML pour les pays incorrects
+function generateIncorrectPaysHTML(response) {
+  const paysCommuns = response.paysCommuns.map(pays => `<div class='details'>${pays}</div>`).join("");
+  const paysNonCommuns = response.paysNonCommuns.map(pays => `<div class='details-barre'>${pays}</div>`).join("");
+  return paysCommuns + paysNonCommuns;
+}
+
+// Génère le HTML pour les productions incorrects
+function generateIncorrectProductionsHTML(response) {
+  const productionsCommuns = response.productionsCommuns.map(production => {
     let img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
     return `<div class='details'>${img}${production.nom}</div>`;
   }).join("");
-  return productionsCommuns;
+  const nbProductionsNonCommuns = response.filmToFind.productions.length - response.productionsCommuns.length;
+  const productionsNonCommuns = Array.from({ length: nbProductionsNonCommuns }).map(() => {
+    return `<div class='details-barre' title="Production">...</div>`;
+  }).join("");
+  return productionsCommuns + productionsNonCommuns;
 }
+
 
 // Obtient les détails de la date
 function getDateDetails(response) {
-  const checkedDate = parseInt(response.filmChecked.release_date);
-  const toFindDate = parseInt(response.filmToFind.release_date);
-  let dateLow = parseInt($("#dateLow").val());
-  let dateUp = parseInt($("#dateUp").val());
-
-  // Si la date recherchée a déjà été trouvée, ne pas la remplacer
-  if ($("#date-recap").html() === toFindDate.toString()) {
-    return toFindDate.toString();
+  const checkedDate = response.filmChecked.release_date;
+  const toFindDate = response.filmToFind.release_date;
+  if ($("#date-recap").html() == toFindDate) {
+    return toFindDate;
   }
-
-  // Si la date vérifiée est égale à la date recherchée
   if (checkedDate === toFindDate) {
-    return checkedDate.toString();
+    return checkedDate;
   }
-  // Initialiser dateLow et dateUp si elles sont aux valeurs par défaut
-  if (dateLow === 0 && dateUp === 10000) {
-    dateLow = checkedDate;
-    dateUp = checkedDate;
-    $("#dateLow").val(dateLow);
-    $("#dateUp").val(dateUp);
-  } else {
-    // Mettre à jour dateLow et dateUp en fonction de la date vérifiée
-    if (checkedDate < dateLow) {
-      dateLow = checkedDate;
-      $("#dateLow").val(dateLow);
-    } else if (checkedDate > dateUp) {
-      dateUp = checkedDate;
-      $("#dateUp").val(dateUp);
+
+  if (checkedDate < $("#dateUp").val() || checkedDate > $("#dateLow").val()) {
+    if (toFindDate > checkedDate) {
+      return `Après ${checkedDate}`;
     } else {
-      return `Entre ${dateLow} et ${dateUp}`;
+      return `Avant ${checkedDate}`;
     }
   }
 
-
-
-  // Retourner la plage mise à jour
-  if (toFindDate > checkedDate) {
-    return `Après ${checkedDate}`;
-  } else {
-    return `Avant ${checkedDate}`;
-  }
+  return `Entre ${$("#dateLow").val()} et ${$("#dateUp").val()}`;
 }
-
-
 
 // Génère le HTML pour les acteurs incorrects
 function generateIncorrectActeursHTML(response) {
@@ -292,21 +285,22 @@ function generateIncorrectActeursHTML(response) {
 
 // Génère le HTML pour les réals incorrects
 function generateIncorrectRealisateursHTML(response) {
-  const realisateursCommuns = response.realisateursCommunsDetails.map(real => `
-    <div class='realisateur real-find' idReal='${real.id}'>
-      <img class='img-realisateur' src='https://image.tmdb.org/t/p/w92/${real.image}'>
-      <p class='realisateur-nom'>${real.name}</p>
-    </div>`).join("");
+  const realisateursCommuns = response.realisateursCommunsDetails && response.realisateursCommunsDetails.length > 0 ?
+    response.realisateursCommunsDetails.map(real => `
+      <div class='real' idReal='${real.id}'>
+        <img class='img-realisateur' src='https://image.tmdb.org/t/p/w92/${real.image}'>
+        <p class='real-nom'>${real.name}</p>
+      </div>`).join("") : '';
 
-  const realisateursNonCommuns = response.realisateursNonCommunsDetails.map(real => `
-    <div class='realisateur real-not-find' idReal='${real.id}' >
-      <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonymous.png'}'>
-      <p class='realisateur-nom'>${real.name}</p>
-    </div>`).join("");
+  const realisateursNonCommuns = response.realisateursNonCommunsDetails && response.realisateursNonCommunsDetails.length > 0 ?
+    response.realisateursNonCommunsDetails.map(real => `
+      <div class='real real-not-find' idReal='${real.id}' >
+        <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonymous.png'}'>
+        <p class='real-nom'>${real.name}</p>
+      </div>`).join("") : '';
 
   return realisateursCommuns + realisateursNonCommuns;
 }
-
 
 // Met à jour le récapitulatif des informations
 function updateRecap(response) {
@@ -341,18 +335,18 @@ function updateRecap(response) {
 }
 // Met à jour le récapitulatif des genres
 function updateGenresRecap(response) {
-
   const listGenresFind = getListGenresFind(response);
-
   const nbGenresTotal = response.filmToFind.genres.length;
 
-
+  // Si tous les genres ont été trouvés, ne plus mettre à jour la liste
+  if (listGenresFind.length >= nbGenresTotal) {
+    return;
+  }
   const genresHTML = listGenresFind.map(genre => `<div class='details'>${genre}</div>`).join("");
   const placeholdersHTML = generatePlaceholderGenres(nbGenresTotal - listGenresFind.length);
 
   $("#genres-recap").html(genresHTML + placeholdersHTML);
 }
-
 
 
 
@@ -369,9 +363,16 @@ function updatePaysRecap(response) {
 
   const paysHTML = listPaysFind.map(pays => `<div class='details'>${pays}</div>`).join("");
   const placeholdersHTML = generatePlaceholderPays(nbPaysTotal - listPaysFind.length);
+  const nonCommunsPaysHTML = generateNonCommunsPaysHTML(response);
 
-  $("#pays-recap").html(paysHTML + placeholdersHTML);
+  $("#pays-recap").html(paysHTML + placeholdersHTML + nonCommunsPaysHTML);
 }
+
+// Génère le HTML pour les pays non communs
+function generateNonCommunsPaysHTML(response) {
+  return response.paysNonCommuns.map(pays => `<div class='details-barre'>${pays}</div>`).join("");
+}
+
 
 // Génère le HTML pour les pays non trouvés
 function generatePlaceholderPays(count) {
@@ -397,12 +398,19 @@ function updateProductionsRecap(response) {
   }).join("");
 
   const placeholdersHTML = generatePlaceholderProductions(nbProductionsTotal - listProductionsFind.length);
+  const nonCommunsProductionsHTML = generateNonCommunsProductionsHTML(response);
 
-  $("#productions-recap").html(productionsHTML + placeholdersHTML);
+  $("#productions-recap").html(productionsHTML + placeholdersHTML + nonCommunsProductionsHTML);
 }
 
 
-
+// Génère le HTML pour les productions non communes
+function generateNonCommunsProductionsHTML(response) {
+  return response.productionsNonCommuns.map(production => {
+    const img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
+    return `<div class='details-barre'>${img}${production.nom}</div>`;
+  }).join("");
+}
 
 
 // Génère le HTML pour les productions non trouvées
@@ -420,18 +428,12 @@ function updateActeursRecap(response) {
 
   let htmlActeurs = listActeursFind.map(acteur => {
     if (acteur !== undefined) {
-      const acteurHTML = $(".acteur[idActeur='" + acteur + "']").first().html();
-      return `<div class='acteur-find' idActeur='${acteur}' rang='${$(".acteur[idActeur='" + acteur + "']").attr("rang")}'>
-                ${acteurHTML}
+      return `<div class='acteur-find' idActeur='${acteur}' rang='${acteur.rang}'>
+                ${$(".acteur[idActeur='" + acteur + "']").first().html()}
               </div>`;
     }
     return "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
   }).join("");
-
-  const nbActeursNotFind = response.filmToFind.acteurs.length - nbActeursFind;
-  for (let i = 0; i < nbActeursNotFind; i++) {
-    htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
-  }
 
   $("#find-acteur-row").html(htmlActeurs);
 }
@@ -444,23 +446,15 @@ function updateRealisateursRecap(response) {
 
   let htmlReals = listRealFind.map(real => {
     if (real !== undefined) {
-      const realHTML = $(".realisateur[idReal='" + real + "']").first().html();
       return `<div class='realisateur real-find' idReal='${real}'>
-                ${realHTML}
+                ${$(".realisateur[idReal='" + real + "']").first().html()}
               </div>`;
     }
     return "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
   }).join("");
 
-  const nbRealsNotFind = response.filmToFind.realisateurs.length - nbRealsFind;
-  for (let i = 0; i < nbRealsNotFind; i++) {
-    htmlReals += "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
-  }
-
   $("#find-real-row").html(htmlReals);
 }
-
-
 // Crée la div de récapitulatif pour la première fois
 function createRecapDiv(response, dateFilm) {
   const titre = response.isCorrect ? response.filmToFind.original_title : "Film à trouver";
@@ -469,13 +463,16 @@ function createRecapDiv(response, dateFilm) {
   let htmlRecap = `<div class='card essai' id='filmToFind'>
     <h4 id='titre-recap'>${titre}</h4>
     <div id='genres-recap' class='row container-details'>
-      ${generateRecapGenresHTML(response)}
+      ${generateIncorrectGenresHTML(response)}
+      ${generatePlaceholderGenres(nbGenres - response.genresCommuns.length)}
     </div>
     <div id='pays-recap' class='row container-details'>
-      ${generateRecapPaysHTML(response)}
+      ${generateIncorrectPaysHTML(response)}
+      ${generatePlaceholderPays(response.filmToFind.pays.length - response.paysCommuns.length)}
     </div>
     <div id='productions-recap' class='row container-details'>
-      ${generateRecapProductionsHTML(response)}
+      ${generateIncorrectProductionsHTML(response)}
+      ${generatePlaceholderProductions(response.filmToFind.productions.length - response.productionsCommuns.length)}
     </div>
     <div class='row container-details'>
       <div class='details' id='date-recap'>${dateFilm}</div>
@@ -496,33 +493,6 @@ function createRecapDiv(response, dateFilm) {
 
   $("#container-filmToFind").html(htmlRecap);
   $("#filmToFind").css("background-image", "linear-gradient(rgb(40, 31, 74) 2%, rgba(40, 31, 74, 0.7) 50%, rgb(40, 31, 74, 0.7)), url(/public/assets/img/fond-login.webp)");
-}
-
-
-// Génère le HTML pour les pays dans le récapitulatif
-function generateRecapPaysHTML(response) {
-  const paysCommuns = response.paysCommuns.map(pays => `<div class='details'>${pays}</div>`).join("");
-  const nbPaysNonCommuns = response.filmToFind.pays.length - response.paysCommuns.length;
-  const paysNonCommuns = Array.from({ length: nbPaysNonCommuns }).map(() => `<div class='details-barre'>...</div>`).join("");
-  return paysCommuns + paysNonCommuns;
-}
-
-// Génère le HTML pour les genres dans le récapitulatif
-function generateRecapGenresHTML(response) {
-  const genresCommuns = response.genresCommuns.map(genre => `<div class='details'>${genre}</div>`).join("");
-  const nbGenresNonCommuns = response.filmToFind.genres.length - response.genresCommuns.length;
-  const genresNonCommuns = Array.from({ length: nbGenresNonCommuns }).map(() => `<div class='details-barre'>...</div>`).join("");
-  return genresCommuns + genresNonCommuns;
-}
-// Génère le HTML pour les productions dans le récapitulatif
-function generateRecapProductionsHTML(response) {
-  const productionsCommuns = response.productionsCommuns.map(production => {
-    let img = production.logo ? `<img src='https://image.tmdb.org/t/p/w92/${production.logo}' alt='logo de ${production.nom}'>` : '';
-    return `<div class='details'>${img}${production.nom}</div>`;
-  }).join("");
-  const nbProductionsNonCommuns = response.filmToFind.productions.length - response.productionsCommuns.length;
-  const productionsNonCommuns = Array.from({ length: nbProductionsNonCommuns }).map(() => `<div class='details-barre'>...</div>`).join("");
-  return productionsCommuns + productionsNonCommuns;
 }
 
 
@@ -554,7 +524,7 @@ function generateActeursRecapHTML(response) {
 
   let htmlActeurs = listActeursFind.map(acteur => {
     if (acteur !== undefined) {
-      return `<div class='acteur-find' idActeur='${acteur}' rang='${$(".acteur[idActeur='" + acteur + "']").first().attr("rang")}'>
+      return `<div class='acteur-find' idActeur='${acteur}' rang='${acteur.rang}'>
                 ${$(".acteur[idActeur='" + acteur + "']").first().html()}
               </div>`;
     }
@@ -588,6 +558,7 @@ function generateRealisateursRecapHTML(response) {
 
   return htmlReals;
 }
+
 // Obtient la liste des acteurs trouvés
 function getListActeursFind(response) {
   let listActeursFind = [];
@@ -604,28 +575,17 @@ function getListActeursFind(response) {
   return listActeursFind;
 }
 
-
 // Obtient la liste des réalisateurs trouvés
 function getListRealFind(response) {
   let listRealFind = [];
-  $(".realisateur.real-find").each(function () {
-    const realId = parseInt($(this).attr("idReal"));
-    if (!listRealFind.includes(realId)) {
-      listRealFind.push(realId);
-    }
-  });
-
   response.realisateursCommunsDetails.forEach(real => {
-    const realId = parseInt(real.id);
-    if (!listRealFind.includes(realId)) {
-      listRealFind.push(realId);
+    if (!$(`.real-find[id='${real.id}']`).length) {
+      listRealFind.push(parseInt(real.id));
     }
   });
 
   return listRealFind;
 }
-
-
 
 // Obtient la liste des genres trouvés
 function getListGenresFind(response) {
