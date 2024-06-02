@@ -230,48 +230,52 @@ function generateEssaiProductionsHTML(response) {
 
 // Obtient les détails de la date
 function getDateDetails(response) {
-  const checkedDate = parseInt(response.filmChecked.release_date);
-  const toFindDate = parseInt(response.filmToFind.release_date);
-  let dateLow = parseInt($("#dateLow").val());
-  let dateUp = parseInt($("#dateUp").val());
+  // Récupérer les dates de sortie des deux films et les convertir en entiers
+  const checkedDate = parseInt(response.filmChecked.release_date, 10);
+  const toFindDate = parseInt(response.filmToFind.release_date, 10);
 
-  // Si la date recherchée a déjà été trouvée, ne pas la remplacer
-  if ($("#date-recap").html() === toFindDate.toString()) {
+  if ($("#dateLow").val() == 0 && $("#dateUp").val() == 10000) {
+    if (checkedDate > toFindDate) {
+      $("#dateUp").val(checkedDate);
+      return `Avant ${checkedDate}`;
+    } else if (checkedDate < toFindDate) {
+      $("#dateLow").val(checkedDate);
+      return `Après ${checkedDate}`;
+    }
+  }
+  if (checkedDate == toFindDate || checkedDate == $("#date-recap").html()) {
     return toFindDate.toString();
-  }
+  } else if (checkedDate < $("#dateUp").val() || checkedDate > $("#dateLow").val()) {
 
-  // Si la date vérifiée est égale à la date recherchée
-  if (checkedDate === toFindDate) {
-    return checkedDate.toString();
-  }
-  // Initialiser dateLow et dateUp si elles sont aux valeurs par défaut
-  if (dateLow === 0 && dateUp === 10000) {
-    dateLow = checkedDate;
-    dateUp = checkedDate;
-    $("#dateLow").val(dateLow);
-    $("#dateUp").val(dateUp);
-  } else {
-    // Mettre à jour dateLow et dateUp en fonction de la date vérifiée
-    if (checkedDate < dateLow) {
-      dateLow = checkedDate;
-      $("#dateLow").val(dateLow);
-    } else if (checkedDate > dateUp) {
-      dateUp = checkedDate;
-      $("#dateUp").val(dateUp);
+    if (toFindDate >checkedDate ) {
+      // $("#dateUp").val(checkedDate);
+
+      result = "Après " + checkedDate;
+      if (checkedDate > $("#dateLow").val()) {
+        $("#dateLow").val(checkedDate);
+      }
     } else {
-      return `Entre ${dateLow} et ${dateUp}`;
+      result = "Avant " + checkedDate;
+      if (checkedDate < $("#dateUp").val()) {
+        $("#dateUp").val(checkedDate);
+      }
+
+    }
+    let dateLow = $("#dateLow").val();
+    let dateUp = $("#dateUp").val();
+    if (dateUp != 10000 && dateLow != 0) {
+      result = "Entre " + dateLow + " et " + dateUp;
+    } else if ($("#dateUp").val() != 10000) {
+      result = "Avant " + dateUp;
+    } else if ($("#dateLow").val() != 0) {
+      result = "Après " + dateLow;
     }
   }
 
 
-
-  // Retourner la plage mise à jour
-  if (toFindDate > checkedDate) {
-    return `Après ${checkedDate}`;
-  } else {
-    return `Avant ${checkedDate}`;
-  }
+  return result;
 }
+
 
 
 
