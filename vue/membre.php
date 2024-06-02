@@ -23,7 +23,7 @@ include 'navbar.php';
             <div class="mb-3">
                <p>Changer votre pseudo :
                </p>
-               <input class="form-control" type="text" id="username" name="login" required value="<?php echo $_SESSION['pseudo']; ?>" />
+               <input class="form-control" type="text" id="username" name="pseudo" required value="<?php echo $_SESSION['pseudo']; ?>" />
             </div>
             <div class="mb-3">
                <p>Changer votre email :</p>
