@@ -121,6 +121,18 @@ class User extends ConnexionMySql
         return $pdo->lastInsertId();
     }
 
+    public function checkMail($email)
+    {
+        $pdo = $this->getConnexion();
+        $req = 'SELECT * FROM user WHERE email = :email';
+        $stmt = $pdo->prepare($req);
+        $stmt->bindParam(':email', $email);
+        $result = $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     // Méthode pour supprimer un utilisateur par son ID
     public function deleteUserByID($id)
     {

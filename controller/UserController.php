@@ -82,16 +82,24 @@ class UserController
     // Méthode pour l'inscription d'un nouvel utilisateur
     public function signIn()
     {
+
         require_once $_SERVER["DOCUMENT_ROOT"] . '/model/User.php';
         if (isset($_POST['mail'])) {
             $db = user::createVide();
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $lastId =  $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
-            $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'], $lastId);
+            if ($db->checkMail($_POST['mail'])) {
+                $erreur = "L'adresse e-mail " . $_POST['mail'] . " est déjà utilisée";
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
+                return;
+            } else {
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $lastId =  $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
+                $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'], $lastId);
 
-            echo $emailContent;
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signInConfirm.php";
+                echo $emailContent;
+                require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signInConfirm.php";
+            }
         } else {
+            $erreur = false;
             require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
         }
     }

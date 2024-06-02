@@ -7,16 +7,16 @@
 }
 
 #fond-login {
-    z-index: -1;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-image: url(/public/assets/img/fond-login.webp);
-    filter: blur(10px) opacity(0.8);
-    background-size: contain;
-    background-position: center;
-    top: 0px;
-    bottom: -10px;
+  z-index: -1;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(/public/assets/img/fond-login.webp);
+  filter: blur(10px) opacity(0.8);
+  background-size: contain;
+  background-position: center;
+  top: 0px;
+  bottom: -10px;
 }
 
 #fond-login img {
@@ -32,7 +32,6 @@ body {
   align-items: center;
 }
 
-
 #div-login {
   display: flex;
   align-items: center;
@@ -40,9 +39,9 @@ body {
   flex-direction: column;
   background: rgb(253, 253, 253);
   width: 400px;
-  padding: 20px; 
+  padding: 20px;
   border-radius: 20px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192); 
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.192);
 }
 
 #div-login .div-logo,
@@ -79,7 +78,6 @@ body {
   background-color: #118d8d;
 }
 
-
 .form-label {
   margin-bottom: 0.75rem;
 }
@@ -88,10 +86,14 @@ body {
   display: block;
 }
 
-#container-div-centrale{
+#container-div-centrale {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
- width:100%;
+  width: 100%;
+}
+
+.alert {
+  margin-top: 1em;
 }

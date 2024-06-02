@@ -39,6 +39,9 @@
              <div class="div-submit">
                  <button class="btn btn-primary" id="btn-login" type="submit">S'inscrire</button>
              </div>
+             <?php if($erreur) { ?>
+                 <p class="alert alert-danger"><?= $erreur ?></p>
+             <?php } ?>
          </form>
      </div>
  </div>
