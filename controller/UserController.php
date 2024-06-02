@@ -90,7 +90,7 @@ class UserController
             $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'],$db->getLastId());
 
             echo $emailContent;
-            require_once $_SERVER["DOCUMENT_ROOT"] . "/Vue/signInConfirm.php";
+            require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signInConfirm.php";
         } else {
             require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signIn.php";
         }
