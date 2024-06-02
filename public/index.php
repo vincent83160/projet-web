@@ -27,11 +27,11 @@ if ($nbSegments >= 3) {
     $nbSegments++;
 }
 
-
-if ($segments[0] == "") {
+ 
+if ($segments[0] == "" || count($segments) == 0 ) {
     $controller = "DefaultController";
     $methode = "accueil";
-}
+}  
 if (isset($_SESSION['pseudo'])) {
     if (!file_exists($_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php")) {
         header("Location: /default/accueil");
@@ -76,7 +76,7 @@ if (isset($_SESSION['pseudo'])) {
             $controller->accueil();
             break;
     }
-} else {
+} else { 
     if (!file_exists($_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php")) {
         header("Location: /default/accueil");
         exit;
@@ -85,8 +85,7 @@ if (isset($_SESSION['pseudo'])) {
     switch ($nbSegments) {
         default:
         case 1:
-            require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/UserController.php';
-            
+            header("Location: /default/accueil");
             break;
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
