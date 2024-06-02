@@ -21,7 +21,6 @@ if ($nbSegments >= 3) {
     for ($i = 2; $i < $nbSegments; $i++) {
         $param = explode("=", $segments[$i]);
         $params[$param[0]] = $param[1];
-        
     }
 } else if (isset($_POST) && $_POST != null) {
     $params = $_POST;
@@ -45,14 +44,25 @@ if (isset($_SESSION['pseudo'])) {
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
             $controller =  new $controller();
-            $controller->$methode();
+
+            if (method_exists($controller, $methode)) {
+                $controller->$methode();
+            } else {
+                // Rediriger vers l'accueil si la méthode n'existe pas
+                header("Location: /default/accueil");
+            }
 
             break;
         case $nbSegments >= 3:
 
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
-            $controller =  new $controller(); 
-            $controller->$methode($params);
+            $controller =  new $controller();
+            if (method_exists($controller, $methode)) {
+                $controller->$methode($params);
+            } else {
+                // Rediriger vers l'accueil si la méthode n'existe pas
+                header("Location: /default/accueil");
+            }
             break;
 
 
@@ -74,16 +84,23 @@ if (isset($_SESSION['pseudo'])) {
         case 2:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
             $controller =  new $controller();
-            $controller->$methode();
+            if (method_exists($controller, $methode)) {
+                $controller->$methode();
+            } else {
+                // Rediriger vers l'accueil si la méthode n'existe pas
+                header("Location: /default/accueil");
+            }
 
             break;
         case 3:
             require_once $_SERVER["DOCUMENT_ROOT"] . '/controller/' . $controller . ".php";
             $controller =  new $controller();
-            $controller->$methode($params);
+            if (method_exists($controller, $methode)) {
+                $controller->$methode($params);
+            } else {
+                // Rediriger vers l'accueil si la méthode n'existe pas
+                header("Location: /default/accueil");
+            }
             break;
-
-        
-            
     }
 }

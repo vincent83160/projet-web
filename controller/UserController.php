@@ -8,7 +8,11 @@ class UserController
     // Méthode pour afficher la page membre
     public function membre()
     {
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
+        if (isset($_SESSION['pseudo'])) {
+            require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/membre.php";
+        } else {
+            header("location: /user/login");
+        }
     }
 
     // Méthode pour modifier un utilisateur
@@ -94,7 +98,7 @@ class UserController
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $lastId =  $db->create($_POST['mail'], $_POST['pseudo'], $password, 0, 'USER');
                 $emailContent = $this->simulateConfirmationEmail($_POST['mail'], $_POST['pseudo'], $lastId);
- 
+
                 $_SESSION['id'] = $lastId;
                 $_SESSION['email'] = $_POST['mail'];
                 $_SESSION['pseudo'] = $_POST['pseudo'];
