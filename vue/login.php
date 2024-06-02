@@ -1,9 +1,11 @@
+<!DOCTYPE html>
+
 <head>
     <?php
 
     require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
     ?>
-
+    <title>Connexion sur plein la bobine !</title>
     <link rel="stylesheet" href="/public/assets/css/login.css">
     <link rel="icon" href="/public/assets/img/logo2.png" />
 </head>

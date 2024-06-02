@@ -116,7 +116,7 @@ class UserController
     {
         // Contenu de l'e-mail
         $subject = 'Confirmation d\'inscription';
-        $body = "Bonjour $pseudo,<br><br>Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : <a href='http://web/user/confirmCompte/id=$id'>Confirmer mon e-mail</a><br><br>Cordialement,<br>L'équipe de votre site";
+        $body = "Bonjour $pseudo,<br><br>Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : <a href='https://pleinlabobine.alwaysdata.net/user/confirmCompte/id=$id'>Confirmer mon e-mail</a><br><br>Cordialement,<br>L'équipe de votre site";
 
         // Simulation de l'e-mail
         $emailContent = "<strong>To:</strong> $email<br>";

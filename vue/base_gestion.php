@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <head>
     <title>Plein la bobine !</title>
     <link rel="icon" href="/public/assets/img/logo2.png" />

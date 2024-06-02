@@ -1,6 +1,6 @@
 <div class="tree">
     <nav class="navbar navbar-dark  ">
-        <button class="navbar-toggler ms-auto bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#button-container"" aria-controls=" button-container" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ms-auto bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#button-container" aria-controls="button-container" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>

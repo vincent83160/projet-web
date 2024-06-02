@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 ?>
@@ -18,7 +19,7 @@ include 'navbar.php';
             <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
          </div>
          <form method="post" id="formulaire" action="/User/userModif/">
-            <input type="hidden" name="id" required value="<?php echo $_SESSION['id'];?>" />
+            <input type="hidden" name="id" required value="<?php echo $_SESSION['id']; ?>" />
             <div class="mb-3">
                <p>Changer votre pseudo :
                </p>
@@ -42,5 +43,5 @@ include 'navbar.php';
       </div>
 
 
-      
+
 </body>
