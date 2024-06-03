@@ -10,7 +10,7 @@
 <body>
     <!-- HEADER -->
     <div class="wrapper">
-        <div class="one"><img width="100" height="100" src="/public/assets/img/logo.webp" class="rounded-corners" alt="Plein la bobine !"></div>
+        <div class="one"><img width="175" height="100" src="/public/assets/img/logo.webp" class="rounded-corners" alt="Plein la bobine !"></div>
         <div class="two">
             <h1>Plein la bobine !</h1>
         </div>
@@ -22,7 +22,7 @@
     <!-- BODY -->
     <div class="holy-grail-grid">
         <main class="main-content">
-            <img src="/public/assets/img/img.webp" width="250" height="250" class="rounded-corners2" alt="Illustration">
+            <img src="/public/assets/img/img.webp" width="300" height="300" class="rounded-corners2" alt="Illustration">
         </main>
         <section class="left-sidebar">
             <h2>Les règles : </h2>

@@ -8,25 +8,25 @@ require $_SERVER["DOCUMENT_ROOT"] . "/model/User.php";
 class AjaxController
 {
     // Méthode pour supprimer un élément selon le contexte
-    function deleteByContext($params)
+    public function deleteByContext($params)
     {
         if ($_SESSION["role"] == "ADMIN") {
-        // Décodage de l'URL pour obtenir les valeurs originales
-        $context = urldecode($params["context"]);
-        $idElem = urldecode($params["idElem"]);
+            // Décodage de l'URL pour obtenir les valeurs originales
+            $context = urldecode($params["context"]);
+            $idElem = urldecode($params["idElem"]);
 
-        if ($context == "film") {
-            $db = Film::createVide();
-            $db->deleteFilmByID($idElem);
-        } elseif ($context == "user") {
-            $db = User::createVide();
-            $db->deleteUserByID($idElem);
+            if ($context == "film") {
+                $db = Film::createVide();
+                $db->deleteFilmByID($idElem);
+            } elseif ($context == "user") {
+                $db = User::createVide();
+                $db->deleteUserByID($idElem);
+            }
         }
-    }
     }
 
     // Méthode pour ajouter un film en utilisant l'API
-    function addFilm($params)
+    public function addFilm($params)
     {
         // Décodage de l'URL pour obtenir les valeurs originales
         $idFilm = urldecode($params["idFilm"]);
@@ -35,7 +35,7 @@ class AjaxController
     }
 
     // Méthode pour obtenir un film par son titre
-    function getFilmByTitre($params)
+    public function getFilmByTitre($params)
     {
         // Décodage de l'URL pour obtenir les valeurs originales
         $titre = urldecode($params["query"]);
@@ -48,7 +48,7 @@ class AjaxController
     }
 
     // Fonction pour fusionner les films de la base de données et de l'API, et supprimer les doublons
-    function mergeMovies($moviesBDD, $moviesAPI)
+    public function mergeMovies($moviesBDD, $moviesAPI)
     {
         $idMap = [];
         foreach ($moviesBDD as $movieBDD) {
@@ -63,7 +63,7 @@ class AjaxController
     }
 
     // Méthode pour vérifier si un film est correct
-    function checkIfFilmCorrect($params)
+    public function checkIfFilmCorrect($params)
     {
         $filmController = new FilmController();
         $idFilm = $params["idFilm"];
@@ -126,4 +126,3 @@ class AjaxController
         echo json_encode($result);
     }
 }
-?>

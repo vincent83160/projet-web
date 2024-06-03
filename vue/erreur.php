@@ -14,7 +14,7 @@
 <body>
     <!-- HEADER -->
     <div class="wrapper">
-        <div class="one"><img src="/public/assets/img/logo.webp" width="100" height="100" class="rounded-corners" alt="Plein la bobine !"></div>
+        <div class="one"><img src="/public/assets/img/logo.webp" width="175" height="100" class="rounded-corners" alt="Plein la bobine !"></div>
         <div class="two">
             <h1>Plein la bobine !</h1>
 

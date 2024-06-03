@@ -13,7 +13,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
    <div id="container-div-centrale">
       <div id="div-centrale">
          <div class="div-logo">
-            <img src="/public/assets/img/logo.webp" width="100" height="100" alt="Plein la bobine !">
+            <img src="/public/assets/img/logo.webp" width="175" height="100" alt="Plein la bobine !">
          </div>
          <div >
             <h1>Félicitation, vous etes inscrit</h1>
