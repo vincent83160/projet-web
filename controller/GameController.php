@@ -3,7 +3,7 @@
 class GameController {
 //fonction pour afficher la page de jeu
     function game() {
-        if(!isset($_SESSION['user']) || $_SESSION['user'] == null) {
+        if(!isset($_SESSION['pseudo'])) {
             header('Location: /login');
             
         }
