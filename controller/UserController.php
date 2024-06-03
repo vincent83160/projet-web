@@ -103,7 +103,24 @@ class UserController
                 $_SESSION['email'] = $_POST['mail'];
                 $_SESSION['pseudo'] = $_POST['pseudo'];
                 $_SESSION['role'] = 'USER';
-                echo $emailContent;
+                $pseudo = $_POST['pseudo'];
+
+
+                $subject = "Confirmation de compte Plein la bobine";
+                $message = "
+                Bonjour sdfsd,<br><br>
+                Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : 
+                <a href='https://pleinlabobine.alwaysdata.net/user/confirmCompte/id=57'>Confirmer mon e-mail</a><br><br>
+                Cordialement,<br>L'équipe de votre site
+                ";
+
+                require_once $_SERVER["DOCUMENT_ROOT"] . '/model/Mailer.php';
+
+                $mailer = new Mailer($_POST['mail'], $subject, $message, "gary.vincent3107@gmail.com");
+                echo $mailer->send();
+
+
+                // echo $emailContent;
                 require_once $_SERVER["DOCUMENT_ROOT"] . "/vue/signInConfirm.php";
             }
         } else {
