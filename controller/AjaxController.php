@@ -10,6 +10,7 @@ class AjaxController
     // Méthode pour supprimer un élément selon le contexte
     function deleteByContext($params)
     {
+        if ($_SESSION["role"] == "ADMIN") {
         // Décodage de l'URL pour obtenir les valeurs originales
         $context = urldecode($params["context"]);
         $idElem = urldecode($params["idElem"]);
@@ -21,6 +22,7 @@ class AjaxController
             $db = User::createVide();
             $db->deleteUserByID($idElem);
         }
+    }
     }
 
     // Méthode pour ajouter un film en utilisant l'API
