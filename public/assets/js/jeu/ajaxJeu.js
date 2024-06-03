@@ -148,7 +148,7 @@ function generateProductionsHTML(productions) {
 function generateActeursHTML(acteurs) {
   return acteurs.map(acteur => `
     <div class='acteur' idActeur='${acteur.id}' rang='${acteur.rang}'>
-      <img class='img-acteur' src='https://image.tmdb.org/t/p/w92/${acteur.image}'>
+      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.png'}'>
       <p class='acteur-nom'>${acteur.name}</p>
     </div>`).join("");
 }
@@ -283,7 +283,7 @@ function getDateDetails(response) {
 function generateIncorrectActeursHTML(response) {
   const acteursCommuns = response.acteursCommunsDetails.map(acteur => `
     <div class='acteur' idActeur='${acteur.id}' rang='${acteur.rang}'>
-      <img class='img-acteur' src='https://image.tmdb.org/t/p/w92/${acteur.image}'>
+      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.png'}'>
       <p class='acteur-nom'>${acteur.name}</p>
     </div>`).join("");
   const acteursNonCommuns = response.acteursNonCommunsDetails.map(acteur => `
