@@ -1,15 +1,14 @@
 <?php
 session_start();
-$requestUri = $_SERVER['REQUEST_URI'];
-// Router les requêtes
 
 
-// Vérifier si l'utilisateur est connecté 
+//Nettoyer l'URL et formater selon les besoins
 $requestUri = filter_var(trim($_SERVER['REQUEST_URI'], '/'), FILTER_SANITIZE_URL);
 $segments = explode('/', $requestUri);
-// Récupérer le dernier élément du tableau
+// Ajouter une Maj à la première lettre du controller
 $segments[0] = ucfirst($segments[0]);
 $controller = $segments[0]  . "Controller";
+
 if (isset($segments[1])) {
     $methode = $segments[1];
 }
