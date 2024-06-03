@@ -116,7 +116,7 @@ class UserController
 
                 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/Mailer.php';
 
-                $mailer = new Mailer($_POST['mail'], $subject, $message, "gary.vincent3107@gmail.com");
+                $mailer = new Mailer($_POST['mail'], $subject, $message, "contact@pleinlabobine.com");
                 echo $mailer->send();
 
 
