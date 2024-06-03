@@ -6,14 +6,14 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 <head>
    <title>Mon compte</title>
    <link rel="stylesheet" href="/public/assets/css/account.css">
-   <link rel="icon" href="/public/assets/img/logo2.png" />
+   <link rel="icon" href="/public/assets/img/logo.webp" />
 </head>
 
 <body>
    <div id="container-div-centrale">
       <div id="div-centrale">
          <div class="div-logo">
-            <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
+            <img src="/public/assets/img/logo.webp" width="100" height="100" alt="Plein la bobine !">
          </div>
          <div >
             <h1>Félicitation, vous etes inscrit</h1>

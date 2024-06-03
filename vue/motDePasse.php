@@ -6,7 +6,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 <head>
    <title>Changer mot de passe</title>
    <link rel="stylesheet" href="/public/assets/css/account.css">
-   <link rel="icon" href="/public/assets/img/logo2.png" />
+   <link rel="icon" href="/public/assets/img/logo.webp" />
 </head>
 <?php
 include 'navbar.php';

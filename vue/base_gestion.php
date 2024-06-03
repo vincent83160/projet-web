@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <head>
     <title>Plein la bobine !</title>
-    <link rel="icon" href="/public/assets/img/logo2.png" />
+    <link rel="icon" href="/public/assets/img/logo.webp" />
 
     <link rel="stylesheet" href="/public/assets/css/admin.css">
     <link rel="stylesheet" href="/public/assets/css/game.css">

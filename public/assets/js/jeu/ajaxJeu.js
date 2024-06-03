@@ -148,7 +148,7 @@ function generateProductionsHTML(productions) {
 function generateActeursHTML(acteurs) {
   return acteurs.map(acteur => `
     <div class='acteur' idActeur='${acteur.id}' rang='${acteur.rang}'>
-      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.png'}'>
+      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.webp'}'>
       <p class='acteur-nom'>${acteur.name}</p>
     </div>`).join("");
 }
@@ -157,7 +157,7 @@ function generateActeursHTML(acteurs) {
 function generateRealisateursHTML(realisateurs) {
   return realisateurs.map(real => `
     <div class='realisateur real-find' idReal='${real.id}'>
-      <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonyme.png'}'>
+      <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonyme.webp'}'>
       <p class='realisateur-nom'>${real.name}</p>
     </div>`).join("");
 }
@@ -283,12 +283,12 @@ function getDateDetails(response) {
 function generateIncorrectActeursHTML(response) {
   const acteursCommuns = response.acteursCommunsDetails.map(acteur => `
     <div class='acteur' idActeur='${acteur.id}' rang='${acteur.rang}'>
-      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.png'}'>
+      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.webp'}'>
       <p class='acteur-nom'>${acteur.name}</p>
     </div>`).join("");
   const acteursNonCommuns = response.acteursNonCommunsDetails.map(acteur => `
     <div class='acteur acteur-not-find' idActeur='${acteur.id}' rang='${acteur.rang}'>
-      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.png'}'>
+      <img class='img-acteur' src='${acteur.image ? `https://image.tmdb.org/t/p/w92/${acteur.image}` : '/public/assets/img/anonymous.webp'}'>
       <p class='acteur-nom'>${acteur.name}</p>
     </div>`).join("");
   return acteursCommuns + acteursNonCommuns;
@@ -304,7 +304,7 @@ function generateIncorrectRealisateursHTML(response) {
 
   const realisateursNonCommuns = response.realisateursNonCommunsDetails.map(real => `
     <div class='realisateur real-not-find' idReal='${real.id}' >
-      <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonymous.png'}'>
+      <img class='img-realisateur' src='${real.image ? `https://image.tmdb.org/t/p/w92/${real.image}` : '/public/assets/img/anonymous.webp'}'>
       <p class='realisateur-nom'>${real.name}</p>
     </div>`).join("");
 
@@ -429,12 +429,12 @@ function updateActeursRecap(response) {
                 ${acteurHTML}
               </div>`;
     }
-    return "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+    return "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='acteur-nom'>&nbsp;</p></div>";
   }).join("");
 
   const nbActeursNotFind = response.filmToFind.acteurs.length - nbActeursFind;
   for (let i = 0; i < nbActeursNotFind; i++) {
-    htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+    htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='acteur-nom'>&nbsp;</p></div>";
   }
 
   $("#find-acteur-row").html(htmlActeurs);
@@ -453,12 +453,12 @@ function updateRealisateursRecap(response) {
                 ${realHTML}
               </div>`;
     }
-    return "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
+    return "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='realisateur-nom'>&nbsp;</p></div>";
   }).join("");
 
   const nbRealsNotFind = response.filmToFind.realisateurs.length - nbRealsFind;
   for (let i = 0; i < nbRealsNotFind; i++) {
-    htmlReals += "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
+    htmlReals += "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='realisateur-nom'>&nbsp;</p></div>";
   }
 
   $("#find-real-row").html(htmlReals);
@@ -562,11 +562,11 @@ function generateActeursRecapHTML(response) {
                 ${$(".acteur[idActeur='" + acteur + "']").first().html()}
               </div>`;
     }
-    return "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+    return "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='acteur-nom'>&nbsp;</p></div>";
   }).join("");
 
   for (let i = 0; i < nbActeursNotFind; i++) {
-    htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='acteur-nom'>&nbsp;</p></div>";
+    htmlActeurs += "<div class='acteur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='acteur-nom'>&nbsp;</p></div>";
   }
 
   return htmlActeurs;
@@ -583,11 +583,11 @@ function generateRealisateursRecapHTML(response) {
                 ${$(".realisateur[idReal='" + real + "']").first().html()}
               </div>`;
     }
-    return "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
+    return "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='realisateur-nom'>&nbsp;</p></div>";
   }).join("");
 
   for (let i = 0; i < nbRealsNotFind; i++) {
-    htmlReals += "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.png'><p class='realisateur-nom'>&nbsp;</p></div>";
+    htmlReals += "<div class='realisateur'><img class='anonyme' src='/public/assets/img/anonyme.webp'><p class='realisateur-nom'>&nbsp;</p></div>";
   }
 
   return htmlReals;

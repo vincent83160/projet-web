@@ -7,7 +7,7 @@
     ?>
     <title>Connexion sur plein la bobine !</title>
     <link rel="stylesheet" href="/public/assets/css/login.css">
-    <link rel="icon" href="/public/assets/img/logo2.png" />
+    <link rel="icon" href="/public/assets/img/logo.webp" />
 </head>
 <?php include 'navbar.php'; ?>
 <div id="fond-login">
@@ -15,7 +15,7 @@
 <div id="container-div-centrale">
     <div id="div-login">
         <div class="div-logo">
-            <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
+            <img src="/public/assets/img/logo.webp" width="100" height="100" alt="Plein la bobine !">
         </div>
         <div id="error"><?php
                         if (isset($erreur)) {

@@ -6,7 +6,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . '/vue/base.html';
 <head>
    <title>Mon compte</title>
    <link rel="stylesheet" href="/public/assets/css/account.css">
-   <link rel="icon" href="/public/assets/img/logo2.png" />
+   <link rel="icon" href="/public/assets/img/logo.webp" />
 </head>
 <?php
 include 'navbar.php';
@@ -16,7 +16,7 @@ include 'navbar.php';
    <div id="container-div-centrale">
       <div id="div-centrale">
          <div class="div-logo">
-            <img src="/public/assets/img/logo2.png" alt="Plein la bobine !">
+            <img src="/public/assets/img/logo.webp" width="100" height="100" alt="Plein la bobine !">
          </div>
          <form method="post" id="formulaire" action="/User/userModif/">
             <input type="hidden" name="id" required value="<?php echo $_SESSION['id']; ?>" />

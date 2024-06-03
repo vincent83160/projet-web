@@ -3,7 +3,7 @@
 
 <head>
     <title>Plein la bobine !</title>
-    <link rel="icon" href="/public/assets/img/logo2.png">
+    <link rel="icon" href="/public/assets/img/logo.webp">
 
     <link rel="stylesheet" href="/public/assets/css/game.css">
     <?php
@@ -18,7 +18,7 @@
 <body>
     <!-- HEADER -->
     <div class="wrapper">
-        <div class="one"><img src="/public/assets/img/logo2.png" class="rounded-corners" alt="Plein la bobine !"></div>
+        <div class="one"><img src="/public/assets/img/logo.webp" width="100" height="100" class="rounded-corners" alt="Plein la bobine !"></div>
         <div class="two">
             <h1>Plein la bobine !</h1>
 
@@ -31,7 +31,7 @@
     <!-- BODY -->
     <div id="spinner"><img src="/public/assets/gif/spinner.gif" alt="spinner"></div>
     <div class="container2">
-        <img src="/public/assets/img/img.jpg" class="rounded-corners3" alt="Illustration">
+        <img src="/public/assets/img/img.webp" width="300" height="300" class="rounded-corners3" alt="Illustration">
     </div>
 
     <div class="container2">
