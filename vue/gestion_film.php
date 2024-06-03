@@ -7,7 +7,7 @@ include 'base_gestion.php';
 
 <body>
     <div class="container2">
-    <div id="spinner"><img src="/public/assets/gif/spinner.gif" /></div>
+    <div id="spinner"><img src="/public/assets/gif/spinner.gif" alt="spinner" /></div>
         <input type="hidden" id="context" value="film" />
         <!-- HEADER -->
         <div class="wrapper">
