@@ -108,16 +108,16 @@ class UserController
 
                 $subject = "Confirmation de compte Plein la bobine";
                 $message = "
-                Bonjour sdfsd,<br><br>
+                Bonjour " . $pseudo . ",<br><br>
                 Merci de vous être inscrit. Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant : 
-                <a href='https://pleinlabobine.alwaysdata.net/user/confirmCompte/id=57'>Confirmer mon e-mail</a><br><br>
+                <a href='https://pleinlabobine.alwaysdata.net/user/confirmCompte/id=" . $lastId . "'>Confirmer mon e-mail</a><br><br>
                 Cordialement,<br>L'équipe de votre site
                 ";
 
                 require_once $_SERVER["DOCUMENT_ROOT"] . '/model/Mailer.php';
 
                 $mailer = new Mailer($_POST['mail'], $subject, $message, "contact@pleinlabobine.com");
-                echo $mailer->send();
+                $mailer->send();
 
 
                 // echo $emailContent;
